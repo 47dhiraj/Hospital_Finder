@@ -12,10 +12,17 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 
+from django.contrib.messages import constants as messages
+
+
+
 from pathlib import Path
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,28 +31,40 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-vh3ohluggd)^wgu_sxz!g$#y09&&eyzzk_f8^hy9a0v$jwu#^#'
 
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+
 ALLOWED_HOSTS = []
+
 
 
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
 
-    'app',
+    ## Created/Installed apps inside the project directory
+    'app',                  
 
+    ## Installed third party packages
     'crispy_forms',
 
-
+    'sweetify',
 ]
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,7 +76,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 ROOT_URLCONF = 'hospital.urls'
+
+
 
 TEMPLATES = [
     {
@@ -74,7 +96,11 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'hospital.wsgi.application'
+
+
 
 
 # Database
@@ -86,6 +112,7 @@ WSGI_APPLICATION = 'hospital.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
 
 
 DATABASES = {
@@ -129,7 +156,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kathmandu' 
 
 USE_I18N = True
 
@@ -139,7 +166,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -153,3 +192,38 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ## For Authentication user model
 AUTH_USER_MODEL = 'app.User'
 
+
+
+
+
+# Configuration for django showing message tags
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
+
+
+
+## sweetify configurations
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
+SWEETIFY_DEFAULT_SUCCESS = 'success'    
+SWEETIFY_DEFAULT_ERROR = 'error'
+SWEETIFY_DEFAULT_WARNING = 'warning'
+SWEETIFY_DEFAULT_INFO = 'info'
+SWEETIFY_USE_JQUERY = False  
+
+
+
+
+## Gmail (E-mail) SMTP configurations
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = '47schoolteaching@gmail.com'
+EMAIL_HOST_PASSWORD = 'pjkonqdfwxnrfyyc'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

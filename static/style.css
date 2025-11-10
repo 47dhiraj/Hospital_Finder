@@ -1,0 +1,182 @@
+/* body */
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+/* navbar */
+
+#nav-bar{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+ 
+ .navbar{
+    background-image: linear-gradient(to left, #b3e6ff,whitesmoke);
+    padding: 0 !important;
+}
+
+ 
+
+.navbar-brand img{
+    height: 50px;
+    padding-left: 20px;
+}
+
+.navbar-nav li{
+    padding: 0 10px;
+}
+
+.navbar-nav a{
+    color: black !important;
+    font-weight: 600;
+    
+}
+ 
+
+/* banner */
+
+#banner{
+    background-image: linear-gradient(to right, );
+    padding: 0;
+
+}
+
+.img{
+    margin-top: 5px;
+}
+    
+.title{
+    margin-top: 100px;
+    }
+    
+.wave-img{
+    width: 100%;
+}
+
+#banner a{
+    color: black !important;
+    text-decoration: none;
+    }
+
+#banner .btn-success{
+    box-shadow: none;
+    border-radius: 20px;
+    padding: 8px 25px;
+    border: none;
+    background-image: linear-gradient(to right,yellowgreen);
+}
+
+/* quality health */
+
+#quality-health{
+    padding: 30px 0;
+}
+
+
+.des-img{
+    width: 50px;
+    margin-top: 10px;
+    border-radius: 150px;
+}
+
+.des{
+    padding: 20px;
+}
+
+.des h4{
+    text-transform: uppercase;
+    padding: 5px;
+    margin-top: 25px;
+}
+
+
+/* btn top services */
+.btn-success{
+    box-shadow: none;
+    border-radius: 20px;
+    padding: 8px 25px;
+    border: none;
+    background-image: linear-gradient(to right,yellowgreen);  
+}
+
+#client{
+    /* padding: 5px 0; */
+    margin: 25px 0;
+ 
+
+}
+
+
+.social-icon a{
+    font-size: 40px;
+    padding: 10px;
+    text-decoration: none;
+
+}
+
+.fa-facebook-square{
+    color: #3b5989;
+}
+
+.fa-instagram{
+    color: #dd4b39;
+}
+
+.fa-envelope{
+    color: #D44638;
+}
+
+footer{
+    margin-top: 40px;
+    background-color: #3f3f3f;
+    color: #d5d5d5;
+}
+
+/* .card-space
+{
+    float: left;
+    margin-right: 10px;
+    margin-left: 10px;
+} */
+
+
+/*Contact Form in Footer */
+.contact-input {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    background-color: #3f3f3f;
+    width: 100%;
+    color: white;
+    margin-bottom: 20px;
+    padding-left: 26px;
+    margin-top: -2px;
+    padding-top: 10px;
+    margin-left: 17px;
+    font-size: medium;
+}
+  
+  .no-outline:focus {
+    outline: none;
+  }
+ 
+.contact-input-container {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+.contact-icon {
+    position: absolute;
+    padding: 11px;
+    background: transparent;
+    color: white;
+    min-width: 51px;
+    text-align: center;
+    padding-bottom: 10px;
+    height: 39px;
+  }
