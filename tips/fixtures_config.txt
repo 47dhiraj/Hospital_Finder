@@ -1,0 +1,38 @@
+## Fixtures Creation Configurations
+
+
+## First: Dumping data into .json files inside fixtures directory
+
+==> python manage.py dumpdata app.User --indent 4 > app/fixtures/User.json
+
+==> python manage.py dumpdata app.Hospital --indent 4 > app/fixtures/Hospital.json
+
+==> python manage.py dumpdata app.Disease --indent 4 > app/fixtures/Disease.json
+
+
+
+## Second: Loading above created fixtures .json files data to database tables
+
+==> python manage.py loaddata app/fixtures/User.json
+
+==> python manage.py loaddata app/fixtures/Hospital.json
+
+==> python manage.py loaddata app/fixtures/Disease.json
+
+
+
+## Now, u must create a setup.py file and write code to initial load these above .json files data to respective tables on database.
+
+
+
+## After all above done then,
+
+
+## Finally, from now on, u can only use single command to setup your project data on database:
+
+==> python manage.py setup
+
+
+## To flush / truncate all data on database tables (it only deletes data no the tabular structure)
+
+==> python manage.py flush
