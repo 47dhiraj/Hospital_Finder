@@ -1,4 +1,4 @@
-id,disease_id,hospital_id
+"id","disease_id","hospital_id"
 1,1,1
 2,1,2
 3,2,3

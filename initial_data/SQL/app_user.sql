@@ -1,0 +1,2 @@
+INSERT INTO public.app_user ("password",last_login,is_superuser,username,first_name,last_name,is_staff,is_active,is_client,is_admin,email,image,date_joined,disease_id) VALUES
+	 ('pbkdf2_sha256$1000000$iva3Cs8SvQxRMJwYjFlHUV$gaaA99QzkPZxO6izyDqX8/iu1mSQIk3F+Upt24o8JRE=',NULL,true,'admin','','',true,true,false,true,'admin@gmail.com','uploads/img_avatar.png','2025-11-10 11:53:43.900259+05:45',NULL);

@@ -29,7 +29,8 @@ class User(AbstractUser):
 	is_admin = models.BooleanField(default=True)
 	email = models.EmailField(unique=True)
 	image = models.ImageField(upload_to ='uploads/', null=True, blank=True, default = 'uploads/img_avatar.png') 
-	disease = models.ForeignKey('Disease', null=True, blank=True, on_delete=models.CASCADE) 
+	disease = models.ForeignKey('Disease', null=True, blank=True, on_delete=models.CASCADE)
+	date_joined = models.DateTimeField(default=timezone.now, null=True)
 	
 
 

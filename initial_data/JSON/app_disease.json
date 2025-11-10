@@ -1,0 +1,35 @@
+{
+"app_disease": [
+	{
+		"id" : 1,
+		"name" : "Anaemia Disease"
+	},
+	{
+		"id" : 2,
+		"name" : "Cancer Disease"
+	},
+	{
+		"id" : 3,
+		"name" : "Covid 19"
+	},
+	{
+		"id" : 4,
+		"name" : "EyeDisease"
+	},
+	{
+		"id" : 5,
+		"name" : "Head and Spinal"
+	},
+	{
+		"id" : 6,
+		"name" : "Heart Disease"
+	},
+	{
+		"id" : 7,
+		"name" : "Kidney Disease"
+	},
+	{
+		"id" : 8,
+		"name" : "Parkinson's and Alzheimer's"
+	}
+]}
