@@ -55,11 +55,14 @@ INSTALLED_APPS = [
     
 
     ## Created/Installed apps inside the project directory
-    'app',                  
+    
+    'app',
+    # 'app.apps.AppConfig',               
+
 
     ## Installed third party packages
     'crispy_forms',
-
+    
     'sweetify',
 ]
 
