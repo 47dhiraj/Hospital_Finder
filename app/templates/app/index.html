@@ -1,0 +1,200 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+
+{%  block content %}
+
+
+
+
+<!-- banner -->
+<section id="banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="title">Bringing The Future Of Healthcare</h1>
+                <p class="lead">We are here for your care.</p>
+                <p class="lead">Submit your Symptom and get Doctor's Help.</p>
+                <a href=""><button type="button" class="btn btn-success">Make Appointment</button></a>
+            </div>
+            <div class="col-md-6 text-center"> 
+                <img src="{% static 'images/banner_img.png' %}" alt="" class="img-fluid img">
+            </div>
+        </div>
+    </div>
+    <!-- <img src="{% static 'images/wave.png' %}" alt="" class="wave-img"> -->
+</section>
+
+<!-- display covid jumbotron -->
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Covid-19 Tally</h1>
+        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    </div>
+</div>
+<!-- quality health -->
+
+<section id="quality-health">
+    <div class="container">
+        <h1 class="title2 text-center">Quality Health</h1>
+        <p class="lead text-center">Lorem ipsum dolor sit amet.</p>
+        <hr>
+        <div class="row text-center">
+            <div class="col-md-3 des">
+                <img src="{% static 'images/support.png' %}" alt="" class="des-img">
+                <h4>Consultant</h4>
+                <p class="lead">Lorem ipsum dolor sit amet.</p>
+            </div>
+            <div class="col-md-3 des">
+                <a href="#" style="text-decoration: none; color: #000;">
+                    <img src="{% static 'images/placeholder.png' %}" alt="" class="des-img">
+                    <h4>Find Hospital</h4>
+                    <p class="lead">Lorem ipsum dolor sit amet.</p>
+                </a>
+            </div>
+            <div class="col-md-3 des">
+                <img src="{% static 'images/doctor.png' %}" alt="" class="des-img">
+                <h4>Search Doctor</h4>
+                <p class="lead">Lorem ipsum dolor sit amet.</p>
+            </div>
+            <div class="col-md-3 des">
+                <img src="{% static 'images/pill.png' %}" alt="" class="des-img">
+                <h4>Medicine</h4>
+                <p class="lead">Lorem ipsum dolor sit amet.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ability -->
+<section id="ability">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-6 col-lg-6">
+                <div class="our_ability_img">
+                    <img src="{% static 'images/ability_img.png' %}" class="img-fluid" alt="">
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-5">
+                <h2>Our Patients
+                    Are at the Centre of
+                    Everything We Do</h2>
+                <p>Kind lesser bring said midst they're created signs made the beginni years
+                    created Beast upon whales herb seas evening she'd day green dominion
+                    evening in moved have fifth in won't in darkness fruitful god behold
+                    whos without bring created creature.</p>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<!-- other info -->
+<section id="otherinfo">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-5 col-lg-5">
+
+                <h2>We Analyse Your
+                    Health States In Order
+                    To Top Service</h2>
+                <p>Kind lesser bring said midst they're created signs made the beginni years
+                    created Beast upon whales herb seas evening she'd day green dominion
+                    evening in moved have fifth in won't in darkness fruitful god behold
+                    whos without bring created creature.</p>
+                <a href=""><button type="button" class="btn btn-success">Make Appointment</button></a>
+
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <img src="{% static 'images/top_service.png' %}" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Our Client Says -->
+<section id="client"></section>
+
+<div class="container">
+    <h1 class="title2 text-center">Hospitals</h1>
+    <p class="lead text-center">Lorem ipsum dolor sit amet.</p>
+    <hr>
+    <div class="autoplay">
+
+        <div class="card">
+            <img class="card-img-top" src="{% static 'images/CivilHospital.jpg' %}" alt="" height="250">
+            <div class="card-body">
+                <h4 class="card-title">Hello</h4>
+                <p class="card-text">Lorem ipsum dolor sit amet.</p>
+                <a href="" class="btn btn-primary">See Detail</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img class="card-img-top" src="{% static 'images/GrandeHospital.jpg' %}" alt="" height="250">
+            <div class="card-body">
+                <h4 class="card-title">Hello</h4>
+                <p class="card-text">Lorem ipsum dolor sit amet.</p>
+                <a href="" class="btn btn-primary">See Detail</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img class="card-img-top" src="{% static 'images/NorvicHospital.jpg' %}" alt="" height="250">
+            <div class="card-body">
+                <h4 class="card-title">Hello</h4>
+                <p class="card-text">Lorem ipsum dolor sit amet.</p>
+                <a href="" class="btn btn-primary">See Detail</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img class="card-img-top" src="{% static 'images/MedicityHospital.jpg' %}" alt="" height="250">
+            <div class="card-body">
+                <h4 class="card-title">Hello</h4>
+                <p class="card-text">Lorem ipsum dolor sit amet.</p>
+                <a href="" class="btn btn-primary">See Detail</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img class="card-img-top" src="{% static 'images/VayodhaHospital.jpg' %}" alt="" height="250">
+            <div class="card-body">
+                <h4 class="card-title">Hello</h4>
+                <p class="card-text">Lorem ipsum dolor sit amet.</p>
+                <a href="" class="btn btn-primary">See Detail</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img class="card-img-top" src="{% static 'images/TeachingHospital.jpg' %}" alt="" height="250">
+            <div class="card-body">
+                <h4 class="card-title">Hello</h4>
+                <p class="card-text">Lorem ipsum dolor sit amet.</p>
+                <a href="" class="btn btn-primary">See Detail</a>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+</section>
+
+
+<script>
+
+    $('.autoplay').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 1000,
+    });
+</script>
+
+
+{% endblock %}

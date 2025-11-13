@@ -1,0 +1,265 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- style css -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <!-- themify CSS -->
+    <link rel="stylesheet" href="css/themify-icons.css">
+
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="css/flaticon.css">
+
+    <!-- description -->
+    <meta name="description" content="................................................ ">
+    <meta name="keywords" content="Hospital,E-checkup,Medicine,Pharmasy,lab">
+
+    <!-- favicon -->
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/gif" sizes="16x16">
+
+    <!-- fontawsome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Slick Slider -->
+    <link rel="stylesheet" type="text/css" href="{% static 'slick/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'slick/slick-theme.css' %}">
+
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="{% static 'slick/slick.min.js' %}" type="text/javascript" charset="utf-8"></script>
+
+
+    <!-- For Slect Picker in Disease select option -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+
+    <!-- Older - Sweet alert -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> -->
+
+
+    <!-- Latest - CDN link for sweetify alert css -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.min.css" rel="stylesheet">
+
+
+
+    <title>Online Hospital</title>
+</head>
+
+
+<body>
+    <!-- nav-bar -->
+    <section id="nav-bar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/"><img src="{% static 'images/logo.png' %}" alt=""></a>
+            <!-- Hamburger Icons -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa fa-medkit" aria-hidden="true"></i>
+                            Services</a>
+                    </li>
+
+
+
+
+                    {% if request.user.is_authenticated %}
+                    {% if request.user.is_client %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="fa fa-user"></span> {{request.user}}
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="fa fa-user"></span> {{request.user}}
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="fa fa-user"></span> {{request.user}}
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% endif %}
+
+
+                    {% if not request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"
+                            onclick="document.getElementById('id02').style.display='block'" style="width:auto;"><span
+                                class="fa fa-user-plus"></span> Signup</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"
+                            onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><span
+                                class="fa fa-sign-in"></span> Login</a>
+                    </li>
+
+                    {% else %}
+
+                    <!-- <li><a style="color: whitesmoke;" href="{% url 'logoutall' %}"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li> -->
+
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        <li class="nav-item">
+
+                            <input type="submit"
+                                style="color: whitesmoke; background-color:#b3e6ff; border: none; height:23px; color:black"
+                                value="Logout">
+                            <span class="fa fa-sign-out" style="margin-top: 9px; font-size:20px;color:red;">
+                            </span>
+
+                        </li>
+
+
+                    </form>
+
+                    {% endif %}
+
+
+                </ul>
+            </div>
+        </nav>
+    </section>
+
+
+
+    {% block content %}
+
+
+
+
+
+
+    {% endblock %}
+
+
+    <!-- footer -->
+    <footer>
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <hr class="light">
+                    <img src="{% static 'images/logo.png' %}" alt="" srcset="" width="150">
+
+                </div>
+                <div class="col-md-4">
+                    <hr class="light">
+                    <h5>Our Social Media</h5>
+                    <hr class="light">
+                    <div class="social-icon">
+                        <a href=""><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                        <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href=""><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <hr class="light">
+                    <h5>Contact Us</h5>
+                    <hr class="light">
+
+                    <form action="" name="message" method="POST">
+                        {% csrf_token %}
+                        <div class="contact-input-container">
+
+
+                            <i class="fa fa-user contact-icon" aria-hidden="true"></i>
+                            <input type="text" name="name" class="contact-input no-outline" placeholder="Name"
+                                autocomplete="off" required>
+                        </div>
+
+                        <div class="contact-input-container">
+                            <i class="fa fa-envelope-o contact-icon" aria-hidden="true"></i>
+                            <input type="email" name="email" class="contact-input no-outline" placeholder="Email"
+                                autocomplete="off" required>
+                        </div>
+
+                        <div class="contact-input-container">
+                            <i class="fa fa-commenting contact-icon" aria-hidden="true"></i>
+                            <input class="contact-input no-outline" id="message" name="message" placeholder="Message">
+                        </div>
+                        <button type="submit" class="btn btn-success">Send</button>
+                        {% if messages %}
+                        {% for message in messages %}
+                        <script>
+
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: '{{message}}',
+                                showConfirmButton: false,
+                                timer: 2500
+                            })
+                        </script>
+                        {% endfor %}
+                        {% endif %}
+
+
+                    </form>
+
+
+                </div>
+                <div class="col-12">
+                    <hr class="light">
+                    <h5>&copy;hospital</h5>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+
+
+
+    <!-- own js -->
+    <script src="{% static '/script.js' %}"></script>
+
+    <!-- Optional JavaScript -->
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    
+
+
+    <!-- Latest - Sweetify CDN JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.min.js" defer></script>
+
+
+</body>
+
+</html>
