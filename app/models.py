@@ -22,6 +22,9 @@ from django.db.models.functions import Lower
 
 
 
+## All the models here ...
+
+
 
 class User(AbstractUser):
 	
@@ -62,10 +65,24 @@ class Disease(models.Model):
 
 
 
+
+class District(models.Model):
+
+	name   	= models.CharField(max_length=50)
+
+	def __str__(self):
+		return self.name 
+
+
+
+
 class Patient(models.Model):
 	
 	name = models.CharField(max_length=200)
 	age = models.CharField(max_length=200,blank=True, null=True,validators=[MaxValueValidator(100),MinValueValidator(1)])
+
+	district = models.ForeignKey('District', blank=True, null=True,  on_delete=models.CASCADE)
+
 	location = models.CharField(max_length=200, blank=True, null=True)
 	latitude = models.CharField(max_length=50,blank=True, null=True)
 	longitude =	models.CharField(max_length=50,blank=True, null=True)
@@ -84,9 +101,11 @@ class Patient(models.Model):
 
 class Rate(models.Model):
 	
-	user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE) 
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
+
 	hospital = models.ForeignKey('Hospital', null=True, blank=True, on_delete=models.CASCADE)
-	rating = models.FloatField(default=1,validators=[MaxValueValidator(5),MinValueValidator(0)])
+
+	rating = models.FloatField(default=1, validators=[MaxValueValidator(5), MinValueValidator(0)])
 
 	def __str__(self):
 		return self.user.username

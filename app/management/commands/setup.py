@@ -59,7 +59,8 @@ class Command(BaseCommand):
         fixtures = [
             'User.json',
             'Hospital.json',
-            'Disease.json'
+            'Disease.json',
+            'District.json'
         ]
 
 
@@ -96,5 +97,5 @@ class Command(BaseCommand):
 
         progress_bar.close()
 
-        self.stdout.write(self.style.SUCCESS('Data Loaded Successfully ! - Hospital Finder'))
+        self.stdout.write(self.style.SUCCESS(' Hospital Finder -- Data loaded successfully!! '))
 
