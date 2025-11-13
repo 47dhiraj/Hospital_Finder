@@ -1,0 +1,120 @@
+{% include 'app/index.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{%  block content %}
+
+<style>
+    li {
+        list-style-type: none;
+        color: red;
+    }
+</style>
+
+<link href="{% static '/signupstyle.css' %}" rel="stylesheet">
+
+
+<!-- Signup Form  -->
+
+<div id="id02" class="signupmodal">
+    <form class="signupmodal-content animate" action="{% url 'register' %}" method="post" novalidate>
+        {% csrf_token %}
+        <div class="imgcontainer">
+            <span onclick="closeFunction()" class="cross" title="Close">&times;</span>
+            <img src="{% static 'images/avatar.png' %}" alt="Avatar" class="avatar">
+        </div>
+
+<!-- For Validation Error-->
+        <div class="container">
+             {% if form.non_field_errors %}
+            <div class="non-field-errors">
+                {% for error in form.non_field_errors %}
+                <p style="color: red;">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <label for="username"><b>Username</b></label>
+            <div class="input-container">
+                <i class="fa fa-user icon" aria-hidden="true"></i>
+                <input type="text" name="username"  maxlength="150" autofocus=""
+                    class="textinput textInput form-control input-field" required="" id="id_username"
+                    placeholder="Username..">
+            </div>
+
+            <label for="Email"><b>Email</b></label>
+
+            <div class="input-container">
+                <i class="fa fa-envelope icon" aria-hidden="true"></i>
+                <input type="email" name="email"  maxlength="254"
+                    class="emailinput form-control input-field" required="" id="id_email" placeholder="Email..">
+            </div>
+
+
+            <label for="Password1"><b>Password</b></label>
+            <div class="input-container">
+                <i class="fa fa-unlock-alt icon" aria-hidden="true"></i>
+                <input type="password" name="password1" class="textinput textInput form-control input-field" required=""
+                    id="id_password1" placeholder="Enter password...">
+            </div>
+            {{ form.errors.password1 }}
+
+            <label for="Password1"><b>Re-typePassword</b></label>
+            <div class="input-container">
+                <i class="fa fa-lock icon" aria-hidden="true"></i>
+                <input type="password" name="password2" class="textinput textInput form-control input-field" required=""
+                    id="id_password2" placeholder="Re-enter Password...">
+            </div>
+            {{ form.errors.password2 }}
+
+            <!-- yo form|cripsy use garey pani hunthyo tara styling hamiley sochey jasto banauna sakinaa so. we use input type.-->
+
+            <!-- {{form|crispy}}  -->
+
+            <button type="submit" class="signupbutton">Signup</button>
+            <span>Already have an account? <a href="/login" style="color: blue;">Sign in</a></span>
+        </div>
+    </form>
+</div>
+
+<!-- When User clicks anywhere outside of the modal -->
+<script>
+    // Get the modal
+    var signup_modal = document.getElementById('id02');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == signup_modal) {
+            signup_modal.style.display = "none";
+            window.location.href = "/";     //After clicking on anywhere outside redirect page to index.html i.e home page
+        }
+    }
+
+</script>
+
+<!-- For Placeholder in registerr form -->
+<script>
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[1].placeholder = 'Username..';
+    form_fields[2].placeholder = 'Email..';
+    form_fields[3].placeholder = 'Enter password...';
+    form_fields[4].placeholder = 'Re-enter Password...';
+
+    for (var field in form_fields) {
+        form_fields[field].className += ' form-control'
+    }
+</script>
+
+<!-- For clicking on X to close add redirect to home page. -->
+<script>
+    function closeFunction() {
+        document.getElementById('id02').style.display = 'none'
+        window.location.href = "/";     //After clicking on X  redirect page to index.html i.e home page
+    }
+</script>
+
+{% endblock %}
+

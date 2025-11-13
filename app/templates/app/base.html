@@ -112,7 +112,7 @@
 
                     {% if not request.user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#"
+                        <a class="nav-link" href="{% url 'register' %}"
                             onclick="document.getElementById('id02').style.display='block'" style="width:auto;"><span
                                 class="fa fa-user-plus"></span> Signup</a>
                     </li>

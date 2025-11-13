@@ -17,6 +17,11 @@ urlpatterns = [
 
     path('', views.home, name="home"),
 
+
+    path('register/', views.clientregisterPage, name="register"),
+
+
+    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
 ]
 
 

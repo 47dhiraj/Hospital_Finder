@@ -62,6 +62,7 @@ INSTALLED_APPS = [
 
     ## Installed third party packages
     'crispy_forms',
+    'crispy_bootstrap4',   # required
     
     'sweetify',
 ]
@@ -196,6 +197,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'app.User'
 
 
+## Login url in the project
+LOGIN_URL = 'login'
+
+
+## Django Crispy Form configurations
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 
 
