@@ -1,0 +1,116 @@
+{% include 'app/index.html' %}
+
+{% load static %}
+
+<!-- {% load crispy_forms_tags %} -->
+
+{%  block content %}
+
+<!-- style css -->
+<link href="{% static '/loginstyle.css' %}" rel="stylesheet">
+
+
+
+<div id="id01" class="loginmodal">
+
+    <form class="loginmodal-content animate" action="" method="post">
+        {% csrf_token %}
+        <div class="loginimgcontainer">
+            <span onclick="closeFunction()" class="cross" title="Close">&times;</span>
+            <img src="{% static 'images/avatar.png' %}" alt="Avatar" class="loginavatar">
+        </div>
+
+
+        <div class="container">
+
+
+            <label for="username"><b>Username</b></label>
+            <div class="input-container">
+
+
+                <i class="fa fa-user icon" aria-hidden="true"></i>
+                <input type="text" class="input-field" placeholder="Enter Username" name="username" required>
+            </div>
+
+            <label for="password"><b>Password</b></label>
+
+            <div class="input-container">
+
+                <i class="fa fa-key icon" aria-hidden="true"></i>
+
+                <input id="password-field" class="input-field" type="password" placeholder="Enter Password"
+                    name="password" required>
+
+                <span toggle="#password-field" class="fa fa-eye field-icon toggle-password"
+                    title="show password"></span>
+            </div>
+            <!-- Using Different types of alert message that comes from views.py -->
+            {% if messages %}
+
+            {% for message in messages %}
+            <div class="container-fluid p-0">
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+            </div>
+            {% endfor %}
+
+            {% endif %}
+
+            <button type="submit" class="loginbutton"><b> LogIn </b></button>
+
+            <span>Forgot password ? <a href="#" style="text-decoration: none;"> Reset password. </a></span><br>
+
+            <span>Don't have an account ? <a href="{% url 'register' %}" style="text-decoration: none;"> Create One. </a></span>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+<!-- When User clicks anywhere outside of the modal -->
+<script>
+    // Get the modal
+    var login_modal = document.getElementById('id01');
+
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == login_modal) {
+            // document.getElementById('id01').style.display='block';
+            login_modal.style.display = "none";
+            window.location.href = "/"; //After clicking on anywhere outside redirect page to index.html i.e home page
+        }
+    }
+</script>
+
+
+<!-- For clicking on X to close add redirect to home page. -->
+<script>
+    function closeFunction() {
+        document.getElementById('id01').style.display = 'none'
+        window.location.href = "/";     //After clicking on X  redirect page to index.html i.e home page
+    }
+</script>
+
+<!-- For show password eye-type icon  -->
+<script>
+    $(".toggle-password").click(function () {
+
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+</script>
+
+
+{% endblock %}

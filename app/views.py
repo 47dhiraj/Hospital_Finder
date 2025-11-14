@@ -145,4 +145,53 @@ def activate(request, uidb64, token):
     
     else:
         return HttpResponse('Activation link is invalid!')
+
+
+
+
+
+
+
+def loginPage(request):
+
+    if request.method == 'POST':
+
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        # print('Username: ', username)
+        # print('Password: ', password)
+
+        user = authenticate(request, username=username, password=password)
+        # print('User: ', user)
+
+        if user is not None:  # user ko value TRUE xa i.e FALSE chaina vani vaneko... khas ma mathi ko authenticate le Boolean Value return garxa i.e user authenticate vayo vani TRUE return garxa & vayena vani chai FALSE return garxa
+            
+            login(request, user)  # login(request, user) django ko inbuilt keyword jastai ho jasle login vaye ko user ko session lai database ko django_session table ma hold garera rakhcha.
+
+            if request.user.is_client:
+                return redirect('clienthome')
+            else:
+                return redirect('adminhome')
+            
+        else:
+
+            messages.error(request, 'Incorrect username or password !')  # SYNTAX: messages.info(request, 'Custom Message').......django le provide gareko informative message lai display garaune kaam garxa
+
+
+    ## request.method == 'GET'
+    context = {}
+
+    if not request.user.is_authenticated:
+
+        return render(request, 'app/login.html', context)
     
+    else:
+
+        return redirect('home')
+
+
+
+
+
+
+

@@ -61,10 +61,10 @@ INSTALLED_APPS = [
 
 
     ## Installed third party packages
-    'crispy_forms',
-    'crispy_bootstrap4',   # required
+    'crispy_forms',                     ## for django-crispy forms
+    'crispy_bootstrap4',                ## for django-crispy forms
     
-    'sweetify',
+    'sweetify',                         ## for sweetify alert from backend/django server
 ]
 
 
@@ -110,26 +110,16 @@ WSGI_APPLICATION = 'hospital.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-
-
+## PostgreSQL database configurations
 DATABASES = {
 
     'default': {
-
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hsptl_finder',     # Database name
-        'USER': 'postgres',         # Default superuser (change if different)
-        'PASSWORD': '1234',         # Your database password
-        'HOST': 'localhost',        # Hostname or IP
-        'PORT': '5432',             # Default PostgreSQL port
-
+        'NAME': 'hsptl_finder',                     # Database Name
+        'USER': 'postgres',                         # Default superuser for any postgres database
+        'PASSWORD': '1234',                         # Database Password
+        'HOST': 'localhost',                        # Database Hostname or IP
+        'PORT': '5432',                             # Default PostgreSQL port
     }
 
 }
@@ -160,16 +150,19 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Kathmandu' 
+## setting Time Zone to Asia/Kathmandu
+TIME_ZONE = 'Asia/Kathmandu'
 
 USE_I18N = True
 
 USE_TZ = True
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+## static files configurations
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -178,6 +171,7 @@ STATICFILES_DIRS = [
 
 
 
+## Media configurations
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -192,7 +186,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-
 ## For Authentication user model
 AUTH_USER_MODEL = 'app.User'
 
@@ -202,9 +195,9 @@ LOGIN_URL = 'login'
 
 
 ## Django Crispy Form configurations
-
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
 
 
 
@@ -231,7 +224,6 @@ SWEETIFY_USE_JQUERY = False
 
 
 ## Gmail (E-mail) SMTP configurations
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
