@@ -30,6 +30,12 @@ urlpatterns = [
 
 
 
+    path('logoutall/', views.logoutall, name="logoutall"),
+
+
+
+
+
     # 1st step - Password reset garna ko lagi, email id halnu parxa so tyo page ko URL ho
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="app/password_reset.html"), name="reset_password"),
     # auth_views.PasswordResetView.as_view  -> yaha  .as_view kina gareko vanda PasswordResetView chai django ko default class view ho so testo view ko lagi  .as_view garna parxa  &  testo defualt django view le default django template nai render garauxa.. so yedi hamilai django ko default template man parena vani teslai override pani garna sakxau . So, to override that page ->  (template_name="accounts/password_reset.html)

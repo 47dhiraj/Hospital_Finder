@@ -124,7 +124,7 @@
 
                     {% else %}
 
-                    <form action="#" method="POST">
+                    <form action="{% url 'logoutall' %}" method="POST">
                         {% csrf_token %}
                         <li class="nav-item">
 
