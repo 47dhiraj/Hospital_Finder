@@ -1,0 +1,33 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+{%  block content %}
+
+<!-- contact -->
+<section id="contact">
+    <div class="container">
+        <div class="contact-title">
+            <h1 class="text-center">Contact</h1>
+            <br>
+        </div>
+        <div class="contact-form">
+            <form action="" method="POST" id="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required class="form-control">
+                <br>
+                <input type="email" name="email" placeholder="Your Email" required class="form-control">
+                <br>
+                <input type="tel" name="phone" placeholder="Your Contact" required class="form-control">
+                <br>
+                <textarea name="msg" placeholder="Message" required rows="4" class="form-control"></textarea>
+                <br>
+                <input type="submit" name="submit" class="form-control submit" value="SEND MESSAGE">
+            </form>
+        </div>
+    </div>
+</section>
+
+<br>
+
+
+{% endblock %}

@@ -1,10 +1,80 @@
-{% include 'app/index.html' %}
+{% extends 'app/base.html' %}
 
 {% load static %}
+
+{% load crispy_forms_tags %}
+
 
 
 {%  block content %}
 
 
+{% if messages %}
 
+    <div class="alert alert-success alert-dismissible fade in" role="alert">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    {% for message in messages %}	<!-- messages vannale djago ma vayeko messages haru vanni bujinxa -->
+    <p id="messages">{{message}}</p>	<!-- id="messages"  styling chai mathi diyeko xa -->
+    {% endfor %}
+    </div>
+
+{% endif %}
+    
+
+<div class="container-fluid" >
+    <div class="row">
+
+        <div style="padding-left: 50px;" class="col-sm-6 col-md-6">
+
+            <h1 style="background: -webkit-linear-gradient(#FFD700, white);-webkit-background-clip: text;background-clip: text;-webkit-text-fill-color: transparent;"> {{request.user}}</h1>
+            <h3> User ID : {{request.user.id}}</h3>
+            <h3> Joined : {{request.user.date_joined}}</h3>
+            <h3> Last Seen : {{request.user.last_login}}</h3>
+            {% if request.user.is_client %}
+                <h3> User Type : User</h3>
+            {% else %}
+            <h3> User Type : Admin</h3>
+            {% endif %}
+            <h3> Email : {{request.user.email}}</h3>
+           
+
+            </br>
+            </br>
+
+        </div>
+
+        <div class="col-sm-3 col-md-3">
+
+        </div>
+            
+        <div class="col-sm-3 col-md-3">
+            <div>
+                
+            </div>
+            <img src="{% static 'images/avatar.png' %}" width="237px;" height="260px;" style="margin-top: 10px; border: 2px solid white; padding: 10px;">
+
+            <form action="" method="post" enctype="multipart/form-data">
+
+                {% csrf_token %}
+                <p>
+                    <input id="id_image" type="file" class="" name="image" style="margin-left: 70px; margin-top: 10px; ">
+                </p>
+                <input type="submit" value="Submit" class="btn btn-success" style="margin-left: 70px; "/>
+            </form>
+
+            {% if messages %}
+                        
+                {% for message in messages %}
+                    <h5><b>{{ message }}</b><h5     >
+                {% endfor %}
+                    
+            {% endif %}
+        </div>
+
+
+    </div>
+
+</div>
+ 
+            
 {% endblock %}

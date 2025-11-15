@@ -1,0 +1,175 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+
+{%  block content %}
+
+<!-- Link for icons -->
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+
+<!-- Link for sweet alert -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+<style>
+    body {
+        background-image: url(/static/images/bg_3.png);
+      
+    }
+
+    .panel-body {
+
+        padding: 4px;
+        width: 100%;
+        height: 500px;
+    }
+
+   
+    .panel {
+        background-color: rgb(75, 240, 60);
+        border: 1px solid transparent;
+        border-radius: 6px;
+
+    }
+
+    img {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .star-rating {
+        line-height: 32px;
+        font-size: 1.25em;
+    }
+
+    .star-rating .fa-star {
+        color: yellow;
+    }
+</style>
+
+<div class="container-fluid">
+    <!-- Hospital Details - Left Side -->
+    <div class="row">
+
+
+        <div class="col-sm-3 col-md-3" data-aos="fade-right" data-aos-duration="800">
+            <div class="panel panel-default bg-primary" style="margin-top: 5%;">
+                <div class="panel-body">
+                    <a href="#">
+                        <img src="{{ hospital.images.url }}" class="img-responsive" width="100%" height="100%">
+                    </a>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-4 col-md-4"><br>
+            <h1 style="background: black;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;"><b>{{hospital.name}}</b></h1>
+            <h6 style="color: black;"><i class="fas fa-map-marker-alt"></i> {{hospital.location}}</h6>
+
+
+            <h6 style="color: black;"><i class="fas fa-mobile-alt"></i> {{hospital.phone}}</h6><br>
+            <h6 style="color: black; text-align: justify;">{{hospital.description}}</h6>
+            <h6 style="color: black;"><a href="{{hospital.website}}" target="_blank" >{{hospital.website}}</a></h6>
+
+
+
+            </br>
+
+            {% if request.user.is_authenticated %}
+            <h4>Rate Hospital</h4>
+            <form class="form-horizontal" role="search" method="post" action="{% url 'detail' hospital.id %}"
+                onsubmit="return validateForm()" name="ratingForm">
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="star-rating" style="font-size: 2em; margin-bottom: 10px;">
+                                    <span class="fa fa-star-o" data-rating="1"></span>
+                                    <span class="fa fa-star-o" data-rating="2"></span>
+                                    <span class="fa fa-star-o" data-rating="3"></span>
+                                    <span class="fa fa-star-o" data-rating="4"></span>
+                                    <span class="fa fa-star-o" data-rating="5"></span>
+                                    <input type="hidden" name="rating" class="rating-value" value="0">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-success" value="Submit">
+                {% if messages %}
+
+                {% for message in messages %}
+                <!-- <h5 style="color: black;"><b>{{ message }}</b><h5> -->
+                    <script type="text/javascript">
+                        swal("", "{{ message }}", "success").then(
+                        function() {
+                            window.location = "{% url 'detail' hospital.id %}";
+                        });
+                        </script>
+                        {% endfor %}
+
+                        {% endif %}
+            </form>
+
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="col-sm-1 col-md-1">
+
+        </div>
+
+    </div>
+
+</div>
+<br><br>
+
+<script type="text/javascript">
+    var $star_rating = $('.star-rating .fa');
+
+    var SetRatingStar = function () {
+        return $star_rating.each(function () {
+            if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+                return $(this).removeClass('fa-star-o').addClass('fa-star');
+            }
+            else {
+                return $(this).removeClass('fa-star').addClass('fa-star-o');
+            }
+        });
+
+    };
+
+    $star_rating.on('click', function () {
+        $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+        return SetRatingStar();
+    });
+
+    SetRatingStar();
+
+    $(document).ready(function () { });
+
+</script>
+
+<script type="text/javascript">
+    function validateForm() {
+        var x = document.forms["ratingForm"]["rating"].value;
+        if (x == "0") {
+            alert("Invalid Input");
+            return false;
+        }
+    }
+</script>
+
+{% endblock %}

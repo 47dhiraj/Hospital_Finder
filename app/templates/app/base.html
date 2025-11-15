@@ -80,7 +80,7 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-medkit" aria-hidden="true"></i>
+                        <a class="nav-link" href="{% url 'services' %}"><i class="fa fa-medkit" aria-hidden="true"></i>
                             Services</a>
                     </li>
 
@@ -90,19 +90,19 @@
                     {% if request.user.is_authenticated %}
                     {% if request.user.is_client %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{% url 'clienthome' %}">
                             <span class="fa fa-user"></span> {{request.user}}
                         </a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span class="fa fa-user"></span> {{request.user}}
+                        <a class="nav-link" href="{% url 'customerdetail' %}">
+                            <span class="fa fa-user"></span> Users
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{% url 'adminhome' %}">
                             <span class="fa fa-user"></span> {{request.user}}
                         </a>
                     </li>

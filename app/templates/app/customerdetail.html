@@ -1,0 +1,56 @@
+{% extends 'app/base.html'%}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+td,th
+{
+    height: 30px; 
+    width: 50px;
+
+    text-align: center; 
+    vertical-align: middle;
+}
+</style>
+
+<table class="table table-bordered table-sm">
+    
+    <thead  class="thead-primary">
+        <tr>
+            <th>UserID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Joined</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    {% for user in users %}
+        <tr>
+            <td>{{user.id}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.date_joined}}</td>
+            
+            {% if user.is_client %}
+                <td>User</td>
+            {% else %}
+                <td>Admin</td>
+            {% endif %}
+
+            <td>
+                <a href="#"><span class="btn btn-success">Show</span></a>
+            </td>
+        </tr>
+    {% endfor %}
+
+
+
+</table>
+
+{% endblock %}

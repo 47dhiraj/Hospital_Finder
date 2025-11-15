@@ -1,15 +1,27 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+
 from django.contrib.auth import authenticate, login, logout
+
 from django.contrib import messages
+
 from django.core.mail import EmailMessage, send_mail
+
 from django.contrib.sites.shortcuts import get_current_site
+
 from django.template.loader import render_to_string
+
 from django.utils.encoding import force_bytes, force_str
+
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+
 from django.contrib.auth import get_user_model
+
 from .forms import CreateClientForm
+
 from .tokens import account_activation_token
+
 from django.conf import settings
+
 from app.models import Disease
 from app.models import Patient
 from app.models import Hospital
@@ -276,9 +288,70 @@ def getRecommendations(diseaseById):
 
 
 def adminhome(request):
-    return render(request, 'app/adminhome.html')
+
+    context = {}
+
+    return render(request, 'app/adminhome.html', context)
 
 
+
+
+
+def detail(request, hospital_id):
+
+    hospital = get_object_or_404(Hospital, id=hospital_id)
+
+    if request.method == "POST":
+
+        rate = request.POST['rating']
+        rateObject = Rate()
+        rateObject.user = request.user
+        rateObject.hospital = hospital
+        rateObject.rating = rate
+
+        rateObject.save()
+
+        messages.success(request, "Your Rating has been submited.")
+
+    context = {'hospital': hospital}
+    
+    return render(request, 'app/detail.html', context)
+
+
+
+
+
+def customerdetail(request):
+
+    users = User.objects.all().order_by('id')
+
+    context = {'users': users}
+
+    return render(request, 'app/customerdetail.html', context)
+
+
+
+
+
+# Find hospital function to display all the hospitals.
+def findHospital(request):
+
+    query = request.GET.get('searchvalue')
+
+    if query:
+
+        hospital = Hospital.objects.filter(Q(name__icontains=query)).distinct()
+
+        context = {'hospital_list': hospital}
+
+        return render(request, 'app/hospital_list.html', context)
+
+
+    hospital_list = Hospital.objects.all()
+
+    context = {'hospital_list': hospital_list}
+
+    return render(request, 'app/hospital_list.html', context)
 
 
 
@@ -288,6 +361,7 @@ def logoutall(request):
     if request.method == "POST":
 
         logout(request)
+        
         return redirect('login')
     
     return redirect('home')

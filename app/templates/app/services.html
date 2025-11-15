@@ -1,0 +1,39 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+
+{%  block content %}
+
+
+<!-- services -->
+<section id="services">
+    <div class="container text-center">
+        <h1 class="title2">Our Services</h1>
+        <hr>
+        <div class="row text-center">
+            <div class="col-md-4 services">
+                <img src="{% static 'images/doctor.png' %}" alt="doctor" class="services-img" width="250">
+                <h4>Doctors</h4>
+                <p>A small river named Duden flows by their place and supplies it with the necessary r</p>
+            </div>
+            <div class="col-md-4 services">
+                <img src="{% static 'images/open-24-hours.png' %}" alt="service24" class="services-img" width="250">
+                <h4>24/7 Services</h4>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia..
+                </p>
+            </div>
+            <div class="col-md-4 services">
+                <img src="{% static 'images/ambulance.png' %}" alt="ambulance" class="services-img" width="250">
+                <h4>Ambulance</h4>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+            </div>
+        </div>
+        <a href=""><button type="button" class="btn btn-success">Get Services</button></a>
+    </div>
+</section>
+
+
+
+
+{% endblock %}

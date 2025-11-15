@@ -1,0 +1,164 @@
+{% extends 'app/base.html' %}
+
+
+{% load static %}
+
+
+{%  block content %}
+
+<!-- Image Hover effect stylesheet -->
+<link rel="stylesheet" href="{% static 'image-style.css' %}">
+
+<!-- For Search Button -->
+<style>
+  form.search input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+    margin-top: 50px;
+  }
+
+  form.search button {
+    float: left;
+    width: 18%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    margin-top: 50px;
+
+  }
+
+  form.search button:hover {
+    background: #0b7dda;
+  }
+
+  form.search::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  /* For Image */
+
+  body {
+    background-image: linear-gradient(to left, #b3e6ff, whitesmoke);
+
+  }
+
+  /* For Border */
+
+  #hospital-list-border a {
+    border: 4px solid white;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    float: left;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    transition: border .15s ease-in-out;
+    -moz-transition: border .15s ease-in-out;
+    -webkit-transition: border .15s ease-in-out;
+    text-decoration: none;
+    margin-right: 5px;
+  }
+
+  #hospital-list-border a:hover {
+    border: 4px solid #5cb85c;
+    opacity: 0.9;
+  }
+
+  /* For Blinking Text 'Hospital' */
+  .blinking {
+    animation: blinkingText 1.2s infinite;
+  }
+
+  @keyframes blinkingText {
+    0% {
+      color: black;
+    }
+
+    49% {
+      color: rgb(100, 190, 218);
+    }
+
+    60% {
+      color: transparent;
+    }
+
+    99% {
+      color: transparent;
+    }
+
+    100% {
+      color: #000;
+    }
+  }
+
+/* For Hospital image list to display in animated way */
+
+.thumbnail a>img, .thumbnail>img {
+    margin-right: auto;
+    margin-left: auto;
+    transition: .2s ease;
+    backface-visibility: hidden;
+}
+</style>
+
+<!-- For Hospital list to display in animated way -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+  AOS.init();
+</script>
+
+
+
+
+<div class="container">
+  <!-- Search Box-->
+  <form class="search" action="" method="GET">
+    {% csrf_token %}
+    <input type="text" placeholder="Search.." name="searchvalue" value="{{ request.GET.searchvalue }}">
+    <button type="submit"><i class="fa fa-search"></i></button>
+  </form>
+  <h2 class="text-center blinking" style="margin-top: 30px;"> Hospitals </h2>
+
+  <div class="row" style="margin-top: 70px;" id="hospital-list-border">
+
+    {% for hospital in hospital_list %}
+
+    <div class="col-sm-3 col-md-3 ">
+      <div class="thumbnail" data-aos="zoom-in">
+
+        <!-- django template ma for loop lai limit garna  break use garna mildaina , so for loop lai limit garna  slice use garna parcha -->
+
+        <a href="{% url 'detail' hospital.id %}" style="text-decoration:none">
+          <div class="img__wrap">
+            <img class="img__img" src="{{ hospital.images.url }}" width=230px; height=280px; />
+            <div class="img__description_layer">
+
+              <p class="img__description" style="text-align: center; font-size: large; font-weight: bold;">
+                {{hospital.name}}</p>
+            </div>
+
+          </div>
+        </a>
+      </div>
+
+
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+
+{% endblock %}

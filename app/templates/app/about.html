@@ -1,0 +1,64 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+
+{%  block content %}
+
+<style>
+    #hospital-img{
+        width: 100%;
+        height: 70%;
+        border: 5px solid black;
+    }
+    p{
+        margin-top: 20px;
+    }
+ 
+ 
+#hospital-related img:hover{
+    border: 4px solid #5cb85c;
+    opacity: 0.9;
+}
+
+</style>
+
+<!-- about -->
+<section id="about">
+    <div class="container">
+        <h1 class="title2 text-center">Top Rated Hospitals</h1>
+        <hr>
+        <div class="row text-justify" id="hospital-related">
+            <div class="col-md-4">
+                <img src="{% static 'images/CivilHospital.jpg' %}" alt="" id="hospital-img">
+                <p>CSH is located at Minbhawan, Kathmandu. CSH is an autonomous government institution under the Ministry of General Administration (MoGA).</p>
+            </div>
+            <div class="col-md-4">
+                <img src="{% static 'images/GrandeHospital.jpg' %}" alt="" id="hospital-img">
+                <p>Grande International Hospital was created with the vision to fill an existing void in the Nepali healthcare industry.</p>
+            </div>
+            <div class="col-md-4">
+                <img src="{% static 'images/NorvicHospital.jpg' %}" alt="" id="hospital-img">
+                <p>Norvic International hospital was established in 1994 by Chaudhary Group, one of the leading corporate houses in Nepal.</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row text-justify" id="hospital-related">
+            <div class="col-md-4">
+                <img src="{% static 'images/MedicityHospital.jpg' %}" alt="" id="hospital-img">
+                <p>Nepal Mediciti combines the finest medical minds and advanced technology to provide holistic treatment within a Multi-Disciplinary Framework.</p>
+            </div>
+            <div class="col-md-4">
+                <img src="{% static 'images/TeachingHospital.jpg' %}" alt="" id="hospital-img">
+                <p>Tribhuvan University Teaching Hospital is a premier hospital in Nepal established in year 1982 with a 300 bed facility.</p>
+            </div>
+            <div class="col-md-4">
+                <img src="{% static 'images/VayodhaHospital.jpg' %}" alt="" id="hospital-img">
+                <p>Vayodha Hospitals, situated at in the major orbit of ring road Kathmandu, is a multi-specialty hospital with the vision of “Cure with Care”. </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

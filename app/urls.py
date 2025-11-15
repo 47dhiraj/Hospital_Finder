@@ -16,9 +16,12 @@ urlpatterns = [
 
     path('', views.home, name="home"),
 
+
     path('login/', views.loginPage, name="login"),
 
+
     path('register/', views.clientregisterPage, name="register"),
+
 
     path('activate/<uidb64>/<token>/', views.activate, name='activate'),
 
@@ -29,12 +32,27 @@ urlpatterns = [
     path('adminhome/', views.adminhome, name='adminhome'),
 
 
-
-    path('logoutall/', views.logoutall, name="logoutall"),
-
+    path('about/', TemplateView.as_view(template_name='app/about.html'), name="about"),
 
 
+    path('services/', TemplateView.as_view(template_name='app/services.html'), name="services"),
 
+
+    path('contact/', TemplateView.as_view(template_name='app/contact.html'), name="contact"),
+
+
+    path('customerdetail/', views.customerdetail, name="customerdetail"),
+
+
+    path('detail/<int:hospital_id>/', views.detail, name='detail'),
+
+
+    path('hospital_list/', views.findHospital, name="hospital_list"),
+
+
+
+
+    ## URLS for Resetting Password
 
     # 1st step - Password reset garna ko lagi, email id halnu parxa so tyo page ko URL ho
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="app/password_reset.html"), name="reset_password"),
@@ -51,5 +69,11 @@ urlpatterns = [
 
     # 4th Step - Password reset Sucess vai sake paxi,, password reset complete vayo aba tapai feri login garna saknu hunxa vanera jun Page display hunxa tesko URL ko lagi
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="app/password_reset_done.html"), name="password_reset_complete"),
+
+
+
+
+    ## url for log out
+    path('logoutall/', views.logoutall, name="logoutall"),
 
 ]
