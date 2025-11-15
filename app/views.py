@@ -176,20 +176,21 @@ def loginPage(request):
 def clienthome(request):
     
     diseases = Disease.objects.all()  # Disease table bata j jati kura cha tyo sabai lai get garera 'disease' vanni object ma haleko. Yo Query kina gareko vanda yesle template ma drop down ma database ma jun jun disease cha tyo sabai list out garna help gareko cha.
+    
+    all_districts = District.objects.all()
+    print('All Districts: ', all_districts)  
 
     # Post method
     if request.method == 'POST':
 
-
         patient_name = request.POST['p_name']
         patient_age = request.POST['p_age']
+        patient_district_id = int(request.POST.get('p_district', '').strip())
         patient_location = request.POST['p_location']
         patient_contact = request.POST['p_contact']
         patient_bloodgroup = request.POST['bloodgroup']
-
         disease_id, patient_disease = request.POST['disease'].split('-')  # select option ko value and text both chaiyo vani yesari split garera liencha.
         # ALTERNATIVE CODE # disease_id = request.POST['disease']
-
 
         userObject = request.user  # User vanni object lai userObject vanii variable ma rakheko so that hamiley tyo object dot garera disease_id  Usermodel ma add garna sakiyos vanera
         userObject.disease_id = disease_id  # hospital_User vanni table ma disease_id vanni field cha so tyo field ma user le choose gareko disease ko id store garayeko.
@@ -207,13 +208,18 @@ def clienthome(request):
         patientObject.disease = patient_disease
         patientObject.user_id = request.user.id  # User Model ma vako particular logged in vako user ko id get garera tyo id lai Patient table ma rakheko as Patient Model and User Model are linked with each other with the help of user_id.
         
+        print('Patient District Id: ', patient_district_id)
+        district_obj = District.objects.filter(id=patient_district_id).first()
+        patientObject.district = district_obj
+
         patientObject.save()
 
         diseaseById = request.user.disease_id  # User Model bata hamiley disease_id lai get gareko so that tyo 'disease_id' 'getRecommendation' vanni method ma pass garna ko lagi.
+        
         hospitals = getRecommendations(diseaseById)  # Jaba yo method-> 'getRecommendation(diseaseById)' call huncha yesle particular user le kun disease search gareyko cha tesko id ko through disease liyera tyo disease ko hospital lai recommend gareko huncha..
         # 'hospitals' vanni yeuta list ho jasma getRecommendation() method call hunda tyo method le return vareko values haru ayera baseko huncha.
 
-        context = {'diseases': diseases, 'patient_disease': patient_disease, 'diseaseById': diseaseById, 'hospitals': hospitals}  # Key value pair ma hamiley context pass gareko so that it could be used in templates.
+        context = {'diseases': diseases, 'districts': all_districts, 'patient_disease': patient_disease, 'diseaseById': diseaseById, 'hospitals': hospitals}  # Key value pair ma hamiley context pass gareko so that it could be used in templates.
 
         return render(request, 'app/clienthome.html', context)
 
@@ -224,7 +230,7 @@ def clienthome(request):
 
     if diseaseById is None:  # Yo if condition kina lagauna parcha ta vanda... Yedi kunai user chai first time login gardai cha (i.e new user )cha vani User Model ma 'disease_id' suruma NULL vako huncha so tyo case check garna parcha natra error falxa.
         
-        context = {'diseases': diseases}  # Yo 'diseases' vani line no. 89 mai get gareko cha so yo line le template ma disease name haru pass gardeko matrai ho becz hamailai disease name dropdown ma dekhauna cha..
+        context = {'diseases': diseases, 'districts': all_districts,}  # Yo 'diseases' vani line no. 89 mai get gareko cha so yo line le template ma disease name haru pass gardeko matrai ho becz hamailai disease name dropdown ma dekhauna cha..
         
         return render(request, 'app/clienthome.html', context)
 
@@ -235,7 +241,7 @@ def clienthome(request):
     hospitals = getRecommendations(diseaseById)  # Jaba yo method-> 'getRecommendation(diseaseById)' call huncha yesle particular user le kun disease search gareyko cha tesko id ko through disease liyera tyo disease ko hospital lai recommend gareko huncha..
     # 'hospitals' vanni yeuta list ho jasma getRecommendation() method call hunda tyo method le return vareko values haru ayera baseko huncha.
 
-    context = {'diseases': diseases, 'patient_disease': patient_disease, 'diseaseById': diseaseById, 'hospitals': hospitals}  # Key value pair ma hamiley context pass gareko so that it could be used in templates.
+    context = {'diseases': diseases, 'districts': all_districts, 'patient_disease': patient_disease, 'diseaseById': diseaseById, 'hospitals': hospitals}  # Key value pair ma hamiley context pass gareko so that it could be used in templates.
 
     return render(request, 'app/clienthome.html', context)
 

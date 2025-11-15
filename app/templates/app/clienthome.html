@@ -32,42 +32,72 @@
 
           <img src="{% static 'images/p_logo.png' %}"  alt="Avatar" class="avatar">
           <br>
+
           <form action="" method="POST">
+
             {% csrf_token %}
-            <div class="form-group">
-              <label for="name">Patient Name:</label>
-              <input type="text" class="form-control" id="p_name" name="p_name" placeholder="Your Name..." required>
-            </div>
+
 
             <div class="form-group">
-              <label for="age">Age:</label>
-              <input type="number" min="1" max="100" class="form-control" id="p_age" name="p_age"
-                placeholder="Your Age..." required>
+
+              <label for="name">Patient Name: </label>
+
+              <input type="text" class="form-control" id="p_name" name="p_name" placeholder="Enter patient name" required>
+
             </div>
 
+
+
             <div class="form-group">
-              <label for="location">Location:</label>
-              <input type="text" class="form-control" id="p_location" name="p_location"
-                placeholder="Your Location..." required>
+
+              <label for="age">Patient Age: </label>
+
+              <input type="number" min="1" max="100" class="form-control" id="p_age" name="p_age" placeholder="Enter patient age" required>
+            </div>
+
+
+
+
+            <div class="form-group">
+
+              <label>Select District: </label>
+
+              <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="p_district" name="p_district" required>
+
+                {% for district in districts %}
+
+                <option value="{{ district.id }}">{{ district.name }}</option>
+
+                {% endfor %}
+
+
+              </select>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+              <label for="location">Patient current location/street: </label>
+
+              <input type="text" class="form-control" id="p_location" name="p_location" placeholder="Enter location / street" required>
             </div>
 
             
             <div class="form-group">
-              <label for="contact">Contact:</label>
-              <input type="tel" class="form-control" id="p_contact" name="p_contact"
-                placeholder="Conctact Number..." required>
+
+              <label for="contact">Patient contact: </label>
+
+              <input type="tel" class="form-control" id="p_contact" name="p_contact" placeholder="Enter patient contact" required>
+
             </div>
 
             <div class="form-group">
-              <label>Blood Group:</label>
-              <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="bloodgroup"
-                name="bloodgroup" required>
-<!-- 
-                {% for disease in diseases %}
 
-                <option value="{{ disease.id }}-{{ disease.name }}">{{ disease.name }}</option>
+              <label>Patient blood Group: </label>
 
-                {% endfor %} -->
+              <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="bloodgroup" name="bloodgroup" required>
            
                 <option value="A+">O negative</option>
                 <option value="A+">O positive</option>
@@ -79,12 +109,15 @@
                 <option value="A+"> AB positive</option>
                               
               </select>
+
             </div>
 
+
             <div class="form-group">
-              <label>Disease:</label>
-              <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="disease"
-                name="disease" required>
+
+              <label>Patient disease: </label>
+
+              <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="disease"name="disease" required>
 
                 {% for disease in diseases %}
 
@@ -94,11 +127,13 @@
 
 
               </select>
+
             </div>
 
-          
 
             <br>
+
+
             <div class="text-center">
               <button type="submit" class="btn btn-info btn-block" id="submitbtn">Submit</button><br>
 
