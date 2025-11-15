@@ -1,66 +1,29 @@
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.core.mail import EmailMessage, send_mail
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.auth import get_user_model
+from .forms import CreateClientForm
+from .tokens import account_activation_token
 from django.conf import settings
 
-from .models import *
+User = get_user_model()
 
-from .forms import CreateClientForm
-
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout as auth_logout
-from django.contrib import messages
-from django.http import HttpResponse
-from django.http import JsonResponse
-from django.contrib.auth.hashers import make_password
-from django.http import HttpResponseRedirect
-from django.db.models import Q
-from django.core.exceptions import ObjectDoesNotExist
-from django.utils import timezone
-
-
-
-from django.core.mail import send_mail
-from django.core.mail import EmailMessage
-
-
-import sweetify
-
-
-from django.contrib.sites.shortcuts import get_current_site
-from django.http import HttpResponse
-from django.template.loader import render_to_string
-
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-
-## latest modification
-from django.utils.encoding import force_bytes, force_str
-
-from .tokens import account_activation_token
-
-
-
-import datetime
-from datetime import timedelta
-
-
-
-# Create your views here.
 
 
 def home(request):
-    
+
     if request.method == 'POST':
 
         name = request.POST.get('name')
         email = request.POST.get('email')
         message = request.POST.get('message')
-
-        contact_detail = "\n Name: " + name + "\n Email: " + email + "\n\n Message: " + message
-
-        if not request.user.is_authenticated:
-            subject = "A Visitor's Comment"
-        else:
-            subject = str(request.user) + "'s Comment"
-
+        contact_detail = f"\n Name: {name}\n Email: {email}\n\n Message: {message}"
+        subject = f"{request.user}'s Comment" if request.user.is_authenticated else "A Visitor's Comment"
 
         send_mail(
             subject=subject,
@@ -69,10 +32,7 @@ def home(request):
             recipient_list=[settings.EMAIL_HOST_USER],
             fail_silently=False,
         )
- 
- 
-        messages.success(request, ' Thank you for getting in touch! ')
-
+        messages.success(request, 'Thank you for getting in touch!')
 
     return render(request, 'app/index.html')
 
@@ -80,23 +40,17 @@ def home(request):
 
 
 
-
+# ---------------- Registration ----------------
 def clientregisterPage(request):
-    
+
     form = CreateClientForm()
 
-    def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'client'
-        return super().get_context_data(**kwargs)
-
-
     if request.method == 'POST':
-        
-        form = CreateClientForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=True)
 
-            # Prepare activation email
+        form = CreateClientForm(request.POST)
+
+        if form.is_valid():
+            user = form.save()
             current_site = get_current_site(request)
             mail_subject = 'Activate your account -- Hospital Finder'
             message = render_to_string('app/acc_active_email.html', {
@@ -105,24 +59,23 @@ def clientregisterPage(request):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
             })
-
             to_email = form.cleaned_data.get('email')
             email = EmailMessage(mail_subject, message, to=[to_email])
             email.content_subtype = "html"
             email.send()
 
-            messages.success(request, f'Account activation link has been sent to {to_email}!')
+            messages.success(request, f'Activation link sent to {to_email}!')
 
-            return redirect('clienthome')
+            return redirect('login')
 
 
-    context = {'form': form}
-    return render(request, 'app/register.html', context)
-
+    return render(request, 'app/register.html', {'form': form})
 
 
 
 
+
+# ---------------- Activation ----------------
 def activate(request, uidb64, token):
 
     try:
@@ -132,66 +85,72 @@ def activate(request, uidb64, token):
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
 
-    if user is not None and account_activation_token.check_token(user, token):
+
+    if user and account_activation_token.check_token(user, token):
 
         user.is_active = True
         user.save()
+        login(request, user)  # auto login after activation
 
-        login(request, user)  # auto login
+        messages.success(request, "Account activated successfully!")
 
-        messages.success(request, "Your account has been activated!")
+        if user.is_client:
+            return redirect('clienthome')
+        else:
+            return redirect('adminhome')
         
-        return redirect('clienthome')
-    
     else:
-        return HttpResponse('Activation link is invalid!')
+        
+        return render(request, 'app/activation_invalid.html')
 
 
 
-
-
-
-
+# ---------------- Login ----------------
 def loginPage(request):
+
+    if request.user.is_authenticated:
+
+        if request.user.is_client:
+            return redirect('clienthome')
+        else:
+            return redirect('adminhome')
+
 
     if request.method == 'POST':
 
         username = request.POST.get('username')
         password = request.POST.get('password')
-        # print('Username: ', username)
-        # print('Password: ', password)
 
         user = authenticate(request, username=username, password=password)
-        # print('User: ', user)
 
-        if user is not None:  # user ko value TRUE xa i.e FALSE chaina vani vaneko... khas ma mathi ko authenticate le Boolean Value return garxa i.e user authenticate vayo vani TRUE return garxa & vayena vani chai FALSE return garxa
+        if user:
+
+            login(request, user)
             
-            login(request, user)  # login(request, user) django ko inbuilt keyword jastai ho jasle login vaye ko user ko session lai database ko django_session table ma hold garera rakhcha.
-
-            if request.user.is_client:
+            if user.is_client:
                 return redirect('clienthome')
             else:
                 return redirect('adminhome')
-            
         else:
+            # Check if user exists but inactive
+            try:
+                temp_user = User.objects.get(username=username)
+                if not temp_user.is_active:
+                    messages.warning(request, "Your account is inactive. Please activate via email.")
+            except User.DoesNotExist:
+                pass
+            messages.error(request, 'Invalid username or password!')
 
-            messages.error(request, 'Incorrect username or password !')  # SYNTAX: messages.info(request, 'Custom Message').......django le provide gareko informative message lai display garaune kaam garxa
-
-
-    ## request.method == 'GET'
-    context = {}
-
-    if not request.user.is_authenticated:
-
-        return render(request, 'app/login.html', context)
-    
-    else:
-
-        return redirect('home')
+    return render(request, 'app/login.html')
 
 
 
 
 
+def clienthome(request):
+    return render(request, 'app/clienthome.html')
 
 
+
+def adminhome(request):
+    return render(request, 'app/adminhome.html')
