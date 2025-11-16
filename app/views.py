@@ -375,3 +375,12 @@ def logoutall(request):
 
 
 
+
+
+
+def demo_map_page(request):
+
+    context = {"google_maps_api_key": settings.GOOGLE_MAPS_API_KEY}
+
+    return render(request, "app/map.html", context)
+

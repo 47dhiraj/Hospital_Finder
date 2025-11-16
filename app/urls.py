@@ -76,4 +76,8 @@ urlpatterns = [
     ## url for log out
     path('logoutall/', views.logoutall, name="logoutall"),
 
+
+
+    path('map/', views.demo_map_page, name='map'),
+
 ]
