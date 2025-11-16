@@ -1,6 +1,7 @@
 from geopy.distance import geodesic
 
 
+## Note: geodesic to calculate distance uses Karney’s Geodesic Algorithm internally (not Haversine algo.)
 
 
 ## coordinate of Maitidevi seto pul
@@ -37,44 +38,47 @@ def calculate_distance_in_km(latitude1, longitude1, latitude2, longitude2):
 
 km = calculate_distance_in_km(lat1, long1, lat2, long2)             ## calling function calculate_distance_in_km(lat1, long1, lat2, long2)
 
-print("\nDistance in kilometers: ", km)
+print("\nAir distance : ", km, "KM")
 
 
 
 
-## Example 2: Cacluate distance in miles
+# ## Example 2: Cacluate distance in miles
 
-def calculate_distance_in_miles(latitude1, longitude1, latitude2, longitude2):
+# def calculate_distance_in_miles(latitude1, longitude1, latitude2, longitude2):
     
-    coordinate1 = (latitude1, longitude1)
+#     coordinate1 = (latitude1, longitude1)
 
-    coordinate2 = (latitude2, longitude2)
+#     coordinate2 = (latitude2, longitude2)
 
-    return geodesic(coordinate1, coordinate2).miles
-
-
-miles = calculate_distance_in_miles(lat1, long1, lat2, long2)
-
-print("\nDistance in miles: ", miles)
+#     return geodesic(coordinate1, coordinate2).miles
 
 
+# miles = calculate_distance_in_miles(lat1, long1, lat2, long2)
+
+# print("\nAir distance : ", miles, "miles")
 
 
-## Example 3: Cacluate distance in meters
 
-def calculate_distance_in_meters(latitude1, longitude1, latitude2, longitude2):
+
+# ## Example 3: Cacluate distance in meters
+
+# def calculate_distance_in_meters(latitude1, longitude1, latitude2, longitude2):
     
-    coordinate1 = (latitude1, longitude1)
+#     coordinate1 = (latitude1, longitude1)
 
-    coordinate2 = (latitude2, longitude2)
+#     coordinate2 = (latitude2, longitude2)
 
-    return geodesic(coordinate1, coordinate2).meters
+#     return geodesic(coordinate1, coordinate2).meters
 
 
 
-meters = calculate_distance_in_meters(lat1, long1, lat2, long2)
+# meters = calculate_distance_in_meters(lat1, long1, lat2, long2)
 
-print("\nDistance in meters: ", meters, "\n")
+# print("\nAir distance : ", meters, "meters" "\n")
+
+
+
 
 
 

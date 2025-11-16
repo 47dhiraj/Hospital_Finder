@@ -1,0 +1,111 @@
+## Calculating distance using Haversine Algorithm
+
+
+
+### Example 1
+
+
+import math
+
+
+
+def haversine(lat1, lon1, lat2, lon2):
+
+    R = 6371            ## Radius of Earth ~ 6371 km(kilometers) ~ 6371000 meters
+
+    ## Converting coordinate degree to radian
+    lat1_rad = math.radians(lat1)
+
+    lon1_rad = math.radians(lon1)
+
+    lat2_rad = math.radians(lat2)
+
+    lon2_rad = math.radians(lon2)
+
+
+    dlat = lat2_rad - lat1_rad
+
+    dlon = lon2_rad - lon1_rad
+
+
+    ## this is haversine alogirhtm(formula)
+    a = math.sin(dlat / 2) ** 2 + math.cos(lat1_rad) * math.cos(lat2_rad) * math.sin(dlon / 2) ** 2
+
+
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+
+    distance = R * c
+
+
+    return distance
+
+
+
+
+## coordinate of Maitidevi seto pul
+
+maitidevi_latitude = 27.7030097
+maitidevi_longititude = 85.3311939
+
+## coordinate of Gaushala chowk
+
+gaushala_latitude = 27.7078657
+gaushala_longititude = 85.3407783
+
+ 
+
+distance = haversine(maitidevi_latitude, maitidevi_longititude, gaushala_latitude, gaushala_longititude)
+
+print("\nAir Distance: ", distance, "KM")
+
+
+
+
+
+
+
+
+
+
+
+
+# ## Example 2
+
+# import math
+
+# def haversine(lat1, lon1, lat2, lon2):
+
+#     # Converting coordinates (latitude and longitude) from Degree to Radian
+#     lat1 = math.radians(lat1)
+#     lon1 = math.radians(lon1)
+#     lat2 = math.radians(lat2)
+#     lon2 = math.radians(lon2)
+    
+#     # Differences in coordinates
+#     dlat = lat2 - lat1
+#     dlon = lon2 - lon1
+    
+#     # HAVERSINE Formula
+#     a = math.sin(dlat / 2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2)**2
+#     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    
+#     # Earth's radius in kilometers
+#     R = 6371.0
+    
+#     # Distance in kilometers
+#     distance = R * c
+    
+#     return distance
+
+
+# # Kathmandu Example:
+
+# lat1, lon1 = 28.2296976, 83.8740449 # Pokhara, Nepal
+# lat2, lon2 = 27.5060061, 83.4149658 # Bhairahawa (Gautam Buddha International Airport), Nepal
+
+# # Air Distance calculation
+# distance = haversine(lat1, lon1, lat2, lon2)
+
+
+# print(f"Air Distance: {distance} KM")

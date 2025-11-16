@@ -26,6 +26,7 @@ address = "Kuleshwor, Kathmandu, Nepal"
 
 
 ## function/method to find coordinates from the given address
+## (Forward Geocoding)
 
 def geocode_address(address: str):
 
@@ -54,6 +55,7 @@ def geocode_address(address: str):
 
 
 ## function/method to find full address from the given coordinates
+## (Reverse Geocoding)
 
 def reverse_geocode(lat: float, lng: float):
 
