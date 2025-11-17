@@ -30,6 +30,9 @@ from app.models import District
 
 
 
+from .coordinate_finder import geocode_address
+
+
 User = get_user_model()
 
 
