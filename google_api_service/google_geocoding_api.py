@@ -1,7 +1,7 @@
 import requests
 
 ## your google Geocoding API Key here ....
-GOOGLE_API_KEY = "YOUR_GOOGLE_API_KEY"
+GOOGLE_API_KEY = "your_google_api_service_key_here"
 
 
 def get_lat_lon_from_address(address):

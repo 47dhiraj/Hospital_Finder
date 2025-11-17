@@ -10,6 +10,7 @@ User = get_user_model()
 
 
 class CreateClientForm(UserCreationForm):
+
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
@@ -18,6 +19,7 @@ class CreateClientForm(UserCreationForm):
             "email": None,
             "password2": None,
         }
+
 
     def clean(self):
         cleaned_data = super().clean()
@@ -30,6 +32,7 @@ class CreateClientForm(UserCreationForm):
             raise ValidationError("User with this email already exists.")
         return cleaned_data
 
+
     @transaction.atomic
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -39,3 +42,4 @@ class CreateClientForm(UserCreationForm):
         if commit:
             user.save()
         return user
+

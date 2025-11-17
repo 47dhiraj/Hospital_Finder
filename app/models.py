@@ -6,6 +6,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 
+
 class User(AbstractUser):
     is_client = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=True)
@@ -18,6 +19,7 @@ class User(AbstractUser):
     )
     disease = models.ForeignKey('Disease', null=True, blank=True, on_delete=models.CASCADE)
     date_joined = models.DateTimeField(default=timezone.now, null=True)
+
 
 
 class Hospital(models.Model):
@@ -34,6 +36,7 @@ class Hospital(models.Model):
         return self.name 
 
 
+
 class Disease(models.Model):
     name = models.CharField(max_length=200)
     hospitals = models.ManyToManyField('Hospital', blank=True)
@@ -42,11 +45,13 @@ class Disease(models.Model):
         return self.name 
 
 
+
 class District(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name 
+
 
 
 class Patient(models.Model):
@@ -67,6 +72,7 @@ class Patient(models.Model):
 
 
 
+
 class Rate(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
     hospital = models.ForeignKey('Hospital', null=True, blank=True, on_delete=models.CASCADE)
@@ -74,3 +80,4 @@ class Rate(models.Model):
 
     def __str__(self):
         return self.user.username
+

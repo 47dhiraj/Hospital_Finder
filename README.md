@@ -2,4 +2,4 @@
 
 <br>
 
-It helps patients in Nepal to find the best & nearby hospitals to treat their specific disease.
+#### It is a project idea, the allows patients in Nepal to find the nearby hospitals to treat their specific diseases.

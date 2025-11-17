@@ -4,7 +4,7 @@ import json
 
 def geocode_address(address):
 
-    api_key = 'AIzaSyCN6QFZnmu9OwRf9GV8XcgVPwHp5aXM-Sw'
+    api_key = 'your_google_api_service_key_here'
 
     # api_key = 'your_billing_enabled_api_key_here'
 
