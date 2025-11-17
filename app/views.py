@@ -198,10 +198,13 @@ def clienthome(request):
         disease_id, patient_disease = request.POST['disease'].split('-')  # select option ko value and text both chaiyo vani yesari split garera liencha.
         # ALTERNATIVE CODE # disease_id = request.POST['disease']
 
-        userObject = request.user  # User vanni object lai userObject vanii variable ma rakheko so that hamiley tyo object dot garera disease_id  Usermodel ma add garna sakiyos vanera
-        userObject.disease_id = disease_id  # hospital_User vanni table ma disease_id vanni field cha so tyo field ma user le choose gareko disease ko id store garayeko.
+        disease_obj = Disease.objects.get(id=disease_id)
+        
+        userObject = request.user
 
-        userObject.save()
+        userObject.disease = disease_obj
+
+        userObject.save(update_fields=['disease']) 
 
 
         patientObject = Patient()  # Patient vanni table ma yedi kei kura store garauna cha vani pahele tesko object banauna parcha.. i.e here it is 'patientObject'
@@ -214,11 +217,22 @@ def clienthome(request):
         patientObject.disease = patient_disease
         patientObject.user_id = request.user.id  # User Model ma vako particular logged in vako user ko id get garera tyo id lai Patient table ma rakheko as Patient Model and User Model are linked with each other with the help of user_id.
         
-        # print('Patient District Id: ', patient_district_id)
         district_obj = District.objects.filter(id=patient_district_id).first()
+
         patientObject.district = district_obj
 
+        full_address = patient_location + ", " + district_obj.name + ", Nepal"
+        response = geocode_address(full_address)
+
+        patient_latitude = response['data']['lat']
+        patient_longitude = response['data']['lng']
+
+        patientObject.latitude = patient_latitude
+        patientObject.longitude = patient_longitude
+
         patientObject.save()
+   
+
 
         diseaseById = request.user.disease_id  # User Model bata hamiley disease_id lai get gareko so that tyo 'disease_id' 'getRecommendation' vanni method ma pass garna ko lagi.
         
@@ -259,9 +273,11 @@ def clienthome(request):
 
 
 
+
+
 def get_recommendations_by_disease(diseaseById):
 
-    print('Disease ID: ', diseaseById)
+    # print('Disease ID: ', diseaseById)
     
     disease = Disease.objects.get(id=diseaseById)
 
