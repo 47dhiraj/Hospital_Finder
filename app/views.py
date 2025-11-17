@@ -30,12 +30,12 @@ from app.models import District
 
 
 
-from .coordinate_finder import geocode_address
+from .utils.coordinate_finder import geocode_address
+from .utils.distance_calculator import calculate_distance_in_km
+
 
 
 User = get_user_model()
-
-
 
 
 

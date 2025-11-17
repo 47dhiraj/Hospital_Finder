@@ -67,24 +67,3 @@ def geocode_address(address: str):
 
 
 
-
-
-
-## calling geocode_address() function to test the geopy
-
-# address = "Kuleshwor, Kathmandu, Nepal"
-# response = geocode_address(address)
-# print(response)
-
-
-## Response Example
-
-# {
-#     'status': 'success', 
-#     'message': 'coordinates found', 
-#     'data': {
-#         'address': 'Kuleshwor, Kathmandu, Nepal', 
-#         'lat': 27.6910608, 
-#         'lng': 85.3002049
-#     }
-# }
