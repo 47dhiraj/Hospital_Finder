@@ -178,7 +178,10 @@ def clienthome(request):
     diseases = Disease.objects.all()  # Disease table bata j jati kura cha tyo sabai lai get garera 'disease' vanni object ma haleko. Yo Query kina gareko vanda yesle template ma drop down ma database ma jun jun disease cha tyo sabai list out garna help gareko cha.
     
     all_districts = District.objects.all()
-    print('All Districts: ', all_districts)  
+    # print('All Districts: ', all_districts)  
+
+
+
 
     # Post method
     if request.method == 'POST':
@@ -208,7 +211,7 @@ def clienthome(request):
         patientObject.disease = patient_disease
         patientObject.user_id = request.user.id  # User Model ma vako particular logged in vako user ko id get garera tyo id lai Patient table ma rakheko as Patient Model and User Model are linked with each other with the help of user_id.
         
-        print('Patient District Id: ', patient_district_id)
+        # print('Patient District Id: ', patient_district_id)
         district_obj = District.objects.filter(id=patient_district_id).first()
         patientObject.district = district_obj
 
@@ -216,12 +219,16 @@ def clienthome(request):
 
         diseaseById = request.user.disease_id  # User Model bata hamiley disease_id lai get gareko so that tyo 'disease_id' 'getRecommendation' vanni method ma pass garna ko lagi.
         
-        hospitals = getRecommendations(diseaseById)  # Jaba yo method-> 'getRecommendation(diseaseById)' call huncha yesle particular user le kun disease search gareyko cha tesko id ko through disease liyera tyo disease ko hospital lai recommend gareko huncha..
+        hospitals = get_recommendations_by_disease(diseaseById)  # Jaba yo method-> 'get_recommendations_by_disease(diseaseById)' call huncha yesle particular user le kun disease search gareyko cha tesko id ko through disease liyera tyo disease ko hospital lai recommend gareko huncha..
         # 'hospitals' vanni yeuta list ho jasma getRecommendation() method call hunda tyo method le return vareko values haru ayera baseko huncha.
 
         context = {'diseases': diseases, 'districts': all_districts, 'patient_disease': patient_disease, 'diseaseById': diseaseById, 'hospitals': hospitals}  # Key value pair ma hamiley context pass gareko so that it could be used in templates.
 
         return render(request, 'app/clienthome.html', context)
+
+
+
+
 
 
     # Code for GET Method
@@ -238,7 +245,7 @@ def clienthome(request):
         patient_disease = Disease.objects.get(id=diseaseById)  # Disease vanni Model ma  User model bata ayeko 'disease_id' (diseaseById) lai pass garera particular disease name nikaleko so that yo chai template ma "Hospital Recommendation For {{patient_disease}}" vanera garna pawos vanera gareko..
 
 
-    hospitals = getRecommendations(diseaseById)  # Jaba yo method-> 'getRecommendation(diseaseById)' call huncha yesle particular user le kun disease search gareyko cha tesko id ko through disease liyera tyo disease ko hospital lai recommend gareko huncha..
+    hospitals = get_recommendations_by_disease(diseaseById)  # Jaba yo method-> 'get_recommendations_by_disease(diseaseById)' call huncha yesle particular user le kun disease search gareyko cha tesko id ko through disease liyera tyo disease ko hospital lai recommend gareko huncha..
     # 'hospitals' vanni yeuta list ho jasma getRecommendation() method call hunda tyo method le return vareko values haru ayera baseko huncha.
 
     context = {'diseases': diseases, 'districts': all_districts, 'patient_disease': patient_disease, 'diseaseById': diseaseById, 'hospitals': hospitals}  # Key value pair ma hamiley context pass gareko so that it could be used in templates.
@@ -249,39 +256,15 @@ def clienthome(request):
 
 
 
+def get_recommendations_by_disease(diseaseById):
 
-# Yo method sabsey important role play garcha. Yo method ko main target vaneko database ko Linker Table (i.e hospital_diesase_hospitals<= ManyToManyField() le create gardeko table) ma kam gareko cha..
-def getRecommendations(diseaseById):
-    hospitalById = list(Disease.hospitals.through.objects.filter(disease_id=diseaseById).values('hospital_id'))  # 1. Suru ma ta disease_id as a parameter auncha method call hunda. (method call clienthome() method bata vako cha..)
+    print('Disease ID: ', diseaseById)
     
-    # 2. Yo Query le  tyo ayeko 'disease_id' liyera Linker Table bata jati pani 'disease_id' gareko diseases haru cha tesbata hospitals haru nikalni kam gareko cha.[ .values('hospital_id') garera hospitals haru filterout gareko cha]
-    # 3. Linker Table ma query chalauna at first:
-    #			i) Model ma hererera ManyToManyField() kun Model name ma cha patta lagauna paryo => In our case it's in 'Disease' Model
-    #			   tesailey query ko suru mai 'Disease' vanera haleko
-    #			ii) Disease vanni model ma ManyToManyField() gareko field ko name 'hospitals' vanni cha tesailey query ma 'Disease.hospitals' vanera aako ho.
-    #			iii) '.through' pani use garnai parcha kina ki Hami Linker Table ma kam gardai chau..
-    # 4. Ayeko Queryset lai hami le 'list' ma convert gardiyeko so that haneko query bata ayeko hospital_id lai sajilai nikalna sakos vanera.
-    # 5. IMP NOTEE: .values('hospital_id') le dictionary return gardincha so ava hamro 'hospitalById' vanni list vitra yeuta dictionary baseko huncha..
+    disease = Disease.objects.get(id=diseaseById)
 
-    # hospitalById<{'hospital_id':3}, {'hospital_id':4}, {'hospital_id':5}, {'hospital_id':6}>	#hospitalById query set ma exact yesari value ayerako huncha.
+    hospitals = disease.hospitals.all()
 
-    recommended_hospital = []  # recommended_hospital yeuta khali list create gareko..
-    
-    for i in range(len(hospitalById)):  # 'hospitalById' aba yeuta as a list jasto vitra values haru chai as  a dictionary ko rup ma baseko huncha so tesma loop chalayeko.
-        
-        recommended_hospital.append(hospitalById[i]['hospital_id'])  # 'hospitalById' vanni list vitra ko dictionary bata hamilai aba key chaindaina tara 'values' haru chai chaini vako le yesto gareko => "hospitalById[i]['hospital_id']". yo dictionary ma hareko values ko key vaney feri 'hospital_id' nai baseko huncha..
-    
-    # tespachi loop bata jati ni values haru ayeko cha teslai recommended_hospital vanni list ma append gardeko.. append garena vani loop bata ayeko last ko values matra gayera bascha..
-
-
-    hospitals = []  # yeuta hospitals vanni khali list create gareko.
-    
-    for i in range(len(recommended_hospital)):  # ahiley sama ta 'recommended_hospital' list ma hospital ko id matrai baseko cha. Aba hamilai tyo hospital ko id ko through hamilai hospital ko name chayeko cha so loop lagayera 'Hospital' table ma hospital ko name haru nilakera 'hospitals' vanni list ma rakheko ho
-        
-        hospitals += Hospital.objects.filter(id=recommended_hospital[i])
-    
-    
-    return hospitals  # Yesle method call hunda 'hospitals' vanni list lai return garcha jasma hamro particular patient lai lageko ko disease ko adhar ma hospitals haru ayera baseko huncha..
+    return list(hospitals)
 
 
 
