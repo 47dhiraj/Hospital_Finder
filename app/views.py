@@ -185,7 +185,6 @@ def clienthome(request):
 
 
 
-
     # Post method
     if request.method == 'POST':
 
@@ -233,13 +232,18 @@ def clienthome(request):
         patientObject.save()
    
 
-
         diseaseById = request.user.disease_id  # User Model bata hamiley disease_id lai get gareko so that tyo 'disease_id' 'getRecommendation' vanni method ma pass garna ko lagi.
         
-        hospitals = get_recommendations_by_disease(diseaseById)  # Jaba yo method-> 'get_recommendations_by_disease(diseaseById)' call huncha yesle particular user le kun disease search gareyko cha tesko id ko through disease liyera tyo disease ko hospital lai recommend gareko huncha..
-        # 'hospitals' vanni yeuta list ho jasma getRecommendation() method call hunda tyo method le return vareko values haru ayera baseko huncha.
 
-        context = {'diseases': diseases, 'districts': all_districts, 'patient_disease': patient_disease, 'diseaseById': diseaseById, 'hospitals': hospitals}  # Key value pair ma hamiley context pass gareko so that it could be used in templates.
+        disease_recommended_hospitals = get_recommendations_by_disease(diseaseById)  # Jaba yo method-> 'get_recommendations_by_disease(diseaseById)' call huncha yesle particular user le kun disease search gareyko cha tesko id ko through disease liyera tyo disease ko hospital lai recommend gareko huncha..
+        print('\n\nDisease Recommended Hospitals: ', disease_recommended_hospitals)
+
+
+        distance_recommended_hospitals = get_recommendation_by_distance(disease_recommended_hospitals, patient_latitude, patient_longitude)
+        print('\n\nNearest Recommended Hospitals: ', distance_recommended_hospitals)
+
+
+        context = {'diseases': diseases, 'districts': all_districts, 'patient_disease': patient_disease, 'diseaseById': diseaseById, 'hospitals': distance_recommended_hospitals}  # Key value pair ma hamiley context pass gareko so that it could be used in templates.
 
         return render(request, 'app/clienthome.html', context)
 
@@ -247,8 +251,7 @@ def clienthome(request):
 
 
 
-
-    # Code for GET Method
+    # Code for other than Post method
     diseaseById = request.user.disease_id  # Yo Query le User Model bata pahele particular user ko 'disease_id' vanni field linxa and tyo field ma user le search gareko disease ko id ayera baseko huncha
 
 
@@ -262,10 +265,19 @@ def clienthome(request):
         patient_disease = Disease.objects.get(id=diseaseById)  # Disease vanni Model ma  User model bata ayeko 'disease_id' (diseaseById) lai pass garera particular disease name nikaleko so that yo chai template ma "Hospital Recommendation For {{patient_disease}}" vanera garna pawos vanera gareko..
 
 
-    hospitals = get_recommendations_by_disease(diseaseById)  # Jaba yo method-> 'get_recommendations_by_disease(diseaseById)' call huncha yesle particular user le kun disease search gareyko cha tesko id ko through disease liyera tyo disease ko hospital lai recommend gareko huncha..
-    # 'hospitals' vanni yeuta list ho jasma getRecommendation() method call hunda tyo method le return vareko values haru ayera baseko huncha.
+    disease_recommended_hospitals = get_recommendations_by_disease(diseaseById)
+    print('\n\nDisease Recommended Hospitals: ', disease_recommended_hospitals)
 
-    context = {'diseases': diseases, 'districts': all_districts, 'patient_disease': patient_disease, 'diseaseById': diseaseById, 'hospitals': hospitals}  # Key value pair ma hamiley context pass gareko so that it could be used in templates.
+
+    patient = request.user.patients.order_by('inqury_date').last()
+    patient_latitude = patient.latitude if patient else None
+    patient_longitude = patient.longitude if patient else None
+
+    distance_recommended_hospitals = get_recommendation_by_distance(disease_recommended_hospitals, patient_latitude, patient_longitude)
+    print('\n\nNearest Recommended Hospitals: ', distance_recommended_hospitals)
+
+
+    context = {'diseases': diseases, 'districts': all_districts, 'patient_disease': patient_disease, 'diseaseById': diseaseById, 'hospitals': distance_recommended_hospitals}  # Key value pair ma hamiley context pass gareko so that it could be used in templates.
 
     return render(request, 'app/clienthome.html', context)
 
@@ -288,6 +300,31 @@ def get_recommendations_by_disease(diseaseById):
 
 
 
+
+def get_recommendation_by_distance(hospitals, patient_latitude, patient_longitude):
+
+    """
+        Sort hospitals based on distance to patient.
+    """
+
+    hospital_distances = []
+
+    for hospital in hospitals:
+
+        distance = calculate_distance_in_km(
+            patient_latitude,
+            patient_longitude,
+            hospital.latitude,
+            hospital.longitude
+        )
+
+        ## making hospital_distances a list of tuples e.g (hospital_1, 10)
+        hospital_distances.append((hospital, distance))
+
+    
+    hospital_distances.sort(key = lambda item: item[1])                         # item[0] represent single hospital_object and item[1] is a distance from patient to that paritcular hospital.
+
+    return [hospital_ojects[0] for hospital_ojects in hospital_distances]       # Return sorted hospital objects
 
 
 

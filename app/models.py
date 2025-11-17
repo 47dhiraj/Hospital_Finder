@@ -60,7 +60,7 @@ class Patient(models.Model):
     blood_group = models.CharField(max_length=200, blank=True, null=True)
     disease = models.CharField(max_length=200, blank=True, null=True)
     inqury_date = models.DateTimeField(auto_now_add=True, null=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE, related_name='patients')
 
     def __str__(self):
         return self.name
