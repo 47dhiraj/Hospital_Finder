@@ -1,6 +1,10 @@
+from django.conf import settings
+
 from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib.auth import authenticate, login, logout
+
+from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
 
@@ -20,7 +24,8 @@ from .forms import CreateClientForm
 
 from .tokens import account_activation_token
 
-from django.conf import settings
+
+from .decorators.authorize_decorators import role_required
 
 from app.models import Disease
 from app.models import Patient
@@ -33,6 +38,8 @@ from app.models import District
 from .utils.coordinate_finder import geocode_address
 from .utils.distance_calculator import calculate_distance_in_km
 
+
+import sweetify
 
 
 User = get_user_model()
@@ -155,6 +162,8 @@ def loginPage(request):
         if user:
 
             login(request, user)
+
+            sweetify.success(request, f'You are logged in !', text= f'Welcome back, {username}.', persistent=False, icon='success', timer=2000)
             
             if user.is_client:
                 return redirect('clienthome')
@@ -175,7 +184,7 @@ def loginPage(request):
 
 
 
-
+@role_required(['client'], url='login')
 def clienthome(request):
     
     diseases = Disease.objects.all()  # Disease table bata j jati kura cha tyo sabai lai get garera 'disease' vanni object ma haleko. Yo Query kina gareko vanda yesle template ma drop down ma database ma jun jun disease cha tyo sabai list out garna help gareko cha.
@@ -236,11 +245,11 @@ def clienthome(request):
         
 
         disease_recommended_hospitals = get_recommendations_by_disease(diseaseById)  # Jaba yo method-> 'get_recommendations_by_disease(diseaseById)' call huncha yesle particular user le kun disease search gareyko cha tesko id ko through disease liyera tyo disease ko hospital lai recommend gareko huncha..
-        print('\n\nDisease Recommended Hospitals: ', disease_recommended_hospitals)
+        # print('\n\nDisease Recommended Hospitals: ', disease_recommended_hospitals)
 
 
         distance_recommended_hospitals = get_recommendation_by_distance(disease_recommended_hospitals, patient_latitude, patient_longitude)
-        print('\n\nNearest Recommended Hospitals: ', distance_recommended_hospitals)
+        # print('\n\nNearest Recommended Hospitals: ', distance_recommended_hospitals)
 
 
         context = {'diseases': diseases, 'districts': all_districts, 'patient_disease': patient_disease, 'diseaseById': diseaseById, 'hospitals': distance_recommended_hospitals}  # Key value pair ma hamiley context pass gareko so that it could be used in templates.
@@ -266,7 +275,7 @@ def clienthome(request):
 
 
     disease_recommended_hospitals = get_recommendations_by_disease(diseaseById)
-    print('\n\nDisease Recommended Hospitals: ', disease_recommended_hospitals)
+    # print('\n\nDisease Recommended Hospitals: ', disease_recommended_hospitals)
 
 
     patient = request.user.patients.order_by('inqury_date').last()
@@ -274,7 +283,7 @@ def clienthome(request):
     patient_longitude = patient.longitude if patient else None
 
     distance_recommended_hospitals = get_recommendation_by_distance(disease_recommended_hospitals, patient_latitude, patient_longitude)
-    print('\n\nNearest Recommended Hospitals: ', distance_recommended_hospitals)
+    # print('\n\nNearest Recommended Hospitals: ', distance_recommended_hospitals)
 
 
     context = {'diseases': diseases, 'districts': all_districts, 'patient_disease': patient_disease, 'diseaseById': diseaseById, 'hospitals': distance_recommended_hospitals}  # Key value pair ma hamiley context pass gareko so that it could be used in templates.
@@ -330,8 +339,7 @@ def get_recommendation_by_distance(hospitals, patient_latitude, patient_longitud
 
 
 
-
-
+@role_required(['admin'], url='login')
 def adminhome(request):
 
     context = {}
@@ -364,8 +372,7 @@ def detail(request, hospital_id):
 
 
 
-
-
+@role_required(['admin'], url='login')
 def customerdetail(request):
 
     users = User.objects.all().order_by('id')
@@ -400,14 +407,14 @@ def findHospital(request):
 
 
 
-
+@login_required
 def logoutall(request):
 
     if request.method == "POST":
-
         logout(request)
-        
-        return redirect('login')
+        sweetify.success(request, 'You are logged out !', text=f'Bye {request.user.username}, see you soon.', persistent=False, icon='success', timer=1500)
+        return redirect('home')
+    
     
     return redirect('home')
 
@@ -417,9 +424,9 @@ def logoutall(request):
 
 
 
-def demo_map_page(request):
+# def demo_map_page(request):
 
-    context = {"google_maps_api_key": settings.GOOGLE_MAPS_API_KEY}
+#     context = {"google_maps_api_key": settings.GOOGLE_MAPS_API_KEY}
 
-    return render(request, "app/map.html", context)
+#     return render(request, "app/map.html", context)
 

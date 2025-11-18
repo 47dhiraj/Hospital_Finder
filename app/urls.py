@@ -2,10 +2,11 @@ from django.urls import path, re_path
 
 from django.contrib.auth import views as auth_views
 
-from django.views.generic import TemplateView       # Need to import inorder to load the template directly without using the help of views.py
+from django.views.generic import TemplateView
 
 from . import views
-# from .views import loginPage, clientregisterPage, home, activate
+
+
 
 
 
@@ -34,10 +35,8 @@ urlpatterns = [
 
     path('about/', TemplateView.as_view(template_name='app/about.html'), name="about"),
 
-
     path('services/', TemplateView.as_view(template_name='app/services.html'), name="services"),
-
-
+    
     path('contact/', TemplateView.as_view(template_name='app/contact.html'), name="contact"),
 
 
@@ -78,6 +77,11 @@ urlpatterns = [
 
 
 
-    path('map/', views.demo_map_page, name='map'),
+
+
+
+
+    ## just for demo: for leanring google maps javascript api service integration in webpage for learning purpose only
+    # path('map/', views.demo_map_page, name='map'),
 
 ]
