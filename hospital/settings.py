@@ -228,9 +228,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'johndoe@example.com'
-EMAIL_HOST_PASSWORD = 'app_email_password'
+EMAIL_HOST_USER = 'youremail@example.com'
+EMAIL_HOST_PASSWORD = 'email_app_password_here'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
 
 
 # GOOGLE_MAPS_API_KEY = "your_google_cloud_api_service_key_here"

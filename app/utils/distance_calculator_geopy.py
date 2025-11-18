@@ -2,7 +2,7 @@ from geopy.distance import geodesic
 
 
 
-def calculate_distance_in_km(lat1, lon1, lat2, lon2):
+def calculate_distance_in_km_with_geopy(lat1, lon1, lat2, lon2):
 
     """
         Calculate distance in kilometers between two points (lat/lon).

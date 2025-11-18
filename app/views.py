@@ -34,12 +34,16 @@ from app.models import Rate
 from app.models import District
 
 
+import sweetify
+
 
 from .utils.coordinate_finder import geocode_address
-from .utils.distance_calculator import calculate_distance_in_km
+from .utils.distance_calculator_geopy import calculate_distance_in_km_with_geopy
+
+from .utils.distance_calculator_haversine import calculate_distance_with_haversine
 
 
-import sweetify
+
 
 
 User = get_user_model()
@@ -282,6 +286,7 @@ def clienthome(request):
     patient_latitude = patient.latitude if patient else None
     patient_longitude = patient.longitude if patient else None
 
+
     distance_recommended_hospitals = get_recommendation_by_distance(disease_recommended_hospitals, patient_latitude, patient_longitude)
     # print('\n\nNearest Recommended Hospitals: ', distance_recommended_hospitals)
 
@@ -320,12 +325,27 @@ def get_recommendation_by_distance(hospitals, patient_latitude, patient_longitud
 
     for hospital in hospitals:
 
-        distance = calculate_distance_in_km(
+        ## To calculate distance using Haversine Algorith / Formula
+        distance = calculate_distance_with_haversine(
             patient_latitude,
             patient_longitude,
             hospital.latitude,
-            hospital.longitude
+            hospital.longitude,
+            unit="km"
         )
+
+
+        ## To calculate distance using geopy
+        # distance = calculate_distance_in_km_with_geopy(
+        #     patient_latitude,
+        #     patient_longitude,
+        #     hospital.latitude,
+        #     hospital.longitude
+        # )
+
+
+        # print('\nDistance: ', distance, ' Type; ', type(distance))
+
 
         ## making hospital_distances a list of tuples e.g (hospital_1, 10)
         hospital_distances.append((hospital, distance))
