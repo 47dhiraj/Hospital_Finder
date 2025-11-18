@@ -188,7 +188,7 @@ def loginPage(request):
 
 
 
-@role_required(['client'], url='login')
+@role_required(['is_client'], url='login')
 def clienthome(request):
     
     diseases = Disease.objects.all()  # Disease table bata j jati kura cha tyo sabai lai get garera 'disease' vanni object ma haleko. Yo Query kina gareko vanda yesle template ma drop down ma database ma jun jun disease cha tyo sabai list out garna help gareko cha.
@@ -359,7 +359,7 @@ def get_recommendation_by_distance(hospitals, patient_latitude, patient_longitud
 
 
 
-@role_required(['admin'], url='login')
+@role_required(['is_admin'], url='login')
 def adminhome(request):
 
     context = {}
@@ -392,7 +392,7 @@ def detail(request, hospital_id):
 
 
 
-@role_required(['admin'], url='login')
+@role_required(['is_admin'], url='login')
 def customerdetail(request):
 
     users = User.objects.all().order_by('id')

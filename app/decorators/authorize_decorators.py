@@ -6,21 +6,10 @@ import sweetify
 
 
 
-# Map role names to your model fields
-ROLE_MAP = {
-    "admin": "is_admin",
-    "client": "is_client",
-}
+def role_required(required_roles, url='login', redirect_field_name=REDIRECT_FIELD_NAME):
 
-
-
-
-def role_required(allowed_roles, url='login', redirect_field_name=REDIRECT_FIELD_NAME):
-
-    if not isinstance(allowed_roles, (list, tuple)):
-        allowed_roles = [allowed_roles]
-
-    allowed_flags = [ROLE_MAP.get(role) for role in allowed_roles]
+    if not isinstance(required_roles, (list, tuple)):
+        required_roles = [required_roles]
 
 
     def decorator(view_func):
@@ -30,22 +19,22 @@ def role_required(allowed_roles, url='login', redirect_field_name=REDIRECT_FIELD
 
             user = request.user
 
-            ## First checking if user is authenticated user or not
+            # User must be logged in
             if not user.is_authenticated:
                 sweetify.error(request, "Access Denied!", text="Login required.", timer=2000)
-                redirect_url = reverse(url) + f'?{redirect_field_name}={request.path}'
+                redirect_url = reverse(url) + f"?{redirect_field_name}={request.path}"
                 return redirect(redirect_url)
 
 
-            ## Now, checking the user role (user has valid permission or not) 
-            for flag in allowed_flags:
-                if flag and getattr(user, flag, False):
+            # Check if user matches any required role
+            for role in required_roles:
+                if getattr(user, role, False) is True:
                     return view_func(request, *args, **kwargs)
 
 
-            # No allowed role found
+            # User does not have permission
             sweetify.error(request, "Access Denied!", text="You don't have permission.", timer=2000)
-            redirect_url = reverse(url) + f'?{redirect_field_name}={request.path}'
+            redirect_url = reverse(url) + f"?{redirect_field_name}={request.path}"
             return redirect(redirect_url)
 
 
@@ -53,3 +42,4 @@ def role_required(allowed_roles, url='login', redirect_field_name=REDIRECT_FIELD
 
 
     return decorator
+
