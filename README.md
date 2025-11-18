@@ -2,4 +2,4 @@
 
 <br>
 
-#### It is a project idea, the allows patients in Nepal to find the nearby hospitals to treat their specific diseases.
+### It’s a prototype concept site built to help patients in Nepal quickly find nearby hospitals that can treat their specific disease.
