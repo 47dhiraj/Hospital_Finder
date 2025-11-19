@@ -3,6 +3,10 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.db.models import UniqueConstraint
+from django.db.models.functions import Lower
+
 
 
 
@@ -22,8 +26,19 @@ class User(AbstractUser):
 
 
 
+
+
+
 class Hospital(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(
+        max_length=100,
+        null=False,
+        blank=False,
+        validators=[
+            MinLengthValidator(3),
+            MaxLengthValidator(100),
+        ]
+    )
     location = models.CharField(max_length=200, blank=True, null=True)
     latitude = models.DecimalField(max_digits=10, decimal_places=7, blank=True, null=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=7, blank=True, null=True)
@@ -33,24 +48,74 @@ class Hospital(models.Model):
     website = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
-        return self.name 
+        return self.name
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(
+                Lower('name'),
+                name='unique_hospital_name',
+            ),
+        ]
+
+
+
 
 
 
 class Disease(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(
+        max_length=100, 
+        null=False,
+        blank=False,
+        validators=[
+            MinLengthValidator(3),
+            MaxLengthValidator(100),
+        ]
+    )
+
     hospitals = models.ManyToManyField('Hospital', blank=True)
 
+
     def __str__(self):
-        return self.name 
+        return self.name
+    
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(
+                Lower('name'),
+                name='unique_disease_name',
+            ),
+        ]
+
+
 
 
 
 class District(models.Model):
-    name = models.CharField(max_length=50)
+
+    name = models.CharField(
+        max_length=50,
+        null=False,
+        blank=False,
+        validators=[
+            MinLengthValidator(4),   
+            MaxLengthValidator(50),
+        ]
+    )
 
     def __str__(self):
-        return self.name 
+        return self.name
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(
+                Lower('name'),
+                name='unique_district_name',
+            ),
+        ]
+
 
 
 

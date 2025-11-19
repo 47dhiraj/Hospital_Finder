@@ -5,9 +5,6 @@ from .models import User, Hospital, Disease, District, Patient, Rate
 
 
 
-# ==========================
-#   CUSTOM USER ADMIN
-# ==========================
 class UserAdmin(BaseUserAdmin):
     model = User
     list_display = (
@@ -45,10 +42,6 @@ class UserAdmin(BaseUserAdmin):
 
 
 
-
-# ==========================
-#      HOSPITAL ADMIN
-# ==========================
 @admin.register(Hospital)
 class HospitalAdmin(admin.ModelAdmin):
     list_display = ('name', 'location', 'phone', 'website')
@@ -57,11 +50,6 @@ class HospitalAdmin(admin.ModelAdmin):
 
 
 
-
-
-# ==========================
-#      DISEASE ADMIN
-# ==========================
 @admin.register(Disease)
 class DiseaseAdmin(admin.ModelAdmin):
     list_display = ('name',)
@@ -70,11 +58,6 @@ class DiseaseAdmin(admin.ModelAdmin):
 
 
 
-
-
-# ==========================
-#      DISTRICT ADMIN
-# ==========================
 @admin.register(District)
 class DistrictAdmin(admin.ModelAdmin):
     list_display = ('name',)
@@ -82,10 +65,6 @@ class DistrictAdmin(admin.ModelAdmin):
 
 
 
-
-# ==========================
-#      PATIENT ADMIN
-# ==========================
 @admin.register(Patient)
 class PatientAdmin(admin.ModelAdmin):
     list_display = ('name', 'age', 'district', 'contact', 'blood_group', 'inqury_date')
@@ -94,11 +73,6 @@ class PatientAdmin(admin.ModelAdmin):
 
 
 
-
-
-# ==========================
-#        RATE ADMIN
-# ==========================
 @admin.register(Rate)
 class RateAdmin(admin.ModelAdmin):
     list_display = ('user', 'hospital', 'rating')
@@ -108,7 +82,5 @@ class RateAdmin(admin.ModelAdmin):
 
 
 
-# ==========================
-#     REGISTER USER
-# ==========================
+
 admin.site.register(User, UserAdmin)
