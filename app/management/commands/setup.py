@@ -58,8 +58,8 @@ class Command(BaseCommand):
         # List of all .json fixture files to load
         fixtures = [
             'User.json',
-            # 'Hospital.json',
-            # 'Disease.json',
+            'Hospital.json',
+            'Disease.json',
             'District.json'
         ]
 

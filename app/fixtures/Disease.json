@@ -3,7 +3,7 @@
     "model": "app.disease",
     "pk": 1,
     "fields": {
-        "name": "Anaemia Disease",
+        "name": "Anaemia Disease - एनीमिया रोग",
         "hospitals": [
             1,
             2
@@ -14,7 +14,7 @@
     "model": "app.disease",
     "pk": 2,
     "fields": {
-        "name": "Cancer Disease",
+        "name": "Cancer Disease - क्यान्सर रोग",
         "hospitals": [
             3,
             4,
@@ -27,7 +27,7 @@
     "model": "app.disease",
     "pk": 3,
     "fields": {
-        "name": "Covid 19",
+        "name": "Covid 19 - कोभिड",
         "hospitals": [
             7,
             8,
@@ -40,7 +40,7 @@
     "model": "app.disease",
     "pk": 4,
     "fields": {
-        "name": "EyeDisease",
+        "name": "Eye Disease - आँखा रोग",
         "hospitals": [
             11,
             12,
@@ -53,7 +53,7 @@
     "model": "app.disease",
     "pk": 5,
     "fields": {
-        "name": "Head and Spinal",
+        "name": "Head and Spinal - टाउको र मेरुदण्ड",
         "hospitals": [
             8,
             15,
@@ -65,7 +65,7 @@
     "model": "app.disease",
     "pk": 6,
     "fields": {
-        "name": "Heart Disease",
+        "name": "Heart Disease - हृदय रोग",
         "hospitals": [
             8,
             17,
@@ -77,7 +77,7 @@
     "model": "app.disease",
     "pk": 7,
     "fields": {
-        "name": "Kidney Disease",
+        "name": "Kidney Disease - मृगौला रोग",
         "hospitals": [
             19,
             20,
@@ -90,7 +90,7 @@
     "model": "app.disease",
     "pk": 8,
     "fields": {
-        "name": "Parkinson's and Alzheimer's",
+        "name": "Parkinson's and Alzheimer's - पार्किन्सन र अल्जाइमर",
         "hospitals": [
             9,
             23,
