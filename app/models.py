@@ -65,12 +65,12 @@ class Hospital(models.Model):
 
 class Disease(models.Model):
     name = models.CharField(
-        max_length=100, 
+        max_length=120, 
         null=False,
         blank=False,
         validators=[
-            MinLengthValidator(3),
-            MaxLengthValidator(100),
+            MinLengthValidator(2),
+            MaxLengthValidator(120),
         ]
     )
 
@@ -86,6 +86,38 @@ class Disease(models.Model):
             UniqueConstraint(
                 Lower('name'),
                 name='unique_disease_name',
+            ),
+        ]
+
+
+
+
+
+
+class Surg(models.Model):
+    
+    name = models.CharField(
+        max_length=100, 
+        null=False,
+        blank=False,
+        validators=[
+            MinLengthValidator(1),
+            MaxLengthValidator(100),
+        ]
+    )
+
+    hospitals = models.ManyToManyField('Hospital', blank=True)
+
+
+    def __str__(self):
+        return self.name
+    
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(
+                Lower('name'),
+                name='unique_surgery_name',
             ),
         ]
 
