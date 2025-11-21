@@ -2,72 +2,70 @@ name,district,latitude,longitude
 Bir Hospital,Kathmandu,27.7051958,85.313784
 T.U. Teaching Hospital,Kathmandu,27.7359459,85.3310189
 Patan Hospital,Lalitpur,27.6685212,85.3203388
-Kanti Children's Hospital,"Maharajgunj, Kathmandu",,
-Tilganga Institute of Ophthalmology,"Ring Rd, Kathmandu",,
-Manmohan Cardiothoracic Vascular and Transplant Center,Kathmandu,,
+Kanti Children's Hospital,"Maharajgunj, Kathmandu",27.7346864,85.3258972
+Tilganga Institute of Ophthalmology,"Ring Rd, Kathmandu",27.7056677,85.347965
+Manmohan Cardiothoracic Vascular and Transplant Center,Kathmandu,27.7358337,85.3261908
 Nepal Mediciti Hospital,Lalitpur,27.6623271,85.3026856
 Grande International Hospital,Kathmandu,27.7529441,85.3253103
 Norvic International Hospital,Kathmandu,27.6893068,85.3200625
-Om Hospital & Research Centre Pvt. Ltd.,Kathmandu,,
+Om Hospital & Research Centre Pvt. Ltd.,Kathmandu,27.721425,85.3422295
 Civil Service Hospital,Kathmandu,27.6864368,85.3389249
-Bhaktapur Cancer Hospital,Bhaktapur,,
+Bhaktapur Cancer Hospital,Bhaktapur,27.6731786,85.4197464
 Bhaktapur Hospital,Bhaktapur,27.6720774,85.4220862
-B.P. Koirala Institute of Health Sciences,Sunsari,,
-Koshi Hospital,Morang,26.4595448,87.285155
-Medanta ortho and neuro care centre,Lalitpur,,
-Star Hospital,Lalitpur,27.6817625,85.302865
-Alka Hospital,Lalitpur,27.6745943,85.3151018
-Paropakar Maternity & Women's Hospital,Kathmandu,,
-Chitwan Medical College,"Bharatpur, Chitwan",27.6453272,84.383167
-Bharatpur Hospital,"Bharatpur, Chitwan",27.6823745,84.4360338
-College Of Medical Sciences,"Bharatpur, Chitwan",27.6836532,84.4360531
+B.P. Koirala Institute of Health Sciences,Sunsari,26.8122466,87.265786
+Koshi Hospital,Morang,26.4592298,87.2839331
+Medanta ortho and neuro care centre,Lalitpur,27.6878172,85.3139626
+Star Hospital,Lalitpur,27.6811723,85.302764
+Alka Hospital,Lalitpur,27.6741922,85.3151018
+Paropakar Maternity & Women's Hospital,Kathmandu,27.6894622,85.3152635
+Chitwan Medical College (CMC),"Bharatpur, Chitwan",27.6852962,84.4304187
+Bharatpur Hospital,"Bharatpur, Chitwan",27.6818245,84.4364771
+College Of Medical Sciences (CMS),"Bharatpur, Chitwan",27.6836399,84.4360595
 B.P. Koirala Memorial Cancer Hospital,"Bharatpur, Chitwan",27.664926,84.4176559
-Shahid Dharmabhakta National Transplant Center,Bhaktapur,,
+Shahid Dharmabhakta National Transplant Center,Bhaktapur,27.6726644,85.4194517
 National Trauma Center,Kathmandu,27.7043028,85.3130677
 Gangalal Heart Centre,Kathmandu,27.7458286,85.3437156
 Western Regional Hospital,Kaski,28.2127095,83.9983555
-Gandaki Medical College,Kaski,28.1708123,84.0431371
-Nepal Manipal Teaching Hospital,Kaski,,
-Lumbini Eye Institute / Rana Ambika Aankha Aspata,Rupandehi,,
-Lumbini Provincial Hospital,Rupandehi,27.6868329,83.431806
-Bheri Hospital,Banke,28.0529035,81.6200829
-Nepalgunj Medical College (NGMC),Banke,,
-Dadeldhura Hospital,Dadeldhura,29.3047311,80.5897023
-Seti province hospital,"Dhangadhi, Kailali",28.7037957,80.587467
-Mahakali Hospital,Kanchanpur,28.9639744,80.1853003
-Tikapur Hospital,Kailali,28.5348816,81.1201794
-Rapti Sub-Regional Hospital,Dang,28.0375479,82.4920644
-Ghorahi Hospital,Dang,28.046162,82.487611
-Lamahi Hospital,Dang,27.8703696,82.5274703
-Pyuthan Hospital,Pyuthan,28.1038438,82.8537131
-Rolpa Hospital,Rolpa,28.3223102,82.6157842
-Salyan Hospital,Salyan,28.3722405,82.1723592
-Surkhet Hospital,Surkhet,28.5952884,81.6083031
-Teaching Hospital Jumla,Jumla,,
-Mugu Hospital,Mugu,29.5515365,82.1569325
-Humla Hospital,Humla,29.9671522,81.8204193
-Kalikot Hospital,Kalikot,29.1808362,81.6069255
-Dailekh Hospital,Dailekh,28.8271888,81.710261
-Achham Hospital,Achham,29.1350433,81.2576054
-Doti Hospital,Doti,29.2707048,80.9882596
-Kailali Hospital Pvt Ltd,Kailali,,
-Baitadi Hospital,Baitadi,29.4634409,80.5499301
-Darchula District Hospital,Darchula,,
-Bajhang Hospital,Bajhang,29.5477307,81.1933393
-Bajura Hospital,Bajura,29.4593249,81.4811607
-Gulmi Hospital,Gulmi,28.0682616,83.2482724
-Arghakhanchi District Hospital,Arghakhanchi,,
-Palpa Hospital,Palpa,27.8662176,83.5416191
-Syangja Hospital,Syangja,28.1050636,83.8736304
-Kaski Hospital,Kaski,28.2131813,84.0008377
-Lahan Hospital Pvt.Ltd,"Nayabazar, Lahan",,
-Gaur Hospital,Rautahat,26.7650182,85.2739965
-Janakpur Zonal Hospital,Dhanusha,26.7332979,85.923427
-Janaki Medical College,Dhanusha,26.8153163,85.9528582
-Siraha Hospital,Siraha,26.6353152,86.2205761
+Gandaki Medical College,Kaski,28.2111235,83.9870112
+Nepal Manipal Teaching Hospital,Kaski,28.2360164,83.9946116
+Bharatpur Eye Hospital,Chitwan,27.684981,84.4360788
+Lumbini Provincial Hospital,Rupandehi,27.6978312,83.4640119
+Bheri Hospital,Banke,28.0530107,81.6198579
+Nepalgunj Medical College (NGMC),Banke,28.1983215,81.6769993
+Dadeldhura Hospital,Dadeldhura,29.3046014,80.5892269
+Seti province hospital,"Dhangadhi, Kailali",28.7038863,80.5875967
+Mahakali Provincial Hospital,Kanchanpur,28.9639564,80.1846428
+Tikapur Hospital,Kailali,28.5343424,81.1205692
+Rapti Academy of Health Sciences,Dang,28.0372777,82.4913576
+Lamahi Hospital,Dang,27.8703834,82.5248558
+Rolpa Hospital,Rolpa,28.3224217,82.615645
+Salyan Hospital,Salyan,28.3731611,82.1699688
+Karnali Provincial Hospital,Surkhet,28.6041811,81.6000325
+Teaching Hospital Jumla,Jumla,29.283519,82.1829151
+Mugu District Hospital,Mugu,29.5517687,82.1570682
+Humla Hospital,Humla,29.9671572,81.821537
+Kalikot District Hospital,Kalikot,29.1477544,81.5931775
+District Hospital Dailekh,Dailekh,28.826971,81.709769
+District Hospital Achham,Achham,29.1351072,81.2575308
+Doti District Hospital,Doti,29.2703318,80.9870702
+District Hospital Baitadi,Baitadi,29.5594931,80.4179696
+Darchula District Hospital,Darchula,29.8368577,80.5340077
+Bajhang District Hospital,Bajhang,29.5477593,81.192859
+District Hospital Bajura,Bajura,29.4592294,81.4810039
+Gulmi Model Hospital,Gulmi,28.0659267,83.245831
+Arghakhanchi District Hospital,Arghakhanchi,27.9645728,83.1261656
+Palpa Hospital,Palpa,27.8663004,83.5417948
+Province Hospital Syangja,Syangja,28.1052139,83.8728467
+Lahan Hospital Pvt.Ltd,"Nayabazar, Lahan",26.7262905,86.4811722
+Gaur Hospital,Rautahat,26.76517,85.2742185
+Madhesh Institute Of Health Sciences,Dhanusha,26.7566464,85.9175933
+Janaki Medical College and Teaching Hospital,Dhanusha,26.8152397,85.9528825
+Siraha District Hospital,Siraha,26.6583985,86.210147
 Udayapur Hospital,Udayapur,26.8055189,86.8725658
 Dhankuta Hospital,Dhankuta,26.9720673,87.3435998
 Bhojpur Hospital,Bhojpur,27.1569877,87.0546256
-Tehrathum District Hospital,"Myanglung, Terhathum",,
+Tehrathum District Hospital,"Myanglung, Terhathum",27.1285413,87.534048
 Panchthar Hospital,Panchthar,27.1477905,87.7657898
 Ilam Hospital,Ilam,26.9091887,87.9266972
+Madhyabindu Provincial Hospital,Nawalparasi (East of Bardaghat susta),27.6294178,84.0933564
+Devchuli Nagar Hospital,Nawalparasi (East of Bardaghat susta),27.6739977,84.2047783
