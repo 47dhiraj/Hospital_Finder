@@ -233,11 +233,21 @@ def clienthome(request):
 
         patientObject.district = district_obj
 
+
         full_address = patient_location + ", " + district_obj.name + ", Nepal"
         response = geocode_address(full_address)
-
+        
         patient_latitude = response['data']['lat']
         patient_longitude = response['data']['lng']
+
+
+        if patient_latitude is None or patient_longitude is None:
+
+            full_address = district_obj.name + ", Nepal"
+            response = geocode_address(full_address)
+            patient_latitude = response['data']['lat']
+            patient_longitude = response['data']['lng']
+
 
         patientObject.latitude = patient_latitude
         patientObject.longitude = patient_longitude
