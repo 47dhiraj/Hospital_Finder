@@ -3,350 +3,980 @@
     "model": "app.hospital",
     "pk": 1,
     "fields": {
-        "name": "Bheri Zonal Hospital",
-        "location": "Nepalgunj",
-        "latitude": "28.0531725",
-        "longitude": "81.6178186",
-        "phone": "081-520039",
-        "description": "Bheri Zonal Hospital is the major referral centre with specialties services for Mid-western and far western region of the country (NEPAL).",
-        "images": "BheriZonalHospital.jpg",
-        "website": "https://bherihospital.gov.np/"
+        "name": "Bir Hospital",
+        "location": "Kathmandu",
+        "latitude": "27.7051958",
+        "longitude": "85.3137840",
+        "phone": "",
+        "description": "",
+        "images": "BirHospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 2,
     "fields": {
-        "name": "Lumbini Provincial Hospital",
-        "location": "Butwal",
-        "latitude": "27.6978265",
-        "longitude": "83.4615766",
-        "phone": "071-540200",
-        "description": "Lumbini Zonal Hospital is the biggest governmental hospital in Lumbini Zone Nepal. This hospital lies in Butwal city. It is one of the oldest hospital in this region and is backbone for the health service to poor citizens who cannot afford private hospitals.",
-        "images": "LumbiniProvincialHospital.jpg",
-        "website": "http://lzhospital.gov.np/"
+        "name": "T.U. Teaching Hospital",
+        "location": "Kathmandu",
+        "latitude": "27.7359459",
+        "longitude": "85.3310189",
+        "phone": "",
+        "description": "",
+        "images": "TUTeachingHospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 3,
     "fields": {
-        "name": "Nepal Cancer Hospital",
+        "name": "Patan Academy of Health Sciences",
         "location": "Lalitpur",
-        "latitude": "27.6433987",
-        "longitude": "85.3364334",
-        "phone": "01-5251311",
-        "description": "Nepal Cancer Hospital and Research Center (NCHRC) Pvt. Ltd. is the first ever effort from the private sector established to provide the highest quality of state-of-the-art treatment and excellent care to the patients and their families from all around the globe. The hospital will contribute to reduce the burden of cancer increase survival and improve the quality of life of the patients and families; thus emphasis has been given to preventive and palliative oncology.",
-        "images": "NepalCancerHospital.jpg",
-        "website": "http://nepalcancerhospital.com/"
+        "latitude": "27.6812802",
+        "longitude": "85.3055966",
+        "phone": "",
+        "description": "",
+        "images": "PatanHospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 4,
     "fields": {
-        "name": "Bhaktapur Cancer Hospital",
-        "location": "Bhaktapur",
-        "latitude": "27.6731786",
-        "longitude": "85.4197464",
-        "phone": "01-6611531",
-        "description": "Bhaktapur Cancer Hospital is a cancer hospital located in Bhaktapur Bagmati Pradesh Nepal run by the Nepal Cancer Relief Society. The hospital is supported by the Nepalese Government and Rotary International.",
-        "images": "BhaktapurCancerHospital.jpg",
-        "website": "http://anmf.info/nepal/care/hospitals/bch.htm"
+        "name": "Kanti Children's Hospital",
+        "location": "Kathmandu",
+        "latitude": "27.7346864",
+        "longitude": "85.3258972",
+        "phone": "",
+        "description": "",
+        "images": "KantiChildrensHospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 5,
     "fields": {
-        "name": "Sushil Koirala Prakhar Cancer Hospital",
-        "location": "Banke District",
-        "latitude": "28.1294911",
-        "longitude": "81.5705435",
-        "phone": "977-81-690669",
-        "description": "Khajura is a historic place of the Banke district. The people of the Khajura and villages next to it are deprived of basic health facilities. Observing their needs Prakhar Paropakar Mission Nepal was registered in 2005 to provide the basic health service in the future. The Mission Nepal is non profitable non governmental organization whose aim is to work for humanity.",
-        "images": "SushilCancerHospital.jpg",
-        "website": "http://nepalcancerhospital.org/home"
+        "name": "Tilganga Institute of Ophthalmology",
+        "location": "Kathmandu",
+        "latitude": "27.7056677",
+        "longitude": "85.3479650",
+        "phone": "",
+        "description": "",
+        "images": "TilgangaEyeHospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 6,
     "fields": {
-        "name": "Civil Service Hospital of Nepal",
+        "name": "Manmohan Cardiothoracic Vascular and Transplant Center",
         "location": "Kathmandu",
-        "latitude": "27.6893519",
-        "longitude": "85.3355108",
-        "phone": "01-4106999",
-        "description": "The need for such a hospital arose in view of the fact that Nepal Army and Nepal Police employees had hospitals dedicated to them while civil service employees of Nepal Government had none. Thus Nepal Government approached the Peoples Republic of China (PRC) with the request to help build Civil Service Hospital (CSH). An agreement to this effect was signed between the Government of Nepal and PRC . CSH is located at Minbhawan Kathmandu. CSH is an autonomous government institution under the Ministry of General Administration (MoGA).",
-        "images": "CivilHospital.jpg",
-        "website": "https://www.civilservicehospital.org/"
+        "latitude": "27.7358337",
+        "longitude": "85.3261908",
+        "phone": "",
+        "description": "",
+        "images": "Manmohan-Cardiothoracic-Vascular-and-Transplant-Center.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 7,
     "fields": {
-        "name": "Shukraraaj Tropical & Infectious Disease Hospital",
-        "location": "Kathmandu",
-        "latitude": "27.6949396",
-        "longitude": "85.3040512",
-        "phone": "01-4253396",
-        "description": "Infectious Disease Hospital (STIDH) is the only Infectious & Tropical Disease Hospital established in 1933 in Kathmandu Nepal. This is the national referral hospital with the capacity 100 beds inpatient service. It receives patients from all over the country and referred patients from the Valley hospitals. It provides training to Undergraduate and Postgraduate medical students . Students from different countries undergo training in Infectious and Tropical Diseases. Nepal is located in South Asia in between China and India. The country is one of the most famous destination for travel for its natural beauty and world famous Himalay's.",
-        "images": "TekuHospital.jpg",
-        "website": "http://www.stidh.gov.np/"
+        "name": "Nepal Mediciti Hospital",
+        "location": "Lalitpur",
+        "latitude": "27.6623271",
+        "longitude": "85.3026856",
+        "phone": "",
+        "description": "",
+        "images": "Nepal-Mediciti-Hospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 8,
     "fields": {
-        "name": "Bir Hospital",
+        "name": "Grande International Hospital",
         "location": "Kathmandu",
-        "latitude": "27.7055927",
-        "longitude": "85.3108244",
-        "phone": "01-4221119",
-        "description": "Bir Hospital is the oldest and one of the busiest hospitals in Nepal. It is located at the center of Kathmandu city. The hospital is run by the National Academy of Medical Sciences a government agency since 2003. The hospital provides medical and surgical treatments. It current has a capacity of 535 beds.",
-        "images": "BirHospital.jpg",
-        "website": "https://nams.org.np/index.php"
+        "latitude": "27.7529441",
+        "longitude": "85.3253103",
+        "phone": "",
+        "description": "",
+        "images": "GrandeHospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 9,
     "fields": {
-        "name": "Patan Academy of Health Science",
-        "location": "Lalitpur",
-        "latitude": "27.6685666",
-        "longitude": "85.3171043",
-        "phone": "01-5522295",
-        "description": "Patan Academy of Health Sciences is an autonomous not-for-profit public institution of higher education established in 2064 B.S. with the charter granted by the Parliament of Nepal.",
-        "images": "PatanHospital.jpg",
-        "website": "https://www.pahs.edu.np/"
+        "name": "Norvic International Hospital",
+        "location": "Kathmandu",
+        "latitude": "27.6893068",
+        "longitude": "85.3200625",
+        "phone": "",
+        "description": "",
+        "images": "norvic-international-hospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 10,
     "fields": {
-        "name": "Gandaki Medical College Teaching Hospital & Research Centre",
-        "location": "Pokhara",
-        "latitude": "27.9367024",
-        "longitude": "84.3308469",
-        "phone": "061-538595",
-        "description": "Gandaki Medical College Teaching Hospital and Research Center (GMCTHRC) Pokhara was established in 2007 A.D with the aim of imparting quality medical education to the students from different parts of the world. Presently GMCTHRC is conducting MBBS BDS BSc. Nursing BNS BSc. MIT BSc. MLT BPH BPharmaProgram and also Post Graduate program in different departmentwith the affiliation of TU-Institute of Medicine (IOM).",
-        "images": "GMCTeachingHospital.jpg",
-        "website": "http://www.gmc.edu.np/"
+        "name": "Om Hospital & Research Centre Pvt. Ltd.",
+        "location": "Kathmandu",
+        "latitude": "27.7214250",
+        "longitude": "85.3422295",
+        "phone": "",
+        "description": "",
+        "images": "Om-Hospital-and-Research-Center.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 11,
     "fields": {
-        "name": "Nepal Eye Hospital",
+        "name": "Civil Service Hospital",
         "location": "Kathmandu",
-        "latitude": "27.6932721",
-        "longitude": "85.3112986",
-        "phone": "01-4260813",
-        "description": "Nepal eye hospital is the first hospital in Nepal dedicated to eye care service established in the year 1973. Before the establishment of this historical hospital eye service was available at Bir Hospital as government owned general hospital with the few beds provided by the Government of Nepal.",
-        "images": "NepalEyeHospital.jpg",
-        "website": "http://www.nepaleyehospital.org/"
+        "latitude": "27.6864368",
+        "longitude": "85.3389249",
+        "phone": "",
+        "description": "",
+        "images": "CivilHospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 12,
     "fields": {
-        "name": "Tilganga Eye Hospital",
-        "location": "Kathmandu",
-        "latitude": "27.7056654",
-        "longitude": "85.3492524",
-        "phone": "01-4493683",
-        "description": "Tilganga Institute of Ophthalmology formerly called the Tilganga Eye Centre in Nepal is the implementing body of the Nepal Eye Program a non-profit community based non-government organization launched in 1992. The current facility was opened in 1994.",
-        "images": "TilgangaEyeHospital.jpg",
-        "website": "http://tilganga.org/"
+        "name": "Bhaktapur Cancer Hospital",
+        "location": "Bhaktapur",
+        "latitude": "27.6731786",
+        "longitude": "85.4197464",
+        "phone": "",
+        "description": "",
+        "images": "BhaktapurCancerHospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 13,
     "fields": {
-        "name": "Dristi Eye Care Center",
-        "location": "Kathmandu",
-        "latitude": "27.6987007",
-        "longitude": "85.2762364",
-        "phone": "01-5224352",
-        "description": "Drishti Eye Care System was initiated and established by a group of experienced enthusiastic dedicated and devoted ophthalmic human resources with a mission to provide the most advanced sophisticated and comprehensive super specialty eye care services to the needy at an affordable price in different parts of Nepal.",
-        "images": "DristiEyeCenter.jpg",
-        "website": "https://www.drishtieye.org/"
+        "name": "Bhaktapur Hospital",
+        "location": "Bhaktapur",
+        "latitude": "27.6720774",
+        "longitude": "85.4220862",
+        "phone": "",
+        "description": "",
+        "images": "Bhaktapur-Hospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 14,
     "fields": {
-        "name": "Geta Eye Hospital",
-        "location": "Attariya",
-        "latitude": "28.7877173",
-        "longitude": "80.5584929",
-        "phone": "977-91-575112",
-        "description": "Geta Eye Hospital was established with the financial support from NORAD Norway in 1981 and it became fully operational from November 1982. Right now It is one of the financially self-sustained hospital with appreciable patient care.",
-        "images": "GetaEyeHospital.jpg",
-        "website": "https://www.nnjs.org.np/shows/pag/geta-eye-hospital"
+        "name": "B.P. Koirala Institute of Health Sciences",
+        "location": "Sunsari",
+        "latitude": "26.8122466",
+        "longitude": "87.2657860",
+        "phone": "",
+        "description": "",
+        "images": "BPHospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 15,
     "fields": {
-        "name": "National Trauma Center",
-        "location": "Kathmandu",
-        "latitude": "27.7042987",
-        "longitude": "85.3085908",
-        "phone": "01-4226933",
-        "description": "Understanding the need for quality Trauma care and Trauma relief centre in Nepal National Trauma Centre was established as the first and only Trauma Hospital of Nepal. It has provided its undivided attention and services to patients at the time of Massive Earthquake (2015) of Nepal.It is well prepared for mass causality of trauma victims.",
-        "images": "NationalTraumaCenter.jpg",
-        "website": "http://nationaltraumacenter.gov.np/"
+        "name": "Koshi Hospital",
+        "location": "Morang",
+        "latitude": "26.4592298",
+        "longitude": "87.2839331",
+        "phone": "",
+        "description": "",
+        "images": "Koshi-Hospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 16,
     "fields": {
-        "name": "Nobel Medical College (Teaching Hospital private limited)",
-        "location": "Kathmandu",
-        "latitude": "26.4924214",
-        "longitude": "87.1177915",
-        "phone": "01-4441079",
-        "description": "Nobel Medical College Teaching Hospital (P) Ltd. an affiliated to Kathmandu University was founded in 2004. It is located in Biratnagar one of the major academic hubs of eastern part of Nepal. Its key objective is to impart international standard medical education to the meritorious students of Nepal and abroad enrolled for both medical and paramedical courses.",
-        "images": "NobelMedicalCollege.jpg",
-        "website": "http://www.nobelmedicalcollege.com.np/"
+        "name": "Medanta ortho and neuro care centre",
+        "location": "Lalitpur",
+        "latitude": "27.6878172",
+        "longitude": "85.3139626",
+        "phone": "",
+        "description": "",
+        "images": "Medanta-ortho-and-neuro.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 17,
     "fields": {
-        "name": "Sahid Gangalal National Heart Center",
-        "location": "Kathmandu",
-        "latitude": "27.7454447",
-        "longitude": "85.3392381",
-        "phone": "01-4371322",
-        "description": "Shahid Gangalal National Heart Centre is a hospital which provides cardiac care diagnostic and treatment procedures in Kathmandu Nepal. The hospital is named after Gangalal Shrestha. It is the first cardiac tertiary center in Nepal.",
-        "images": "Gangalal.jpg",
-        "website": "https://www.sgnhc.org.np/"
+        "name": "Star Hospital",
+        "location": "Lalitpur",
+        "latitude": "27.6811723",
+        "longitude": "85.3027640",
+        "phone": "",
+        "description": "",
+        "images": "star-hospital.png",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 18,
     "fields": {
-        "name": "Vayodha Hospital",
-        "location": "Kathmandu",
-        "latitude": "27.6841639",
-        "longitude": "85.2957519",
-        "phone": "01-4286428",
-        "description": "Vayodhameans possessinggood health in Sanskrit! We believe every human being is an author of his/her own health and in this journey of life we would like to be your trusted companion. For us Patient Care supersedes all other aspects. We emphasize on quality care  round the clock! Where in symbol of Vayodha V symbolizes caring hands and the Green droplet symbolizes Life.",
-        "images": "Vayodha.jpg",
-        "website": "https://www.vayodhahospitals.com/"
+        "name": "Alka Hospital",
+        "location": "Lalitpur",
+        "latitude": "27.6741922",
+        "longitude": "85.3151018",
+        "phone": "",
+        "description": "",
+        "images": "AlkaHospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 19,
     "fields": {
-        "name": "Human Organ Transplant Center",
-        "location": "Bhaktapur",
-        "latitude": "27.6724794",
-        "longitude": "85.4192918",
-        "phone": "01-6614709",
-        "description": "Shahid Dharmabhakta National transplant Center- SDNTC (Human Organ Transplant Center- HOTC) is situated at Dudhpati-17 Bhaktapur a beautiful and a serene place at the distance of 12 kilometers from Kathmandu. It was established in 2012 by the Ministry of Health to strengthen and expand organ transplantation services in the country.",
-        "images": "HumanOrgan.jpg",
-        "website": "https://hotc.org.np/"
+        "name": "Paropakar Maternity & Women's Hospital",
+        "location": "Kathmandu",
+        "latitude": "27.6894622",
+        "longitude": "85.3152635",
+        "phone": "",
+        "description": "",
+        "images": "Paropakar_Maternity_and_Women,s_Hospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 20,
     "fields": {
-        "name": "Dhulikhel Hospital",
-        "location": "Dhulikhel",
-        "latitude": "27.6162933",
-        "longitude": "85.5453931",
-        "phone": "011-490486",
-        "description": "Dhulikhel Hospital a Kathmandu University hospital is an independent not for profit non-government hospital in Dhulikhel Kavrepalanchok Nepal.",
-        "images": "DhulikhelHospital.jpg",
-        "website": "https://www.dhulikhelhospital.org/"
+        "name": "Chitwan Medical College (CMC)",
+        "location": "Chitwan",
+        "latitude": "27.6852962",
+        "longitude": "84.4304187",
+        "phone": "",
+        "description": "",
+        "images": "CMCHospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 21,
     "fields": {
-        "name": "Alka Hospital",
-        "location": "Lalitpur",
-        "latitude": "27.674311",
-        "longitude": "85.3120779",
-        "phone": "01-5555555",
-        "description": "The history of private hospital in Nepal dates back to late 1980's .After the people's popular movement 1990 AD. There was mushrooming of private hospitals or nursing homes. Nearing to people popular movement 2062 BS (April 2006 AD) There was sprouting yet another hospital Called Alka Hospital in the heart of the lalitpur district .Question is : Is the hospital different from others ? Or why do people from valley need additional Hospital like this ?",
-        "images": "AlkaHospital.jpg",
-        "website": "http://www.alkahospital.com/"
+        "name": "Bharatpur Hospital",
+        "location": "Chitwan",
+        "latitude": "27.6818245",
+        "longitude": "84.4364771",
+        "phone": "",
+        "description": "",
+        "images": "bharatpur_hospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 22,
     "fields": {
-        "name": "Grande International Hospital",
-        "location": "Kathmandu",
-        "latitude": "27.7528807",
-        "longitude": "85.3233141",
-        "phone": "01-5159266",
-        "description": "Grande International Hospital was created with the vision to fill an existing void in the Nepali healthcare industry. It is dedicated to the seamless delivery of quality patient-centric healthcarewhich means supplying everything a patient may need from acute critical care to rehabilitation to transitional care to home healthcare servicesat an affordable cost.",
-        "images": "GrandeHospital.jpg",
-        "website": "http://www.grandehospital.com/"
+        "name": "College Of Medical Sciences (CMS)",
+        "location": "Chitwan",
+        "latitude": "27.6836399",
+        "longitude": "84.4360595",
+        "phone": "",
+        "description": "",
+        "images": "CMS.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 23,
     "fields": {
-        "name": "T.U Teaching Hospital",
-        "location": "Kathmandu",
-        "latitude": "27.7359964",
-        "longitude": "85.3276846",
-        "phone": "01-4412302",
-        "description": "Tribhuvan University Teaching Hospital is a premier hospital in Nepal established in year 1982 with a 300 bed facility. At present with 700-bed facility this hospital is the site of teaching and research activities for Institute of Medicine (IOM).The Hospital is primarily a teaching and training hospital for the undergraduates (MBBS) the postgraduate (MD/MS/MDS) the super specialty students (DM/Mch Students) BDS research scholars B.Sc nursing & training of medical staffs.",
-        "images": "TeachingHospital.jpg",
-        "website": "http://www.iom.edu.np/"
+        "name": "B.P. Koirala Memorial Cancer Hospital",
+        "location": "Chitwan",
+        "latitude": "27.6649260",
+        "longitude": "84.4176559",
+        "phone": "",
+        "description": "",
+        "images": "BP-Koirala-Memorial-Cancer-Hospital.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 24,
     "fields": {
-        "name": "B.P Koirala Institute of Health Science",
-        "location": "Kathmandu",
-        "latitude": "27.7452388",
-        "longitude": "85.3397245",
-        "phone": "977-25-525555",
-        "description": "B.P. Koirala Institute of Health Sciences (BPKIHS) was established on Jan 18 1993 and subsequently upgraded as an autonomous Health Sciences University on Oct 28 1998 with a mandate to work towards developing socially responsible and competent health workforce providing health care & involving in innovative health research.",
-        "images": "BPHospital.jpg",
-        "website": "http://www.bpkihs.edu/"
+        "name": "Shahid Dharmabhakta National Transplant Center",
+        "location": "Bhaktapur",
+        "latitude": "27.6726644",
+        "longitude": "85.4194517",
+        "phone": "",
+        "description": "",
+        "images": "Shahid-Dharmabhakta.jpg",
+        "website": ""
     }
 },
 {
     "model": "app.hospital",
     "pk": 25,
     "fields": {
-        "name": "Chitwan Medical College Teaching Hospital",
-        "location": "Bharatpur",
-        "latitude": "27.6854192",
-        "longitude": "84.4130452",
-        "phone": "985-5055155",
-        "description": "Offer world class medical education.\nProvide patients centered quality healthcare services with state of art facilities.\nEnhance research culture in par with national and international contemporaries.\nBecome Nepals leading partnership in medical education.\nPromote self-sustainability of institution.",
-        "images": "CMCHospital.jpg",
-        "website": "http://www.cmc.edu.np/"
+        "name": "National Trauma Center",
+        "location": "Kathmandu",
+        "latitude": "27.7043028",
+        "longitude": "85.3130677",
+        "phone": "",
+        "description": "",
+        "images": "national-trauma-center.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 26,
+    "fields": {
+        "name": "Gangalal Heart Centre",
+        "location": "Kathmandu",
+        "latitude": "27.7458286",
+        "longitude": "85.3437156",
+        "phone": "",
+        "description": "",
+        "images": "Shahid_Gangalal_Heart.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 27,
+    "fields": {
+        "name": "Western Regional Hospital",
+        "location": "Kaski",
+        "latitude": "28.2127095",
+        "longitude": "83.9983555",
+        "phone": "",
+        "description": "",
+        "images": "Western-Regional-Hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 28,
+    "fields": {
+        "name": "Gandaki Medical College",
+        "location": "Kaski",
+        "latitude": "28.2111235",
+        "longitude": "83.9870112",
+        "phone": "",
+        "description": "",
+        "images": "gandaki-medical-college.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 29,
+    "fields": {
+        "name": "Nepal Manipal Teaching Hospital",
+        "location": "Kaski",
+        "latitude": "28.2360164",
+        "longitude": "83.9946116",
+        "phone": "",
+        "description": "",
+        "images": "Manipal-Teaching-Hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 30,
+    "fields": {
+        "name": "Bharatpur Eye Hospital",
+        "location": "Chitwan",
+        "latitude": "27.6849810",
+        "longitude": "84.4360788",
+        "phone": "",
+        "description": "",
+        "images": "bharatpur-eye-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 31,
+    "fields": {
+        "name": "Lumbini Provincial Hospital",
+        "location": "Rupandehi",
+        "latitude": "27.6978312",
+        "longitude": "83.4640119",
+        "phone": "",
+        "description": "",
+        "images": "lumbini-province-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 32,
+    "fields": {
+        "name": "Bheri Hospital",
+        "location": "Banke",
+        "latitude": "28.0530107",
+        "longitude": "81.6198579",
+        "phone": "",
+        "description": "",
+        "images": "Bheri-Hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 33,
+    "fields": {
+        "name": "Nepalgunj Medical College (NGMC)",
+        "location": "Banke",
+        "latitude": "28.1983215",
+        "longitude": "81.6769993",
+        "phone": "",
+        "description": "",
+        "images": "nepalgunj-medical-college.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 34,
+    "fields": {
+        "name": "Dadeldhura Hospital",
+        "location": "Dadeldhura",
+        "latitude": "29.3046014",
+        "longitude": "80.5892269",
+        "phone": "",
+        "description": "",
+        "images": "dadeldhura-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 35,
+    "fields": {
+        "name": "Seti province hospital",
+        "location": "Kailali",
+        "latitude": "28.7038863",
+        "longitude": "80.5875967",
+        "phone": "",
+        "description": "",
+        "images": "SetiProvincialHospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 36,
+    "fields": {
+        "name": "Mahakali Provincial Hospital",
+        "location": "Kanchanpur",
+        "latitude": "28.9639564",
+        "longitude": "80.1846428",
+        "phone": "",
+        "description": "",
+        "images": "MAHAKALI-HOSPITAL.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 37,
+    "fields": {
+        "name": "Tikapur Hospital",
+        "location": "Kailali",
+        "latitude": "28.5343424",
+        "longitude": "81.1205692",
+        "phone": "",
+        "description": "",
+        "images": "tikapur-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 38,
+    "fields": {
+        "name": "Rapti Academy of Health Sciences",
+        "location": "Dang",
+        "latitude": "28.0372777",
+        "longitude": "82.4913576",
+        "phone": "",
+        "description": "",
+        "images": "RAHS.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 39,
+    "fields": {
+        "name": "Rolpa Hospital",
+        "location": "Rolpa",
+        "latitude": "28.3224217",
+        "longitude": "82.6156450",
+        "phone": "",
+        "description": "",
+        "images": "rolpa-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 40,
+    "fields": {
+        "name": "Salyan Hospital",
+        "location": "Salyan",
+        "latitude": "28.3731611",
+        "longitude": "82.1699688",
+        "phone": "",
+        "description": "",
+        "images": "salyan-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 41,
+    "fields": {
+        "name": "Karnali Provincial Hospital",
+        "location": "Surkhet",
+        "latitude": "28.6041811",
+        "longitude": "81.6000325",
+        "phone": "",
+        "description": "",
+        "images": "karnali-province-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 42,
+    "fields": {
+        "name": "Teaching Hospital Jumla",
+        "location": "Jumla",
+        "latitude": "29.2835190",
+        "longitude": "82.1829151",
+        "phone": "",
+        "description": "",
+        "images": "teaching-hospital-jumla.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 43,
+    "fields": {
+        "name": "Mugu District Hospital",
+        "location": "Mugu",
+        "latitude": "29.5517687",
+        "longitude": "82.1570682",
+        "phone": "",
+        "description": "",
+        "images": "mugu-district-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 44,
+    "fields": {
+        "name": "Humla District Hospital",
+        "location": "Humla",
+        "latitude": "29.9671572",
+        "longitude": "81.8215370",
+        "phone": "",
+        "description": "",
+        "images": "humla-district-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 45,
+    "fields": {
+        "name": "Kalikot District Hospital",
+        "location": "Kalikot",
+        "latitude": "29.1477544",
+        "longitude": "81.5931775",
+        "phone": "",
+        "description": "",
+        "images": "kalikot-district-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 46,
+    "fields": {
+        "name": "District Hospital Dailekh",
+        "location": "Dailekh",
+        "latitude": "28.8269710",
+        "longitude": "81.7097690",
+        "phone": "",
+        "description": "",
+        "images": "district-hospital-dailekh.png",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 47,
+    "fields": {
+        "name": "District Hospital Achham",
+        "location": "Achham",
+        "latitude": "29.1351072",
+        "longitude": "81.2575308",
+        "phone": "",
+        "description": "",
+        "images": "district-hospital-achham.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 48,
+    "fields": {
+        "name": "Doti District Hospital",
+        "location": "Doti",
+        "latitude": "29.2703318",
+        "longitude": "80.9870702",
+        "phone": "",
+        "description": "",
+        "images": "Doti-district-hospital.png",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 49,
+    "fields": {
+        "name": "District Hospital Baitadi",
+        "location": "Baitadi",
+        "latitude": "29.5594931",
+        "longitude": "80.4179696",
+        "phone": "",
+        "description": "",
+        "images": "district-hospital-baitadi.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 50,
+    "fields": {
+        "name": "Darchula District Hospital",
+        "location": "Darchula",
+        "latitude": "29.8368577",
+        "longitude": "80.5340077",
+        "phone": "",
+        "description": "",
+        "images": "darchula-district-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 51,
+    "fields": {
+        "name": "Bajhang District Hospital",
+        "location": "Bajhang",
+        "latitude": "29.5477593",
+        "longitude": "81.1928590",
+        "phone": "",
+        "description": "",
+        "images": "district-hospital-bajhang.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 52,
+    "fields": {
+        "name": "District Hospital Bajura",
+        "location": "Bajura",
+        "latitude": "29.4592294",
+        "longitude": "81.4810039",
+        "phone": "",
+        "description": "",
+        "images": "district-hospital-bajura.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 53,
+    "fields": {
+        "name": "Gulmi Hospital",
+        "location": "Gulmi",
+        "latitude": "28.0682566",
+        "longitude": "83.2481452",
+        "phone": "",
+        "description": "",
+        "images": "gulmi-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 54,
+    "fields": {
+        "name": "Arghakhanchi District Hospital",
+        "location": "Arghakhanchi",
+        "latitude": "27.9645728",
+        "longitude": "83.1261656",
+        "phone": "",
+        "description": "",
+        "images": "arghakhanchi-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 55,
+    "fields": {
+        "name": "District Hospital Palpa",
+        "location": "Palpa",
+        "latitude": "27.8663004",
+        "longitude": "83.5417948",
+        "phone": "",
+        "description": "",
+        "images": "district-hospital-palpa.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 56,
+    "fields": {
+        "name": "Province Hospital Syangja",
+        "location": "Syangja",
+        "latitude": "28.1052139",
+        "longitude": "83.8728467",
+        "phone": "",
+        "description": "",
+        "images": "province-hospital-syangja.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 57,
+    "fields": {
+        "name": "Provincial Hospital Lahan",
+        "location": "Lahan",
+        "latitude": "26.7088119",
+        "longitude": "86.4927211",
+        "phone": "",
+        "description": "",
+        "images": "Provincial-Hospital-Lahan.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 58,
+    "fields": {
+        "name": "Provincial Hospital Gaur",
+        "location": "Rautahat",
+        "latitude": "26.7651812",
+        "longitude": "85.2737442",
+        "phone": "",
+        "description": "",
+        "images": "provincial-hospital-gaur.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 59,
+    "fields": {
+        "name": "Madhesh Institute Of Health Sciences",
+        "location": "Dhanusha",
+        "latitude": "26.7566464",
+        "longitude": "85.9175933",
+        "phone": "",
+        "description": "",
+        "images": "mihs.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 60,
+    "fields": {
+        "name": "Janaki Medical College and Teaching Hospital",
+        "location": "Dhanusha",
+        "latitude": "26.8152397",
+        "longitude": "85.9528825",
+        "phone": "",
+        "description": "",
+        "images": "Janaki-Medical-College-and-Teaching-Hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 61,
+    "fields": {
+        "name": "Provincial Hospital Siraha",
+        "location": "Siraha",
+        "latitude": "26.6585080",
+        "longitude": "86.2105919",
+        "phone": "",
+        "description": "",
+        "images": "provincial-hospital-siraha.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 62,
+    "fields": {
+        "name": "District Hospital Udayapur",
+        "location": "Udayapur",
+        "latitude": "26.7976801",
+        "longitude": "86.6949791",
+        "phone": "",
+        "description": "",
+        "images": "district-hospital-udayepur.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 63,
+    "fields": {
+        "name": "Dhankuta District Hospital",
+        "location": "Dhankuta",
+        "latitude": "26.9720996",
+        "longitude": "87.3432507",
+        "phone": "",
+        "description": "",
+        "images": "dhankuta-district-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 64,
+    "fields": {
+        "name": "Bhojpur District Hospital",
+        "location": "Bhojpur",
+        "latitude": "27.1614977",
+        "longitude": "87.0514834",
+        "phone": "",
+        "description": "",
+        "images": "bhojpur-district-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 65,
+    "fields": {
+        "name": "Tehrathum District Hospital",
+        "location": "Terhathum",
+        "latitude": "27.1285413",
+        "longitude": "87.5340480",
+        "phone": "",
+        "description": "",
+        "images": "tehrathum-district-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 66,
+    "fields": {
+        "name": "Panchthar District Hospital",
+        "location": "Panchthar",
+        "latitude": "27.1488725",
+        "longitude": "87.7669995",
+        "phone": "",
+        "description": "",
+        "images": "panchthar-district-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 67,
+    "fields": {
+        "name": "District Hospital Ilam",
+        "location": "Ilam",
+        "latitude": "26.9097971",
+        "longitude": "87.9255334",
+        "phone": "",
+        "description": "",
+        "images": "district-hospital-illam.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 68,
+    "fields": {
+        "name": "Madhyabindu Provincial Hospital",
+        "location": "Nawalparasi (East of Bardaghat Susta)",
+        "latitude": "27.6294178",
+        "longitude": "84.0933564",
+        "phone": "",
+        "description": "",
+        "images": "madhyabindu-provincial-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 69,
+    "fields": {
+        "name": "Devchuli Nagar Hospital",
+        "location": "Nawalparasi (West of Bardaghat Susta)",
+        "latitude": "27.6739977",
+        "longitude": "84.2047783",
+        "phone": "",
+        "description": "",
+        "images": "devchuli-nagar-hospital.jpg",
+        "website": ""
+    }
+},
+{
+    "model": "app.hospital",
+    "pk": 70,
+    "fields": {
+        "name": "Chautara Hospital",
+        "location": "Sindhupalchok ",
+        "latitude": "27.7809354",
+        "longitude": "85.7108937",
+        "phone": "",
+        "description": "",
+        "images": "chautara-hospital.jpg",
+        "website": ""
     }
 }
 ]
