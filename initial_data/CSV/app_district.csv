@@ -1,4 +1,4 @@
-"id","name"
+id,name
 1,Achham
 2,Arghakhanchi
 3,Baglung
@@ -45,8 +45,8 @@
 44,Mugu
 45,Mustang
 46,Myagdi
-47,Nawalparasi (East of Bardaghat Susta)
-48,Nawalparasi (West of Bardaghat Susta)
+47,Nawalpur
+48,Parasi
 49,Nuwakot
 50,Okhaldhunga
 51,Palpa
@@ -58,8 +58,8 @@
 57,Rasuwa
 58,Rautahat
 59,Rolpa
-60,Rukum (East)
-61,Rukum (West)
+60,Rukum East
+61,Rukum West
 62,Rupandehi
 63,Salyan
 64,Sankhuwasabha
