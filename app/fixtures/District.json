@@ -325,14 +325,14 @@
     "model": "app.district",
     "pk": 47,
     "fields": {
-        "name": "Nawalparasi (East of Bardaghat Susta)"
+        "name": "Nawalpur"
     }
 },
 {
     "model": "app.district",
     "pk": 48,
     "fields": {
-        "name": "Nawalparasi (West of Bardaghat Susta)"
+        "name": "Parasi"
     }
 },
 {

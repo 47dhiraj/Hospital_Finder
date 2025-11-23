@@ -204,7 +204,8 @@ def clienthome(request):
         patient_name = request.POST['p_name']
         patient_age = request.POST['p_age']
         patient_district_id = int(request.POST.get('p_district', '').strip())
-        patient_location = request.POST['p_location']
+        patient_location = request.POST.get('p_location', '').strip()
+        print('Location: ', patient_location)
         patient_contact = request.POST['p_contact']
         patient_bloodgroup = request.POST['bloodgroup']
         disease_id, patient_disease = request.POST['disease'].split('-')  # select option ko value and text both chaiyo vani yesari split garera liencha.
@@ -238,6 +239,7 @@ def clienthome(request):
         response = geocode_address(full_address)
         
         patient_latitude, patient_longitude = extract_lat_lng(response)
+        # print('Patient Latitude: ', patient_latitude, '\n', 'Patient Longitude: ', patient_longitude)
 
         # fallback to district address, only if latitude and longitude is None or missing
         if patient_latitude is None or patient_longitude is None:
@@ -245,6 +247,8 @@ def clienthome(request):
             fallback_address = f"{district_obj.name}, Nepal"
             response = geocode_address(fallback_address)
             patient_latitude, patient_longitude = extract_lat_lng(response)
+            # print('Patient Lat: ', patient_latitude, '\n', 'Patient Lng: ', patient_longitude)
+
 
 
 
