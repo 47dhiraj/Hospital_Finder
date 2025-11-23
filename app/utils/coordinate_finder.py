@@ -67,3 +67,13 @@ def geocode_address(address: str):
 
 
 
+
+
+def extract_lat_lng(response: dict):
+
+    """Safely extract lat/lng from geocode_address() response."""
+
+    data = response.get("data", {})
+
+    return data.get("lat"), data.get("lng")
+

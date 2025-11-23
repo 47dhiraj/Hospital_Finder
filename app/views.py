@@ -37,7 +37,7 @@ from app.models import District
 import sweetify
 
 
-from .utils.coordinate_finder import geocode_address
+from .utils.coordinate_finder import geocode_address, extract_lat_lng
 from .utils.distance_calculator_geopy import calculate_distance_in_km_with_geopy
 
 from .utils.distance_calculator_haversine import calculate_distance_with_haversine
@@ -230,23 +230,22 @@ def clienthome(request):
         patientObject.user_id = request.user.id  # User Model ma vako particular logged in vako user ko id get garera tyo id lai Patient table ma rakheko as Patient Model and User Model are linked with each other with the help of user_id.
         
         district_obj = District.objects.filter(id=patient_district_id).first()
-
         patientObject.district = district_obj
 
 
-        full_address = patient_location + ", " + district_obj.name + ", Nepal"
+        full_address = f"{patient_location}, {district_obj.name}, Nepal"
+
         response = geocode_address(full_address)
         
-        patient_latitude = response['data']['lat']
-        patient_longitude = response['data']['lng']
+        patient_latitude, patient_longitude = extract_lat_lng(response)
 
-
+        # fallback to district address, only if latitude and longitude is None or missing
         if patient_latitude is None or patient_longitude is None:
 
-            full_address = district_obj.name + ", Nepal"
-            response = geocode_address(full_address)
-            patient_latitude = response['data']['lat']
-            patient_longitude = response['data']['lng']
+            fallback_address = f"{district_obj.name}, Nepal"
+            response = geocode_address(fallback_address)
+            patient_latitude, patient_longitude = extract_lat_lng(response)
+
 
 
         patientObject.latitude = patient_latitude
