@@ -16,6 +16,7 @@
         "email": "admin@gmail.com",
         "image": "uploads/img_avatar.png",
         "disease": null,
+        "date_joined": "2025-11-23T17:00:31.333Z",
         "groups": [],
         "user_permissions": []
     }

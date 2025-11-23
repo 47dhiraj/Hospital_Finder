@@ -36,20 +36,3 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS("🔥 All models dumped successfully in UTF-8!"))
 
-
-
-# from django.core.management.base import BaseCommand
-# from django.core import management
-
-
-# class Command(BaseCommand):
-
-#     def handle(self, *args, **kwargs):
-        
-#         with open("app/fixtures/Surg.json", "w", encoding="utf-8") as f:
-#             management.call_command(
-#                 "dumpdata",
-#                 "app.Surg",
-#                 indent=4,
-#                 stdout=f
-#             )
