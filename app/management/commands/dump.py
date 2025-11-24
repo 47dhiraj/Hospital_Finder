@@ -24,7 +24,7 @@ class Command(BaseCommand):
             model_name = model.__name__
             file_path = os.path.join(fixtures_path, f"{model_name}.json")
 
-            self.stdout.write(f"📦 Dumping {model_name} → {file_path}")
+            self.stdout.write(f"Dumping {model_name} → {file_path}")
 
             with open(file_path, "w", encoding="utf-8") as f:
                 management.call_command(
@@ -34,5 +34,5 @@ class Command(BaseCommand):
                     stdout=f
                 )
 
-        self.stdout.write(self.style.SUCCESS("🔥 All models dumped successfully in UTF-8!"))
+        self.stdout.write(self.style.SUCCESS("All models dumped successfully in JSON UTF-8."))
 

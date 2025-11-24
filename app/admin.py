@@ -5,13 +5,13 @@ from .models import User, Hospital, Disease, District, Patient, Rate
 
 
 
+
 class UserAdmin(BaseUserAdmin):
     model = User
     list_display = (
-        'username', 'email', 'is_client', 'is_admin',
-        'disease', 'date_joined'
+        'username', 'email', 'is_client', 'is_admin', 'date_joined'
     )
-    list_filter = ('is_client', 'is_admin', 'disease')
+    list_filter = ('is_client', 'is_admin')
     search_fields = ('username', 'email')
     ordering = ('id',)
 
@@ -23,10 +23,14 @@ class UserAdmin(BaseUserAdmin):
             'fields': ('first_name', 'last_name', 'email', 'image')
         }),
         ('Permissions', {
-            'fields': ('is_active', 'is_client', 'is_admin', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
+            'fields': (
+                'is_active', 'is_client', 'is_admin',
+                'is_staff', 'is_superuser',
+                'groups', 'user_permissions'
+            )
         }),
         ('Extra Info', {
-            'fields': ('disease', 'date_joined')
+            'fields': ('date_joined',)  # <-- FIXED
         }),
     )
 
@@ -42,11 +46,13 @@ class UserAdmin(BaseUserAdmin):
 
 
 
+
 @admin.register(Hospital)
 class HospitalAdmin(admin.ModelAdmin):
     list_display = ('name', 'location', 'phone', 'website')
     search_fields = ('name', 'location')
     list_filter = ('location',)
+
 
 
 
@@ -58,6 +64,7 @@ class DiseaseAdmin(admin.ModelAdmin):
 
 
 
+
 @admin.register(District)
 class DistrictAdmin(admin.ModelAdmin):
     list_display = ('name',)
@@ -65,11 +72,13 @@ class DistrictAdmin(admin.ModelAdmin):
 
 
 
+
 @admin.register(Patient)
 class PatientAdmin(admin.ModelAdmin):
-    list_display = ('name', 'age', 'district', 'contact', 'blood_group', 'inqury_date')
+    list_display = ('name', 'age', 'district', 'disease', 'contact', 'blood_group', 'inqury_date')
     search_fields = ('name', 'contact', 'location')
-    list_filter = ('district', 'blood_group')
+    list_filter = ('district', 'disease', 'blood_group')
+
 
 
 
@@ -82,5 +91,5 @@ class RateAdmin(admin.ModelAdmin):
 
 
 
-
 admin.site.register(User, UserAdmin)
+

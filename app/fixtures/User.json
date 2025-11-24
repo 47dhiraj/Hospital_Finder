@@ -3,7 +3,7 @@
     "model": "app.user",
     "pk": 1,
     "fields": {
-        "password": "pbkdf2_sha256$1000000$iva3Cs8SvQxRMJwYjFlHUV$gaaA99QzkPZxO6izyDqX8/iu1mSQIk3F+Upt24o8JRE=",
+        "password": "pbkdf2_sha256$1000000$cPjL3cn2WaUI2HOXnu1wLt$+Tm9OYqKMxnTk/wyWXl2QpYMp/G4m7JoXObdsewPqHo=",
         "last_login": null,
         "is_superuser": true,
         "username": "admin",
@@ -15,8 +15,6 @@
         "is_admin": true,
         "email": "admin@gmail.com",
         "image": "uploads/img_avatar.png",
-        "disease": null,
-        "date_joined": "2025-11-23T17:00:31.333Z",
         "groups": [],
         "user_permissions": []
     }
