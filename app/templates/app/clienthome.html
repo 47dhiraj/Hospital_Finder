@@ -1,26 +1,20 @@
 {% extends 'app/base.html' %}
-
 {% load static %}
 
+{% block content %}
 
-{%  block content %}
-
-<!-- Image hover effect Stylesheet -->
 <link rel="stylesheet" href="{% static 'image-style.css' %}">
 
 <style>
   #submitbtn:hover {
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
     background-color: #4CAF50;
-    /* Green */
   }
 
   body {
     background-image: url(/static/images/bg_3.png);
   }
-  
 </style>
- 
 
 <br>
 
@@ -30,94 +24,92 @@
       <div class="card">
         <div class="card-body ">
 
-          <img src="{% static 'images/p_logo.png' %}"  alt="Avatar" class="avatar">
+          <img src="{% static 'images/p_logo.png' %}" alt="Avatar" class="avatar">
           <br>
 
           <form action="" method="POST">
-
             {% csrf_token %}
 
-
             <div class="form-group">
-
-              <label for="name">Patient Name: </label>
-
-              <input type="text" class="form-control" id="p_name" name="p_name" placeholder="Enter patient name" required>
-
+              <label for="name">Patient Name : </label>
+              <input type="text" class="form-control" id="p_name" name="p_name" placeholder="Enter patient name"
+                required>
             </div>
 
-
-
             <div class="form-group">
-
-              <label for="age">Patient Age: </label>
-
-              <input type="number" min="1" max="100" class="form-control" id="p_age" name="p_age" placeholder="Enter patient age" required>
+              <label for="age">Age : </label>
+              <input type="number" min="1" max="100" class="form-control" id="p_age" name="p_age"
+                placeholder="Enter patient age" required>
             </div>
 
-
-
-
             <div class="form-group">
-
-              <label>Select District: </label>
-
-              <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="p_district" name="p_district" required>
-
+              <label>Select District : </label>
+              <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="p_district"
+                name="p_district" required>
                 {% for district in districts %}
-
                 <option value="{{ district.id }}">{{ district.name }}</option>
-
                 {% endfor %}
-
-
               </select>
-
-            </div>
-
-
-
-            <div class="form-group">
-
-              <label for="location">Patient current location/street: </label>
-
-              <input type="text" class="form-control" id="p_location" name="p_location" placeholder="Enter location / street">
-            </div>
-
-            
-            <div class="form-group">
-
-              <label for="contact">Patient contact: </label>
-
-              <input type="tel" class="form-control" id="p_contact" name="p_contact" placeholder="Enter patient contact" required>
-
             </div>
 
             <div class="form-group">
+              <label for="location">Current location/street/municipality : </label>
+              <input type="text" class="form-control" id="p_location" name="p_location"
+                placeholder="Enter location / street">
+            </div>
 
-              <label>Patient blood Group: </label>
+            <div class="form-group">
+              <label for="contact">Contact : </label>
+              <input type="tel" class="form-control" id="p_contact" name="p_contact" placeholder="Enter patient contact"
+                required>
+            </div>
 
-              <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="bloodgroup" name="bloodgroup" required>
-           
-                <option value="A+">O negative</option>
-                <option value="A+">O positive</option>
-                <option value="A+">A negative</option>
+            <div class="form-group">
+              <label>Blood Group : </label>
+              <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="bloodgroup"
+                name="bloodgroup" required>
+
+                <option value="O-">O negative</option>
+                <option value="O+">O positive</option>
+                <option value="A-">A negative</option>
                 <option value="A+">A positive</option>
-                <option value="A+"> B negative</option>
-                <option value="A+">B positive</option>
-                <option value="A+"> AB negative</option>
-                <option value="A+"> AB positive</option>
-                              
+                <option value="B-">B negative</option>
+                <option value="B+">B positive</option>
+                <option value="AB-">AB negative</option>
+                <option value="AB+">AB positive</option>
+
+              </select>
+            </div>
+
+
+
+            <!-- Select Either Disease or Surgery -->
+
+            <div class="form-group">
+
+              <label>Select either disease/surgery :</label>
+
+              <select class="form-control" id="select_type" required>
+
+                <option value="">-- Select --</option>
+
+                <option value="disease">Disease</option>
+                <option value="surgery">Surgery</option>
+
               </select>
 
             </div>
 
 
-            <div class="form-group">
 
-              <label>Patient disease: </label>
+            <!-- Select Disease -->
 
-              <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="disease"name="disease" required>
+            <div class="form-group" id="disease_div" style="display:none;">
+
+              <label>Disease :</label>
+
+              <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="disease"
+                name="disease">
 
                 {% for disease in diseases %}
 
@@ -125,6 +117,27 @@
 
                 {% endfor %}
 
+              </select>
+
+            </div>
+
+
+
+
+            <!-- Select Surgery -->
+
+            <div class="form-group" id="surgery_div" style="display:none;">
+
+              <label>Surgery :</label>
+
+              <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="surgery"
+                name="surgery">
+
+                {% for surgery in surgeries %}
+
+                <option value="{{ surgery.id }}-{{ surgery.name }}">{{ surgery.name }}</option>
+
+                {% endfor %}
 
               </select>
 
@@ -133,73 +146,134 @@
 
             <br>
 
-
             <div class="text-center">
-              <button type="submit" class="btn btn-info btn-block" id="submitbtn">Submit</button><br>
-
+              <button type="submit" class="btn btn-info btn-block" id="submitbtn"> Submit </button><br>
             </div>
+
           </form>
         </div>
-
       </div>
     </div>
 
-    <div class="col-sm-2">
-      <br>
-    </div>
+    <div class="col-sm-2"><br></div>
 
     <div class="col-sm-5 cardcenter">
 
       <div class="card" style="background-color:#5dc3e2;">
         {% if diseaseById is None %}
-        <h6>Hello! {{ request.user }} you are a new user. To get 'Hospital Recommendation' submit your query through
-          Patient Form. </h6>
-
-
+        <h6>Hello! {{ request.user }} you are a new user.<br> <br> To get 'Hospital Recommendation' submit your query
+          through patient Form. </h6>
         {% else %}
         <br>
-        <h5 style="color: rgb(197, 37, 37); text-align: center;">Nearest Hospitals recommendation for <br> <b>{{ patient_disease }}</b> </h5>
+        <h5 style="color: rgb(197, 37, 37); text-align: center;">
+          Nearest Hospitals recommendation for <br> <b>{{ patient_disease }}</b>
+        </h5>
         {% endif %}
 
         <div id="hospital-related" style="margin-left: 10px;">
 
           {% if hospitals %}
-            {% for hospital in hospitals|slice:":6" %}
-            <!-- django template ma for loop lai limit garna  break use garna mildaina , so for loop lai limit garna  slice use garna parcha -->
-
-
-
-            
-            <a href="{% url 'detail' hospital.id %}">
-
-              <div class="img__wrap">
-                <img class="img__img" src="{{ hospital.images.url }}" width=200px; height=220px; />
-                <div class="img__description_layer">
-                  <p class="img__description" style="text-align: center; font-size: large; font-weight: bold;">{{hospital.name}}</p>
-                </div>
+          {% for hospital in hospitals|slice:":6" %}
+          <a href="{% url 'detail' hospital.id %}">
+            <div class="img__wrap">
+              <img class="img__img" src="{{ hospital.images.url }}" width="200px" height="220px" />
+              <div class="img__description_layer">
+                <p class="img__description" style="text-align: center; font-size: large; font-weight: bold;">
+                  {{ hospital.name }}
+                </p>
               </div>
-
-            </a>
-
-            {% endfor %}
+            </div>
+          </a>
+          {% endfor %}
           {% else %}
           <h5
-            style="background:red;-webkit-background-clip: text;background-clip: text;-webkit-text-fill-color: transparent;">
-            Sorry! Recommendation are not available.</h5>
+            style="background:red;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">
+            Sorry! Recommendations are not available.
+          </h5>
           {% endif %}
 
         </div>
-
       </div>
 
     </div>
+
     <div class="col-sm-1"></div>
   </div>
-
 </div>
+
+
+
+<!-- ========================= -->
+<!--       JAVASCRIPT          -->
+<!-- ========================= -->
+
 <script>
-  // To style only selects with the my-select class
-  $('.my-select').selectpicker();
+
+  document.getElementById("select_type").addEventListener("change", function () 
+  {
+
+
+    const selected = this.value;
+
+    const diseaseDiv = document.getElementById("disease_div");
+    const surgeryDiv = document.getElementById("surgery_div");
+
+    const diseaseSelect = document.getElementById("disease");
+    const surgerySelect = document.getElementById("surgery");
+
+    if (selected === "disease") 
+    {
+      // Show Disease, Hide Surgery
+      diseaseDiv.style.display = "block";
+      surgeryDiv.style.display = "none";
+
+      // Enable Disease
+      diseaseSelect.disabled = false;
+      diseaseSelect.required = true;
+
+      // Disable Surgery
+      surgerySelect.disabled = true;
+      surgerySelect.required = false;
+      surgerySelect.value = "";
+    }
+    else if (selected === "surgery") 
+    {
+      // Show Surgery, Hide Disease
+      surgeryDiv.style.display = "block";
+      diseaseDiv.style.display = "none";
+
+      // Enable Surgery
+      surgerySelect.disabled = false;
+      surgerySelect.required = true;
+
+      // Disable Disease
+      diseaseSelect.disabled = true;
+      diseaseSelect.required = false;
+      diseaseSelect.value = "";
+    }
+    else 
+    {
+      // Hide all if no selection
+      diseaseDiv.style.display = "none";
+      surgeryDiv.style.display = "none";
+
+      diseaseSelect.disabled = true;
+      surgerySelect.disabled = true;
+
+      diseaseSelect.required = false;
+      surgerySelect.required = false;
+    }
+
+
+
+    // Refresh bootstrap-select dropdown UI
+    $('.selectpicker').selectpicker('refresh');
+
+  });
+
+
 </script>
+
+
 
 {% endblock %}

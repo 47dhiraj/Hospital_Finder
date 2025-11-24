@@ -28,6 +28,7 @@ from .tokens import account_activation_token
 from .decorators.authorize_decorators import role_required
 
 from app.models import Disease
+from app.models import Surg
 from app.models import Patient
 from app.models import Hospital
 from app.models import Rate
@@ -191,122 +192,22 @@ def loginPage(request):
 @role_required(['is_client'], url='login')
 def clienthome(request):
     
-    diseases = Disease.objects.all()  # Disease table bata j jati kura cha tyo sabai lai get garera 'disease' vanni object ma haleko. Yo Query kina gareko vanda yesle template ma drop down ma database ma jun jun disease cha tyo sabai list out garna help gareko cha.
-    
+    diseases = Disease.objects.all()
+    surgeries = Surg.objects.all()
     all_districts = District.objects.all()
-    # print('All Districts: ', all_districts)  
-
-
-
-    # Post method
-    if request.method == 'POST':
-
-        patient_name = request.POST['p_name']
-        patient_age = request.POST['p_age']
-        patient_district_id = int(request.POST.get('p_district', '').strip())
-        patient_location = request.POST.get('p_location', '').strip()
-        print('Location: ', patient_location)
-        patient_contact = request.POST['p_contact']
-        patient_bloodgroup = request.POST['bloodgroup']
-        disease_id, patient_disease = request.POST['disease'].split('-')  # select option ko value and text both chaiyo vani yesari split garera liencha.
-        # ALTERNATIVE CODE # disease_id = request.POST['disease']
-
-        disease_obj = Disease.objects.get(id=disease_id)
-        
-        userObject = request.user
-
-        userObject.disease = disease_obj
-
-        userObject.save(update_fields=['disease']) 
-
-
-        patientObject = Patient()  # Patient vanni table ma yedi kei kura store garauna cha vani pahele tesko object banauna parcha.. i.e here it is 'patientObject'
-        
-        patientObject.name = patient_name  # table ko field ko ma kei kura insert garna cha vani yesari  baneko object i.e ('patientObject') dot ani field ko name ma hami user bata ayeko kura rakhdinchau
-        patientObject.age = patient_age
-        patientObject.location = patient_location
-        patientObject.contact = patient_contact
-        patientObject.blood_group = patient_bloodgroup
-        patientObject.disease = patient_disease
-        patientObject.user_id = request.user.id  # User Model ma vako particular logged in vako user ko id get garera tyo id lai Patient table ma rakheko as Patient Model and User Model are linked with each other with the help of user_id.
-        
-        district_obj = District.objects.filter(id=patient_district_id).first()
-        patientObject.district = district_obj
-
-
-        full_address = f"{patient_location}, {district_obj.name}, Nepal"
-
-        response = geocode_address(full_address)
-        
-        patient_latitude, patient_longitude = extract_lat_lng(response)
-        # print('Patient Latitude: ', patient_latitude, '\n', 'Patient Longitude: ', patient_longitude)
-
-        # fallback to district address, only if latitude and longitude is None or missing
-        if patient_latitude is None or patient_longitude is None:
-
-            fallback_address = f"{district_obj.name}, Nepal"
-            response = geocode_address(fallback_address)
-            patient_latitude, patient_longitude = extract_lat_lng(response)
-            # print('Patient Lat: ', patient_latitude, '\n', 'Patient Lng: ', patient_longitude)
-
-
-
-
-        patientObject.latitude = patient_latitude
-        patientObject.longitude = patient_longitude
-
-        patientObject.save()
-   
-
-        diseaseById = request.user.disease_id  # User Model bata hamiley disease_id lai get gareko so that tyo 'disease_id' 'getRecommendation' vanni method ma pass garna ko lagi.
-        
-
-        disease_recommended_hospitals = get_recommendations_by_disease(diseaseById)  # Jaba yo method-> 'get_recommendations_by_disease(diseaseById)' call huncha yesle particular user le kun disease search gareyko cha tesko id ko through disease liyera tyo disease ko hospital lai recommend gareko huncha..
-        # print('\n\nDisease Recommended Hospitals: ', disease_recommended_hospitals)
-
-
-        distance_recommended_hospitals = get_recommendation_by_distance(disease_recommended_hospitals, patient_latitude, patient_longitude)
-        # print('\n\nNearest Recommended Hospitals: ', distance_recommended_hospitals)
-
-
-        context = {'diseases': diseases, 'districts': all_districts, 'patient_disease': patient_disease, 'diseaseById': diseaseById, 'hospitals': distance_recommended_hospitals}  # Key value pair ma hamiley context pass gareko so that it could be used in templates.
-
-        return render(request, 'app/clienthome.html', context)
-
-
-
-
-
-    # Code for other than Post method
-    diseaseById = request.user.disease_id  # Yo Query le User Model bata pahele particular user ko 'disease_id' vanni field linxa and tyo field ma user le search gareko disease ko id ayera baseko huncha
-
-
-    if diseaseById is None:  # Yo if condition kina lagauna parcha ta vanda... Yedi kunai user chai first time login gardai cha (i.e new user )cha vani User Model ma 'disease_id' suruma NULL vako huncha so tyo case check garna parcha natra error falxa.
-        
-        context = {'diseases': diseases, 'districts': all_districts,}  # Yo 'diseases' vani line no. 89 mai get gareko cha so yo line le template ma disease name haru pass gardeko matrai ho becz hamailai disease name dropdown ma dekhauna cha..
-        
-        return render(request, 'app/clienthome.html', context)
-
-    else:
-        patient_disease = Disease.objects.get(id=diseaseById)  # Disease vanni Model ma  User model bata ayeko 'disease_id' (diseaseById) lai pass garera particular disease name nikaleko so that yo chai template ma "Hospital Recommendation For {{patient_disease}}" vanera garna pawos vanera gareko..
-
-
-    disease_recommended_hospitals = get_recommendations_by_disease(diseaseById)
-    # print('\n\nDisease Recommended Hospitals: ', disease_recommended_hospitals)
 
 
     patient = request.user.patients.order_by('inqury_date').last()
-    patient_latitude = patient.latitude if patient else None
-    patient_longitude = patient.longitude if patient else None
+    print('Patient: ', patient)
+
+    patient_disease = patient.disease if patient else None
+    print('Patient Disease: ', patient_disease)
 
 
-    distance_recommended_hospitals = get_recommendation_by_distance(disease_recommended_hospitals, patient_latitude, patient_longitude)
-    # print('\n\nNearest Recommended Hospitals: ', distance_recommended_hospitals)
-
-
-    context = {'diseases': diseases, 'districts': all_districts, 'patient_disease': patient_disease, 'diseaseById': diseaseById, 'hospitals': distance_recommended_hospitals}  # Key value pair ma hamiley context pass gareko so that it could be used in templates.
-
-    return render(request, 'app/clienthome.html', context)
+    if patient_disease is None:
+        context = {'diseases': diseases, 'surgeries': surgeries, 'districts': all_districts,}
+        return render(request, 'app/clienthome.html', context)
+    
 
 
 
