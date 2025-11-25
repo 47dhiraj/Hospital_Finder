@@ -30,7 +30,7 @@ class UserAdmin(BaseUserAdmin):
             )
         }),
         ('Extra Info', {
-            'fields': ('date_joined',)  # <-- FIXED
+            'fields': ('date_joined',)
         }),
     )
 
@@ -75,9 +75,9 @@ class DistrictAdmin(admin.ModelAdmin):
 
 @admin.register(Patient)
 class PatientAdmin(admin.ModelAdmin):
-    list_display = ('name', 'age', 'district', 'disease', 'contact', 'blood_group', 'inqury_date')
+    list_display = ('name', 'age', 'district', 'disease', 'surgery', 'contact', 'blood_group', 'inqury_date')
     search_fields = ('name', 'contact', 'location')
-    list_filter = ('district', 'disease', 'blood_group')
+    list_filter = ('district', 'disease', 'surgery', 'blood_group')
 
 
 

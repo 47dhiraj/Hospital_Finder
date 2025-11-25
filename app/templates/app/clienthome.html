@@ -33,21 +33,22 @@
             <div class="form-group">
               <label for="name">Patient Name : </label>
               <input type="text" class="form-control" id="p_name" name="p_name" placeholder="Enter patient name"
-                required>
+                value="{{ entered_name }}" required>
             </div>
 
             <div class="form-group">
               <label for="age">Age : </label>
               <input type="number" min="1" max="100" class="form-control" id="p_age" name="p_age"
-                placeholder="Enter patient age" required>
+                placeholder="Enter patient age" value="{{ entered_age }}" required>
             </div>
 
             <div class="form-group">
               <label>Select District : </label>
-              <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="p_district"
-                name="p_district" required>
+              <select class="form-control selectpicker" id="p_district" name="p_district" required>
                 {% for district in districts %}
-                <option value="{{ district.id }}">{{ district.name }}</option>
+                <option value="{{ district.id }}" {% if district.id == selected_district_id %}selected{% endif %}>
+                  {{ district.name }}
+                </option>
                 {% endfor %}
               </select>
             </div>
@@ -55,13 +56,13 @@
             <div class="form-group">
               <label for="location">Current location/street/municipality : </label>
               <input type="text" class="form-control" id="p_location" name="p_location"
-                placeholder="Enter location / street">
+                placeholder="Enter location / street" value="{{ entered_location }}">
             </div>
 
             <div class="form-group">
               <label for="contact">Contact : </label>
               <input type="tel" class="form-control" id="p_contact" name="p_contact" placeholder="Enter patient contact"
-                required>
+                value="{{ entered_contact }}" required>
             </div>
 
             <div class="form-group">
@@ -69,14 +70,14 @@
               <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="bloodgroup"
                 name="bloodgroup" required>
 
-                <option value="O-">O negative</option>
-                <option value="O+">O positive</option>
-                <option value="A-">A negative</option>
-                <option value="A+">A positive</option>
-                <option value="B-">B negative</option>
-                <option value="B+">B positive</option>
-                <option value="AB-">AB negative</option>
-                <option value="AB+">AB positive</option>
+                <option value="O-" {% if entered_bloodgroup == 'O-' %}selected{% endif %}>O negative</option>
+                <option value="O+" {% if entered_bloodgroup == 'O+' %}selected{% endif %}>O positive</option>
+                <option value="A-" {% if entered_bloodgroup == 'A-' %}selected{% endif %}>A negative</option>
+                <option value="A+" {% if entered_bloodgroup == 'A+' %}selected{% endif %}>A positive</option>
+                <option value="B-" {% if entered_bloodgroup == 'B-' %}selected{% endif %}>B negative</option>
+                <option value="B+" {% if entered_bloodgroup == 'B+' %}selected{% endif %}>B positive</option>
+                <option value="AB-" {% if entered_bloodgroup == 'AB-' %}selected{% endif %}>AB negative</option>
+                <option value="AB+" {% if entered_bloodgroup == 'AB+' %}selected{% endif %}>AB positive</option>
 
               </select>
             </div>
@@ -93,10 +94,11 @@
 
                 <option value="">-- Select --</option>
 
-                <option value="disease">Disease</option>
-                <option value="surgery">Surgery</option>
+                <option value="disease" {% if selected_type == 'disease' %}selected{% endif %}>Disease</option>
+                <option value="surgery" {% if selected_type == 'surgery' %}selected{% endif %}>Surgery</option>
 
               </select>
+
 
             </div>
 
@@ -104,17 +106,17 @@
 
             <!-- Select Disease -->
 
-            <div class="form-group" id="disease_div" style="display:none;">
+            <div class="form-group" id="disease_div">
 
               <label>Disease :</label>
 
-              <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="disease"
-                name="disease">
+              <select class="form-control selectpicker" id="disease" name="disease">
 
                 {% for disease in diseases %}
-
-                <option value="{{ disease.id }}-{{ disease.name }}">{{ disease.name }}</option>
-
+                <option value="{{ disease.id }}-{{ disease.name }}" 
+                  {% if disease.id == selected_disease_id %}selected{% endif %}>
+                  {{ disease.name }}
+                </option>
                 {% endfor %}
 
               </select>
@@ -126,17 +128,17 @@
 
             <!-- Select Surgery -->
 
-            <div class="form-group" id="surgery_div" style="display:none;">
+            <div class="form-group" id="surgery_div">
 
               <label>Surgery :</label>
 
-              <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="surgery"
-                name="surgery">
+              <select class="form-control selectpicker" id="surgery" name="surgery">
 
                 {% for surgery in surgeries %}
-
-                <option value="{{ surgery.id }}-{{ surgery.name }}">{{ surgery.name }}</option>
-
+                <option value="{{ surgery.id }}-{{ surgery.name }}" 
+                {% if surgery.id == selected_surgery_id %}selected{% endif %}>
+                  {{ surgery.name }}
+                </option>
                 {% endfor %}
 
               </select>
@@ -159,14 +161,13 @@
 
     <div class="col-sm-5 cardcenter">
 
-      <div class="card" style="background-color:#5dc3e2;">
-        {% if diseaseById is None %}
-        <h6>Hello! {{ request.user }} you are a new user.<br> <br> To get 'Hospital Recommendation' submit your query
-          through patient Form. </h6>
+      <div class="card" style="background-color:#7df0a9;">
+        {% if hospitals is None %}
+        <h6>Please submit the form to get hospital recommendations. <br> </h6>
         {% else %}
         <br>
-        <h5 style="color: rgb(197, 37, 37); text-align: center;">
-          Nearest Hospitals recommendation for <br> <b>{{ patient_disease }}</b>
+        <h5 style="color: rgb(41, 62, 248); text-align: center;">
+        Nearest Hospitals recommendation for <br> <b>{{ patient_disease }}</b>
         </h5>
         {% endif %}
 
@@ -187,7 +188,7 @@
           {% endfor %}
           {% else %}
           <h5
-            style="background:red;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">
+            style="background:rgb(252, 44, 79);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">
             Sorry! Recommendations are not available.
           </h5>
           {% endif %}
@@ -203,74 +204,83 @@
 
 
 
-<!-- ========================= -->
-<!--       JAVASCRIPT          -->
-<!-- ========================= -->
+
+
 
 <script>
 
-  document.getElementById("select_type").addEventListener("change", function () 
+document.addEventListener("DOMContentLoaded", function() {
+
+  const selectType = document.getElementById("select_type");
+
+  const diseaseDiv = document.getElementById("disease_div");
+  const surgeryDiv = document.getElementById("surgery_div");
+  const diseaseSelect = document.getElementById("disease");
+  const surgerySelect = document.getElementById("surgery");
+
+  // Function to show/hide divs
+  function updateDivs(selected) 
   {
-
-
-    const selected = this.value;
-
-    const diseaseDiv = document.getElementById("disease_div");
-    const surgeryDiv = document.getElementById("surgery_div");
-
-    const diseaseSelect = document.getElementById("disease");
-    const surgerySelect = document.getElementById("surgery");
 
     if (selected === "disease") 
     {
-      // Show Disease, Hide Surgery
+
       diseaseDiv.style.display = "block";
       surgeryDiv.style.display = "none";
-
-      // Enable Disease
       diseaseSelect.disabled = false;
       diseaseSelect.required = true;
-
-      // Disable Surgery
       surgerySelect.disabled = true;
       surgerySelect.required = false;
       surgerySelect.value = "";
-    }
+
+    } 
     else if (selected === "surgery") 
     {
-      // Show Surgery, Hide Disease
+
       surgeryDiv.style.display = "block";
       diseaseDiv.style.display = "none";
-
-      // Enable Surgery
       surgerySelect.disabled = false;
       surgerySelect.required = true;
-
-      // Disable Disease
       diseaseSelect.disabled = true;
       diseaseSelect.required = false;
       diseaseSelect.value = "";
-    }
+
+    } 
     else 
     {
-      // Hide all if no selection
+
       diseaseDiv.style.display = "none";
       surgeryDiv.style.display = "none";
-
       diseaseSelect.disabled = true;
       surgerySelect.disabled = true;
-
       diseaseSelect.required = false;
       surgerySelect.required = false;
+      
     }
 
 
-
-    // Refresh bootstrap-select dropdown UI
     $('.selectpicker').selectpicker('refresh');
+  }
+
+
+
+  // --- On change ---
+  selectType.addEventListener("change", function() 
+  {
+
+    updateDivs(this.value);
 
   });
 
+
+
+  // --- On page load, set initial state from previously selected type ---
+  const initialType = "{{ selected_type|default_if_none:'' }}";   // from Django context
+  selectType.value = initialType;     
+
+  updateDivs(initialType);
+
+});
 
 </script>
 

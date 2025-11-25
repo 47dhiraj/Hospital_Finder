@@ -151,6 +151,7 @@ class District(models.Model):
 
 
 class Patient(models.Model):
+    
     name = models.CharField(max_length=200)
     age = models.CharField(max_length=200, blank=True, null=True, validators=[MaxValueValidator(100), MinValueValidator(1)])
     location = models.CharField(max_length=200, blank=True, null=True)
@@ -158,10 +159,15 @@ class Patient(models.Model):
     longitude = models.DecimalField(max_digits=10, decimal_places=7, blank=True, null=True)
     contact = models.CharField(max_length=20, blank=True, null=True)
     blood_group = models.CharField(max_length=200, blank=True, null=True)
+
     inqury_date = models.DateTimeField(auto_now_add=True, null=True)
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE, related_name='patients')
+    
     disease = models.ForeignKey('Disease', blank=True, null=True, on_delete=models.CASCADE)
+    
+    surgery = models.ForeignKey('Surg', blank=True, null=True, on_delete=models.CASCADE)
+    
     district = models.ForeignKey('District', blank=True, null=True, on_delete=models.CASCADE)
 
 

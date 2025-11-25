@@ -24,7 +24,6 @@ from .forms import CreateClientForm
 
 from .tokens import account_activation_token
 
-
 from .decorators.authorize_decorators import role_required
 
 from app.models import Disease
@@ -34,21 +33,14 @@ from app.models import Hospital
 from app.models import Rate
 from app.models import District
 
-
 import sweetify
 
-
 from .utils.coordinate_finder import geocode_address, extract_lat_lng
-from .utils.distance_calculator_geopy import calculate_distance_in_km_with_geopy
 
-from .utils.distance_calculator_haversine import calculate_distance_with_haversine
-
-
-
+from .utils.recommendation import recommendations_by_disease, recommendations_by_surgery, recommendation_by_distance
 
 
 User = get_user_model()
-
 
 
 
@@ -189,85 +181,207 @@ def loginPage(request):
 
 
 
+
+
+
+
+
+
 @role_required(['is_client'], url='login')
 def clienthome(request):
     
-    diseases = Disease.objects.all()
-    surgeries = Surg.objects.all()
+    user = request.user
+
+    all_diseases = Disease.objects.all()
+    all_surgeries = Surg.objects.all()
     all_districts = District.objects.all()
 
 
     patient = request.user.patients.order_by('inqury_date').last()
-    print('Patient: ', patient)
+    # print('Patient: ', patient)
 
     patient_disease = patient.disease if patient else None
-    print('Patient Disease: ', patient_disease)
+    # print('Patient Disease: ', patient_disease)
 
 
-    if patient_disease is None:
-        context = {'diseases': diseases, 'surgeries': surgeries, 'districts': all_districts,}
+    if request.method == 'GET' and patient_disease is None:
+
+        context = {
+            'diseases': all_diseases,
+            'surgeries': all_surgeries,
+            'districts': all_districts,
+        }
+
         return render(request, 'app/clienthome.html', context)
     
 
 
 
+    if request.method == 'POST':
+
+        patient_name = request.POST.get('p_name', '').strip()
+        patient_age = request.POST.get('p_age', '').strip()
+        patient_location = request.POST.get('p_location', '').strip()
+        patient_contact = request.POST.get('p_contact', '').strip()
+        patient_bloodgroup = request.POST.get('bloodgroup', '').strip()
+
+        district_raw = request.POST.get('p_district', '').strip()
+        try:
+            patient_district_id = int(district_raw)
+        except (ValueError, TypeError):
+            patient_district_id = None
+
+        disease_raw = request.POST.get('disease', '').strip()
+        surgery_raw = request.POST.get('surgery', '').strip()
+        disease_id = None
+        patient_disease = None
+        surgery_id = None
+        patient_surgery = None
+
+        ## ---- If Disease selected ----
+        if disease_raw and "-" in disease_raw:
+            try:
+                d_id, d_name = disease_raw.split('-', 1)
+                disease_id = int(d_id)
+                patient_disease = d_name.strip()
+
+            except (ValueError, TypeError):
+                disease_id = None
+                patient_disease = None
+
+        ## ---- If Surgery selected ----
+        elif surgery_raw and "-" in surgery_raw:
+            try:
+                s_id, s_name = surgery_raw.split('-', 1)
+                surgery_id = int(s_id)
+                patient_surgery = s_name.strip()
+
+            except (ValueError, TypeError):
+                surgery_id = None
+                patient_surgery = None
+        
+
+        ## Fetching District Object Safely
+        district = None
+        if patient_district_id:
+            try:
+                district = District.objects.get(id=patient_district_id)
+            except District.DoesNotExist:
+                district = None
+        
+
+        ## Fetching Disease Object Safely
+        disease = None
+        if disease_id:
+            try:
+                disease = Disease.objects.get(id=disease_id)
+            except Disease.DoesNotExist:
+                disease = None
+        
+
+        ## Fetching Surgery Object Safely
+        surgery = None
+        if surgery_id:
+            try:
+                surgery = Surg.objects.get(id=surgery_id)
+            except Surg.DoesNotExist:
+                surgery = None
 
 
+        full_address = f"{patient_location}, {district.name}, Nepal"
+        response = geocode_address(full_address)
+        patient_latitude, patient_longitude = extract_lat_lng(response)
+        # print('\nPatient Latitude: ', patient_latitude, '\n', 'Patient Longitude: ', patient_longitude)
+
+        # Fallback to district level address, only if latitude and longitude is None or missing
+        if patient_latitude is None or patient_longitude is None:
+            fallback_address = f"{district.name}, Nepal"
+            response = geocode_address(fallback_address)
+            patient_latitude, patient_longitude = extract_lat_lng(response)
+            # print('\nPatient Lat: ', patient_latitude, '\n', 'Patient Lng: ', patient_longitude)
+        
 
 
-def get_recommendations_by_disease(diseaseById):
+        ## Creating a new patient object
 
-    # print('Disease ID: ', diseaseById)
-    
-    disease = Disease.objects.get(id=diseaseById)
-
-    hospitals = disease.hospitals.all()
-
-    return list(hospitals)
-
-
-
-
-
-def get_recommendation_by_distance(hospitals, patient_latitude, patient_longitude):
-
-    """
-        Sort hospitals based on distance to patient.
-    """
-
-    hospital_distances = []
-
-    for hospital in hospitals:
-
-        ## To calculate distance using Haversine Algorith / Formula
-        distance = calculate_distance_with_haversine(
-            patient_latitude,
-            patient_longitude,
-            hospital.latitude,
-            hospital.longitude,
-            unit="km"
-        )
-
-
-        ## To calculate distance using geopy
-        # distance = calculate_distance_in_km_with_geopy(
-        #     patient_latitude,
-        #     patient_longitude,
-        #     hospital.latitude,
-        #     hospital.longitude
+        # patient = Patient.objects.create(
+        #     name=patient_name,
+        #     age=patient_age,
+        #     location=patient_location,
+        #     latitude=patient_latitude,
+        #     longitude=patient_longitude,
+        #     contact=patient_contact,
+        #     blood_group=patient_bloodgroup,
+        #     user=user,
+        #     disease=disease,
+        #     surgery=surgery,
+        #     district=district
         # )
 
 
-        # print('\nDistance: ', distance, ' Type; ', type(distance))
+        recommended_hospitals = []
+
+        if disease and not surgery:
+            recommended_hospitals = recommendations_by_disease(disease)
+            # print('\n\nDisease Recommended Hospitals: ', recommended_hospitals)
 
 
-        ## making hospital_distances a list of tuples e.g (hospital_1, 10)
-        hospital_distances.append((hospital, distance))
+        if surgery and not disease:
+            recommended_hospitals = recommendations_by_surgery(surgery)
+            # print('\n\nSurgery Recommended Hospitals: ', recommended_hospitals)
 
-    
-    hospital_distances.sort(key = lambda item: item[1])                         # item[0] represent single hospital_object and item[1] is a distance from patient to that paritcular hospital.
 
-    return [hospital_ojects[0] for hospital_ojects in hospital_distances]       # Return sorted hospital objects
+        if recommended_hospitals and patient_latitude and patient_longitude:
+            recommended_hospitals = recommendation_by_distance(recommended_hospitals, patient_latitude, patient_longitude)
+            # print('\n\nNearest Recommended Hospitals: ', recommended_hospitals)
+
+        
+
+        context = {
+            'diseases': all_diseases,
+            'surgeries': all_surgeries,
+            'districts': all_districts,
+            'hospitals': recommended_hospitals,
+            'selected_district_id': district.id if district else None,
+            'selected_disease_id': disease.id if disease else None,
+            'selected_surgery_id': surgery.id if surgery else None,
+            'selected_type': 'disease' if disease else ('surgery' if surgery else None),
+            'entered_name': patient_name,
+            'entered_age': patient_age,
+            'entered_location': patient_location,
+            'entered_contact': patient_contact,
+            'entered_bloodgroup': patient_bloodgroup,
+        }
+
+        return render(request, 'app/clienthome.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
