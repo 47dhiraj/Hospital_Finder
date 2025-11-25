@@ -1,30 +1,14 @@
 from django.conf import settings
-
 from django.shortcuts import render, redirect, get_object_or_404
-
 from django.contrib.auth import authenticate, login, logout
-
 from django.contrib.auth.decorators import login_required
-
 from django.contrib import messages
-
 from django.core.mail import EmailMessage, send_mail
-
 from django.contrib.sites.shortcuts import get_current_site
-
 from django.template.loader import render_to_string
-
 from django.utils.encoding import force_bytes, force_str
-
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-
 from django.contrib.auth import get_user_model
-
-from .forms import CreateClientForm
-
-from .tokens import account_activation_token
-
-from .decorators.authorize_decorators import role_required
 
 from app.models import Disease
 from app.models import Surg
@@ -35,10 +19,12 @@ from app.models import District
 
 import sweetify
 
+from .forms import CreateClientForm
+from .tokens import account_activation_token
+from .decorators.authorize_decorators import role_required
+
 from .utils.coordinate_finder import geocode_address, extract_lat_lng
-
 from .utils.recommendation import recommendations_by_disease, recommendations_by_surgery, recommendation_by_distance
-
 
 User = get_user_model()
 
@@ -47,7 +33,7 @@ User = get_user_model()
 
 
 
-
+# ---------------- Landing / Home page ----------------
 def home(request):
 
     if request.method == 'POST':
@@ -68,6 +54,8 @@ def home(request):
         messages.success(request, 'Thank you for getting in touch!')
 
     return render(request, 'app/index.html')
+
+
 
 
 
@@ -108,6 +96,8 @@ def clientregisterPage(request):
 
 
 
+
+
 # ---------------- Activation ----------------
 def activate(request, uidb64, token):
 
@@ -135,6 +125,10 @@ def activate(request, uidb64, token):
     else:
         
         return render(request, 'app/activation_invalid.html')
+
+
+
+
 
 
 
@@ -184,37 +178,70 @@ def loginPage(request):
 
 
 
-
-
-
+# ---------------- Client Home & Recommendation page ----------------
 @role_required(['is_client'], url='login')
 def clienthome(request):
-    
     user = request.user
 
     all_diseases = Disease.objects.all()
     all_surgeries = Surg.objects.all()
     all_districts = District.objects.all()
 
-
-    patient = request.user.patients.order_by('inqury_date').last()
-    # print('Patient: ', patient)
+    # patient = request.user.patients.order_by('id').last()
+    # patient = request.user.patients.order_by('inqury_date').last()
+    patient = request.user.patients.latest('id')
 
     patient_disease = patient.disease if patient else None
-    # print('Patient Disease: ', patient_disease)
+    patient_surgery = patient.surgery if patient else None
 
 
-    if request.method == 'GET' and patient_disease is None:
+    if request.method == 'GET' and patient_disease is None and patient_surgery is None:
 
         context = {
             'diseases': all_diseases,
             'surgeries': all_surgeries,
             'districts': all_districts,
         }
+        return render(request, 'app/clienthome.html', context)
+
+
+    elif request.method == 'GET':
+
+        recommended_hospitals = []
+
+        if patient_disease and not patient_surgery:
+            recommended_hospitals = recommendations_by_disease(patient_disease)
+
+        if patient_surgery and not patient_disease:
+            recommended_hospitals = recommendations_by_surgery(surgery)
+
+        recommended_hospitals = recommendation_by_distance(recommended_hospitals, patient.latitude, patient.longitude)
+
+        context = {
+            'diseases': all_diseases,
+            'surgeries': all_surgeries,
+            'districts': all_districts,
+            
+            'hospitals': recommended_hospitals,
+
+            'selected_district_id': patient.district.id if patient.district else None,
+
+            'selected_disease_id': patient.disease.id if patient.disease else None,
+            'selected_disease_name': patient.disease.name if patient.disease else None,
+
+            'selected_surgery_id': patient.surgery.id if patient.surgery else None,
+            'selected_surgery_name': patient.surgery.name if patient.surgery else None,
+
+            'selected_type': 'disease' if patient.disease else ('surgery' if patient.surgery else None),
+
+            'entered_name': patient.name,
+            'entered_age': patient.age,
+            'entered_location': patient.location,
+            'entered_contact': patient.contact,
+            'entered_bloodgroup': patient.blood_group,
+        }
 
         return render(request, 'app/clienthome.html', context)
-    
-
 
 
     if request.method == 'POST':
@@ -269,7 +296,6 @@ def clienthome(request):
             except District.DoesNotExist:
                 district = None
         
-
         ## Fetching Disease Object Safely
         disease = None
         if disease_id:
@@ -277,7 +303,6 @@ def clienthome(request):
                 disease = Disease.objects.get(id=disease_id)
             except Disease.DoesNotExist:
                 disease = None
-        
 
         ## Fetching Surgery Object Safely
         surgery = None
@@ -291,51 +316,38 @@ def clienthome(request):
         full_address = f"{patient_location}, {district.name}, Nepal"
         response = geocode_address(full_address)
         patient_latitude, patient_longitude = extract_lat_lng(response)
-        # print('\nPatient Latitude: ', patient_latitude, '\n', 'Patient Longitude: ', patient_longitude)
 
         # Fallback to district level address, only if latitude and longitude is None or missing
         if patient_latitude is None or patient_longitude is None:
             fallback_address = f"{district.name}, Nepal"
             response = geocode_address(fallback_address)
             patient_latitude, patient_longitude = extract_lat_lng(response)
-            # print('\nPatient Lat: ', patient_latitude, '\n', 'Patient Lng: ', patient_longitude)
         
-
-
         ## Creating a new patient object
-
-        # patient = Patient.objects.create(
-        #     name=patient_name,
-        #     age=patient_age,
-        #     location=patient_location,
-        #     latitude=patient_latitude,
-        #     longitude=patient_longitude,
-        #     contact=patient_contact,
-        #     blood_group=patient_bloodgroup,
-        #     user=user,
-        #     disease=disease,
-        #     surgery=surgery,
-        #     district=district
-        # )
-
+        patient = Patient.objects.create(
+            name=patient_name,
+            age=patient_age,
+            location=patient_location,
+            latitude=patient_latitude,
+            longitude=patient_longitude,
+            contact=patient_contact,
+            blood_group=patient_bloodgroup,
+            user=user,
+            disease=disease,
+            surgery=surgery,
+            district=district
+        )
 
         recommended_hospitals = []
 
         if disease and not surgery:
             recommended_hospitals = recommendations_by_disease(disease)
-            # print('\n\nDisease Recommended Hospitals: ', recommended_hospitals)
-
 
         if surgery and not disease:
             recommended_hospitals = recommendations_by_surgery(surgery)
-            # print('\n\nSurgery Recommended Hospitals: ', recommended_hospitals)
-
 
         if recommended_hospitals and patient_latitude and patient_longitude:
             recommended_hospitals = recommendation_by_distance(recommended_hospitals, patient_latitude, patient_longitude)
-            # print('\n\nNearest Recommended Hospitals: ', recommended_hospitals)
-
-        
 
         context = {
             'diseases': all_diseases,
@@ -344,7 +356,9 @@ def clienthome(request):
             'hospitals': recommended_hospitals,
             'selected_district_id': district.id if district else None,
             'selected_disease_id': disease.id if disease else None,
+            'selected_disease_name': disease.name if disease else None,
             'selected_surgery_id': surgery.id if surgery else None,
+            'selected_surgery_name': surgery.name if surgery else None,
             'selected_type': 'disease' if disease else ('surgery' if surgery else None),
             'entered_name': patient_name,
             'entered_age': patient_age,
@@ -360,33 +374,7 @@ def clienthome(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# ---------------- Admin Dashboard page ----------------
 @role_required(['is_admin'], url='login')
 def adminhome(request):
 
@@ -397,7 +385,7 @@ def adminhome(request):
 
 
 
-
+# ---------------- Hospital Detail page ----------------
 def detail(request, hospital_id):
 
     hospital = get_object_or_404(Hospital, id=hospital_id)
@@ -420,6 +408,10 @@ def detail(request, hospital_id):
 
 
 
+
+
+
+# ---------------- Client Deail page ----------------
 @role_required(['is_admin'], url='login')
 def customerdetail(request):
 
@@ -452,6 +444,8 @@ def findHospital(request):
     context = {'hospital_list': hospital_list}
 
     return render(request, 'app/hospital_list.html', context)
+
+
 
 
 
